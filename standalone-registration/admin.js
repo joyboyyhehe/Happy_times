@@ -30,15 +30,74 @@ const branchNames = {
   'rr-nagar': 'RR Nagar'
 };
 
-// On Load Check session storage for existing authorization
-document.addEventListener("DOMContentLoaded", () => {
-  const isAuthorized = sessionStorage.getItem("admin_authorized") === "true";
-  if (isAuthorized) {
-    document.getElementById("gatekeeper-overlay").classList.add("hidden");
-    document.getElementById("admin-container").classList.remove("hidden");
-    initializeDashboard();
-  }
+// Listen to Auth State Changes in real-time
+firebase.auth().onAuthStateChanged(async (user) => {
+  console.log("[Auth State]:", user ? `Signed in as ${user.email} (UID: ${user.uid})` : "Signed out");
   
+  if (user) {
+    try {
+      // Fetch user profile from Firestore to verify superadmin role
+      const snap = await db.collection("users").doc(user.uid).get();
+      const profile = snap.exists() ? snap.data() : null;
+      console.log("[Auth Profile]:", profile ? JSON.stringify(profile) : "No profile found in Firestore");
+
+      if (profile && profile.role === "superadmin") {
+        // Superadmin verified: unlock portal and load data
+        document.getElementById("gatekeeper-overlay").classList.add("hidden");
+        document.getElementById("admin-container").classList.remove("hidden");
+        sessionStorage.setItem("admin_authorized", "true");
+        
+        // Load data if not already loading
+        if (!registrationsListener) {
+          initializeDashboard();
+        }
+      } else {
+        console.warn("[Auth Warning]: Signed-in user is not a superadmin.");
+        // If they just logged in but profile isn't superadmin yet (first time email/pass), write it
+        if (!profile) {
+          console.log("[Auth Action]: Writing first-time superadmin profile...");
+          await db.collection("users").doc(user.uid).set({
+            name: "Super Admin Portal",
+            role: "superadmin",
+            email: user.email || "admin@happytimes.com",
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          // The update will trigger onAuthStateChanged again
+        } else {
+          showToast("Access Denied: You are not a Super Admin.", "danger");
+          lockPortal();
+        }
+      }
+    } catch (e) {
+      console.error("[Auth Profile Fetch Error]:", e);
+    }
+  } else {
+    // If not signed in but sessionStorage says they should be, attempt background login
+    const isAuthorized = sessionStorage.getItem("admin_authorized") === "true";
+    if (isAuthorized) {
+      console.log("[Auth Action]: Bypassed overlay, attempting background re-authentication...");
+      try {
+        await auth.signInWithEmailAndPassword("admin@happytimes.com", "happytimes_admin_6754");
+      } catch (err) {
+        console.warn("[Auth Re-auth Failed]:", err);
+        // Fallback to anonymous re-auth
+        try {
+          await auth.signInAnonymously();
+        } catch (anonErr) {
+          console.error("[Auth Anonymous Fallback Failed]:", anonErr);
+          lockPortal();
+        }
+      }
+    } else {
+      // Show password gatekeeper
+      document.getElementById("gatekeeper-overlay").classList.remove("hidden");
+      document.getElementById("admin-container").classList.add("hidden");
+    }
+  }
+});
+
+// On Load Check
+document.addEventListener("DOMContentLoaded", () => {
   // Bind enter key on password input
   document.getElementById("gatekeeper-password").addEventListener("keydown", (e) => {
     if (e.key === "Enter") unlockPortal();
