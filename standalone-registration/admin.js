@@ -54,7 +54,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
     try {
       // Fetch user profile from Firestore to verify superadmin role
       const snap = await db.collection("users").doc(user.uid).get();
-      const profile = snap.exists() ? snap.data() : null;
+      const profile = snap.exists ? snap.data() : null;
       console.log("[Auth Profile]:", profile ? JSON.stringify(profile) : "No profile found in Firestore");
 
       if (profile && profile.role === "superadmin") {
@@ -126,7 +126,7 @@ async function unlockPortal() {
       
       // Verify role in Firestore
       const snap = await db.collection("users").doc(user.uid).get();
-      const profile = snap.exists() ? snap.data() : null;
+      const profile = snap.exists ? snap.data() : null;
       
       if (profile && profile.role === "superadmin") {
         // Auth Success: Hide overlay
@@ -511,7 +511,7 @@ async function processApproval(regId, isApproved) {
       const parentUserRef = db.collection("users").doc(parentUserId);
       const parentSnap = await parentUserRef.get();
       
-      if (parentSnap.exists()) {
+      if (parentSnap.exists) {
         // Appending sibling logic
         const existingStudentIds = parentSnap.data().linkedStudentIds || [];
         if (!existingStudentIds.includes(studentId)) {
