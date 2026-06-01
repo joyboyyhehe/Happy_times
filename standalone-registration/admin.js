@@ -216,10 +216,15 @@ function updateStats() {
     else if (item.status === "rejected") rejected++;
   });
   
-  document.getElementById("stat-pending").innerText = pending;
-  document.getElementById("stat-approved").innerText = approved;
-  document.getElementById("stat-rejected").innerText = rejected;
-  document.getElementById("stat-total").innerText = allSubmissions.length;
+  const elPending = document.getElementById("stat-pending");
+  const elApproved = document.getElementById("stat-approved");
+  const elRejected = document.getElementById("stat-rejected");
+  const elTotal = document.getElementById("stat-total");
+  
+  if (elPending) elPending.innerText = pending;
+  if (elApproved) elApproved.innerText = approved;
+  if (elRejected) elRejected.innerText = rejected;
+  if (elTotal) elTotal.innerText = allSubmissions.length;
 }
 
 // 6. Filtering & Search Workflows
@@ -314,17 +319,18 @@ function renderApplicationsList(items) {
   updateBulkActionToolbar();
 
   if (items.length === 0) {
-    emptyState.classList.remove("hidden");
+    if (emptyState) emptyState.classList.remove("hidden");
     const actionsBar = document.getElementById("list-header-actions");
     if (actionsBar) actionsBar.classList.add("hidden");
     return;
   }
   
-  emptyState.classList.add("hidden");
+  if (emptyState) emptyState.classList.add("hidden");
   const actionsBar = document.getElementById("list-header-actions");
   if (actionsBar) {
     actionsBar.classList.remove("hidden");
-    document.getElementById("filtered-count-val").innerText = items.length;
+    const countVal = document.getElementById("filtered-count-val");
+    if (countVal) countVal.innerText = items.length;
   }
   
   items.forEach(item => {
@@ -487,38 +493,43 @@ function updateBulkActionToolbar() {
   const quickSelectText = document.getElementById("quick-select-text");
   const quickSelectIcon = document.getElementById("quick-select-icon");
   
-  const totalSelectable = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)").length;
+  const listContent = document.getElementById("list-content");
+  const totalSelectable = listContent ? listContent.querySelectorAll("input[type='checkbox']:not(:disabled)").length : 0;
   
   if (selectedIds.size > 0) {
-    countSpan.innerText = selectedIds.size;
-    toolbar.classList.remove("hidden");
+    if (countSpan) countSpan.innerText = selectedIds.size;
+    if (toolbar) toolbar.classList.remove("hidden");
     
     // Set matching select all checkbox state
-    if (selectedIds.size === totalSelectable) {
-      selectAllBox.checked = true;
-      selectAllBox.indeterminate = false;
-      
-      // Update quick select button to Deselect All
-      if (quickSelectText) quickSelectText.innerText = "Deselect All";
-      if (quickSelectIcon) {
-        quickSelectIcon.setAttribute("data-lucide", "square-x");
-        quickSelectIcon.className = "w-4 h-4 text-danger";
-      }
-    } else {
-      selectAllBox.checked = false;
-      selectAllBox.indeterminate = true;
-      
-      // Update quick select button to Select All
-      if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
-      if (quickSelectIcon) {
-        quickSelectIcon.setAttribute("data-lucide", "square-dashed-mouse-pointer");
-        quickSelectIcon.className = "w-4 h-4 text-primary";
+    if (selectAllBox) {
+      if (selectedIds.size === totalSelectable) {
+        selectAllBox.checked = true;
+        selectAllBox.indeterminate = false;
+        
+        // Update quick select button to Deselect All
+        if (quickSelectText) quickSelectText.innerText = "Deselect All";
+        if (quickSelectIcon) {
+          quickSelectIcon.setAttribute("data-lucide", "square-x");
+          quickSelectIcon.className = "w-4 h-4 text-danger";
+        }
+      } else {
+        selectAllBox.checked = false;
+        selectAllBox.indeterminate = true;
+        
+        // Update quick select button to Select All
+        if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
+        if (quickSelectIcon) {
+          quickSelectIcon.setAttribute("data-lucide", "square-dashed-mouse-pointer");
+          quickSelectIcon.className = "w-4 h-4 text-primary";
+        }
       }
     }
   } else {
-    toolbar.classList.add("hidden");
-    selectAllBox.checked = false;
-    selectAllBox.indeterminate = false;
+    if (toolbar) toolbar.classList.add("hidden");
+    if (selectAllBox) {
+      selectAllBox.checked = false;
+      selectAllBox.indeterminate = false;
+    }
     
     // Reset quick select button to Select All
     if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
@@ -528,7 +539,9 @@ function updateBulkActionToolbar() {
     }
   }
   
-  lucide.createIcons();
+  if (window.lucide && typeof lucide.createIcons === 'function') {
+    lucide.createIcons();
+  }
 }
 
 function triggerQuickSelectAll() {
@@ -680,10 +693,12 @@ async function handleBulkAction(action) {
 // 12. Helper loaders & Toasts UI
 function showLoading(isLoading) {
   const loadingDiv = document.getElementById("list-loading");
-  if (isLoading) {
-    loadingDiv.classList.remove("hidden");
-  } else {
-    loadingDiv.classList.add("hidden");
+  if (loadingDiv) {
+    if (isLoading) {
+      loadingDiv.classList.remove("hidden");
+    } else {
+      loadingDiv.classList.add("hidden");
+    }
   }
 }
 
