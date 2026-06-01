@@ -69,40 +69,25 @@ firebase.auth().onAuthStateChanged(async (user) => {
         }
       } else {
         console.warn("[Auth Warning]: Signed-in user is not a superadmin.");
-        // If they just logged in but profile isn't superadmin yet (first time email/pass), write it
-        if (!profile) {
-          console.log("[Auth Action]: Writing first-time superadmin profile...");
-          await db.collection("users").doc(user.uid).set({
-            name: "Super Admin Portal",
-            role: "superadmin",
-            email: user.email || "admin@happytimes.com",
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          // The update will trigger onAuthStateChanged again
-        } else {
-          showToast("Access Denied: You are not a Super Admin.", "danger");
-          lockPortal();
-        }
+        showToast("Access Denied: You are not a Super Admin.", "danger");
+        await auth.signOut();
+        sessionStorage.removeItem("admin_authorized");
+        document.getElementById("gatekeeper-overlay").classList.remove("hidden");
+        document.getElementById("admin-container").classList.add("hidden");
       }
     } catch (e) {
       console.error("[Auth Profile Fetch Error]:", e);
-    }
-  } else {
-    // If not signed in but sessionStorage says they should be, attempt background login
-    const isAuthorized = sessionStorage.getItem("admin_authorized") === "true";
-    if (isAuthorized) {
-      console.log("[Auth Action]: Bypassed overlay, attempting background re-authentication...");
-      try {
-        await auth.signInAnonymously();
-      } catch (err) {
-        console.error("[Auth Re-auth Failed]:", err);
-        lockPortal();
-      }
-    } else {
-      // Show password gatekeeper
+      showToast("Auth verification failed.", "danger");
+      await auth.signOut();
+      sessionStorage.removeItem("admin_authorized");
       document.getElementById("gatekeeper-overlay").classList.remove("hidden");
       document.getElementById("admin-container").classList.add("hidden");
     }
+  } else {
+    // Show password gatekeeper
+    document.getElementById("gatekeeper-overlay").classList.remove("hidden");
+    document.getElementById("admin-container").classList.add("hidden");
+    sessionStorage.removeItem("admin_authorized");
   }
 });
 
@@ -131,31 +116,41 @@ async function unlockPortal() {
     errorBadge.classList.add("hidden");
 
     try {
-      // Sign in Anonymously (fully supported on any domain, zero configs needed)
-      console.log("[Auth Action]: Authenticating anonymous admin session...");
-      const userCredential = await auth.signInAnonymously();
+      // Sign in with Google (fully authorized and whitelisted domain)
+      console.log("[Auth Action]: Authenticating superadmin via Google Sign-In Popup...");
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+      
+      const userCredential = await auth.signInWithPopup(provider);
       const user = userCredential.user;
       
-      // Ensure the user's role is set to superadmin (handles both new and re-auth sessions)
-      await db.collection("users").doc(user.uid).set({
-        name: "Super Admin Portal",
-        role: "superadmin",
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-
-      // Auth Success: Hide overlay
-      const overlay = document.getElementById("gatekeeper-overlay");
-      overlay.style.opacity = "0";
-      setTimeout(() => {
-        overlay.classList.add("hidden");
-        document.getElementById("admin-container").classList.remove("hidden");
-        sessionStorage.setItem("admin_authorized", "true");
-        initializeDashboard();
-      }, 400);
+      // Verify role in Firestore
+      const snap = await db.collection("users").doc(user.uid).get();
+      const profile = snap.exists() ? snap.data() : null;
+      
+      if (profile && profile.role === "superadmin") {
+        // Auth Success: Hide overlay
+        const overlay = document.getElementById("gatekeeper-overlay");
+        overlay.style.opacity = "0";
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+          document.getElementById("admin-container").classList.remove("hidden");
+          sessionStorage.setItem("admin_authorized", "true");
+          initializeDashboard();
+        }, 400);
+      } else {
+        // If not a superadmin, sign out immediately
+        await auth.signOut();
+        throw new Error("Access Denied: Your Google account is not configured as a Super Admin in Happy Times.");
+      }
 
     } catch (err) {
       console.error("[Gatekeeper Auth Error]:", err);
-      errorBadge.innerText = "Auth failed: " + (err.message || "Unknown error");
+      let errMsg = err.message || "Unknown error occurred";
+      if (err.code === "auth/popup-closed-by-user") {
+        errMsg = "Google login popup closed by user.";
+      }
+      errorBadge.innerText = errMsg;
       errorBadge.classList.remove("hidden");
       errorBadge.classList.add("animate-shake");
       btn.disabled = false;
@@ -177,8 +172,13 @@ async function unlockPortal() {
   }
 }
 
-function lockPortal() {
+async function lockPortal() {
   sessionStorage.removeItem("admin_authorized");
+  try {
+    await auth.signOut();
+  } catch (e) {
+    console.error("Error signing out:", e);
+  }
   location.reload();
 }
 
