@@ -1,0 +1,142 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function getCleanPhone(phone) {
+      return phone.size() > 3 ? phone[3:] : phone;
+    }
+    
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    function isSuperAdmin() {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+        getUserData().role == 'superadmin';
+    }
+    
+    function isBranchAdmin() {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+        getUserData().role == 'branchadmin';
+    }
+    
+    function isParent() {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+        getUserData().role == 'parent';
+    }
+    
+    function isStaff() {
+      return isSuperAdmin() || isBranchAdmin();
+    }
+
+    // --- /branches ---
+    match /branches/{branchId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
+    }
+
+    // --- /users ---
+    match /users/{userId} {
+      // Super Admin can do everything
+      allow read, write: if isSuperAdmin();
+      
+      // Users can read their own profile, or matching their authenticated Google email/phone token
+      allow read: if isAuthenticated() && (
+        request.auth.uid == userId || 
+        isStaff() ||
+        (request.auth.token.email != null && resource.data.email == request.auth.token.email) ||
+        (request.auth.token.phone_number != null && (
+          resource.data.phone == request.auth.token.phone_number ||
+          request.auth.token.phone_number == '+91' + resource.data.phone
+        ))
+      );
+      
+      // Let new users link their authenticated account to a pre-created profile
+      allow update: if isAuthenticated() && 
+        (
+          (request.auth.token.email != null && resource.data.email == request.auth.token.email) ||
+          (request.auth.token.phone_number != null && (
+            resource.data.phone == request.auth.token.phone_number ||
+            request.auth.token.phone_number == '+91' + resource.data.phone
+          ))
+        ) &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.role == resource.data.role;
+        
+      // Allow registrations to create temporary parent/user references if needed
+      allow create: if true; // Public register is allowed to write registration documents
+    }
+
+    // --- /registrations (Public parent registration submissions) ---
+    match /registrations/{regId} {
+      allow create: if true; // anyone can submit a registration form
+      allow read, write: if isSuperAdmin();
+    }
+
+    // --- /students ---
+    match /students/{studentId} {
+      allow read: if true;
+      allow write: if isSuperAdmin();
+      allow read: if isBranchAdmin() && resource.data.branchId == getUserData().branchId;
+      allow read: if isParent() && request.auth.uid in resource.data.parentUids;
+      
+      // Let parents update their child's record on first login to link parentUids
+      allow update: if isAuthenticated() && 
+        request.auth.token.phone_number != null &&
+        exists(/databases/$(database)/documents/users/$('parent_' + getCleanPhone(request.auth.token.phone_number))) &&
+        studentId in get(/databases/$(database)/documents/users/$('parent_' + getCleanPhone(request.auth.token.phone_number))).data.linkedStudentIds;
+    }
+
+    // --- /attendance ---
+    match /attendance/{attendanceId} {
+      allow read: if true;
+      allow write: if isSuperAdmin();
+      allow read: if isBranchAdmin() && resource.data.branchId == getUserData().branchId;
+      allow write: if isBranchAdmin() && 
+        request.resource.data.branchId == getUserData().branchId &&
+        (resource == null || resource.data.branchId == getUserData().branchId);
+      allow read: if isParent() && 
+        request.auth.uid in get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.parentUids;
+    }
+
+    // --- /fees ---
+    match /fees/{feeId} {
+      allow read, write: if isSuperAdmin();
+      allow read: if isParent() && 
+        request.auth.uid in get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.parentUids;
+      // Branch admins have no access to fees
+    }
+
+    // --- /posts ---
+    match /posts/{postId} {
+      allow read, write: if isSuperAdmin();
+      allow read, write: if isBranchAdmin() && 
+        (resource == null || resource.data.branchId == getUserData().branchId) &&
+        (request.resource == null || request.resource.data.branchId == getUserData().branchId);
+      // Parents and authenticated users can read posts (they are school announcements)
+      allow read: if isAuthenticated();
+    }
+
+    // --- /logs ---
+    match /logs/{logId} {
+      allow read: if isSuperAdmin();
+      allow read: if isBranchAdmin() && resource.data.actorUid == request.auth.uid;
+      allow create: if isAuthenticated();
+      allow update, delete: if false; // Logs are write-once, immutable
+    }
+
+    // --- /settings ---
+    match /settings/{settingId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
+    }
+  }
+}
