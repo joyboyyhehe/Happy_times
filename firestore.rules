@@ -72,7 +72,7 @@ service cloud.firestore {
         request.resource.data.role == resource.data.role;
         
       // Allow registrations to create temporary parent/user references if needed
-      allow create: if true; // Public register is allowed to write registration documents
+      allow create: if isSuperAdmin(); // Restrict user creation to Super Admins to prevent admin escalation
     }
 
     // --- /registrations (Public parent registration submissions) ---
@@ -83,7 +83,7 @@ service cloud.firestore {
 
     // --- /students ---
     match /students/{studentId} {
-      allow read: if true;
+      allow read: if isAuthenticated(); // Restrict public student access to authenticated sessions only
       allow write: if isSuperAdmin();
       allow read: if isBranchAdmin() && resource.data.branchId == getUserData().branchId;
       allow read: if isParent() && request.auth.uid in resource.data.parentUids;

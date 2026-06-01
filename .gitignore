@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated User Data Reports containing sensitive personal info
+/reports
+/reports/
