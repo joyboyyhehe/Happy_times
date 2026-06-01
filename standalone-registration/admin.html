@@ -255,6 +255,18 @@
 
     <!-- Registration Applications List -->
     <main class="flex-grow flex flex-col">
+      <!-- List Header / Quick Actions -->
+      <div id="list-header-actions" class="mb-4 flex items-center justify-between px-2 hidden">
+        <h3 class="font-poppins text-xs font-bold text-navy-lighter uppercase tracking-wider">Applications</h3>
+        <button 
+          id="quick-select-all-btn" 
+          onclick="triggerQuickSelectAll()" 
+          class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-gray-200 text-navy font-semibold px-4 py-2.5 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 text-xs shadow-sm shadow-navy/5"
+        >
+          <i data-lucide="check-square" class="w-4 h-4 text-primary"></i>
+          <span id="quick-select-text">Select All</span>
+        </button>
+      </div>
       <!-- Loading State -->
       <div id="list-loading" class="flex flex-col items-center justify-center py-20 bg-white/60 backdrop-blur-md rounded-3xl border border-gray-150">
         <div class="relative w-12 h-12 mb-4">

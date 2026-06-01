@@ -315,10 +315,14 @@ function renderApplicationsList(items) {
 
   if (items.length === 0) {
     emptyState.classList.remove("hidden");
+    const actionsBar = document.getElementById("list-header-actions");
+    if (actionsBar) actionsBar.classList.add("hidden");
     return;
   }
   
   emptyState.classList.add("hidden");
+  const actionsBar = document.getElementById("list-header-actions");
+  if (actionsBar) actionsBar.classList.remove("hidden");
   
   items.forEach(item => {
     const isSelected = selectedIds.has(item.id);
@@ -479,6 +483,7 @@ function updateBulkActionToolbar() {
   const selectAllBox = document.getElementById("select-all-box");
   
   const totalSelectable = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)").length;
+  const quickSelectText = document.getElementById("quick-select-text");
   
   if (selectedIds.size > 0) {
     countSpan.innerText = selectedIds.size;
@@ -488,15 +493,39 @@ function updateBulkActionToolbar() {
     if (selectedIds.size === totalSelectable) {
       selectAllBox.checked = true;
       selectAllBox.indeterminate = false;
+      if (quickSelectText) quickSelectText.innerText = "Deselect All";
     } else {
       selectAllBox.checked = false;
       selectAllBox.indeterminate = true;
+      if (quickSelectText) quickSelectText.innerText = "Select All";
     }
   } else {
     toolbar.classList.add("hidden");
     selectAllBox.checked = false;
     selectAllBox.indeterminate = false;
+    if (quickSelectText) quickSelectText.innerText = "Select All";
   }
+}
+
+function triggerQuickSelectAll() {
+  const checkboxes = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)");
+  if (checkboxes.length === 0) return;
+  
+  const allChecked = Array.from(checkboxes).every(box => selectedIds.has(box.value));
+  
+  checkboxes.forEach(box => {
+    box.checked = !allChecked;
+    const card = document.getElementById(`card-${box.value}`);
+    if (!allChecked) {
+      selectedIds.add(box.value);
+      if (card) card.classList.add("selected");
+    } else {
+      selectedIds.delete(box.value);
+      if (card) card.classList.remove("selected");
+    }
+  });
+  
+  updateBulkActionToolbar();
 }
 
 // 10. Database Logic: Real-time Approvals & Rejections
