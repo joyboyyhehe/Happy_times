@@ -48,26 +48,83 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // 3. Gatekeeper Authentication Flow
-function unlockPortal() {
+async function unlockPortal() {
   const passwordInput = document.getElementById("gatekeeper-password");
   const errorBadge = document.getElementById("gatekeeper-error");
+  const btn = document.getElementById("gatekeeper-btn");
   const password = passwordInput.value.trim();
 
   if (password === "6754") {
-    // Hide error
+    // Show loading on button
+    btn.disabled = true;
+    btn.innerHTML = `<span class="flex items-center gap-2"><i data-lucide="loader-2" class="w-4 h-4 spin"></i> Authenticating...</span>`;
+    lucide.createIcons();
     errorBadge.classList.add("hidden");
-    
-    // Animate overlay slide/fade away
-    const overlay = document.getElementById("gatekeeper-overlay");
-    overlay.style.opacity = "0";
-    setTimeout(() => {
-      overlay.classList.add("hidden");
-      document.getElementById("admin-container").classList.remove("hidden");
-      sessionStorage.setItem("admin_authorized", "true");
-      initializeDashboard();
-    }, 400);
+
+    try {
+      const email = "admin@happytimes.com";
+      const secretPass = "happytimes_admin_6754";
+      let userCredential;
+
+      try {
+        // 1. Try signing in with pre-configured admin credentials
+        userCredential = await auth.signInWithEmailAndPassword(email, secretPass);
+      } catch (authErr) {
+        if (authErr.code === "auth/user-not-found") {
+          // 2. If user not found, create it on first run
+          userCredential = await auth.createUserWithEmailAndPassword(email, secretPass);
+          // Set role to superadmin in users collection
+          await db.collection("users").doc(userCredential.user.uid).set({
+            name: "Super Admin Portal",
+            role: "superadmin",
+            email: email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        } else if (authErr.code === "auth/operation-not-allowed") {
+          // 3. If email/pass is disabled, use Anonymous Auth fallback
+          console.warn("Email/Password provider not enabled. Falling back to Anonymous Auth...");
+          userCredential = await auth.signInAnonymously();
+          // Set role to superadmin in users collection
+          await db.collection("users").doc(userCredential.user.uid).set({
+            name: "Super Admin (Anonymous)",
+            role: "superadmin",
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        } else {
+          throw authErr;
+        }
+      }
+
+      // Ensure the user's role is set to superadmin (handles cases where email/pass was already created but profile document is missing)
+      const user = userCredential.user;
+      await db.collection("users").doc(user.uid).set({
+        role: "superadmin",
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+
+      // Auth Success: Hide overlay
+      const overlay = document.getElementById("gatekeeper-overlay");
+      overlay.style.opacity = "0";
+      setTimeout(() => {
+        overlay.classList.add("hidden");
+        document.getElementById("admin-container").classList.remove("hidden");
+        sessionStorage.setItem("admin_authorized", "true");
+        initializeDashboard();
+      }, 400);
+
+    } catch (err) {
+      console.error("[Gatekeeper Auth Error]:", err);
+      errorBadge.innerText = "Auth failed: " + (err.message || "Unknown error");
+      errorBadge.classList.remove("hidden");
+      errorBadge.classList.add("animate-shake");
+      btn.disabled = false;
+      btn.innerHTML = `<span>Unlock Dashboard</span><i data-lucide="unlock" class="w-[18px] h-[18px]"></i>`;
+      lucide.createIcons();
+      setTimeout(() => { errorBadge.classList.remove("animate-shake"); }, 500);
+    }
   } else {
     // Show error with shake animation
+    errorBadge.innerText = "Incorrect password. Try again.";
     errorBadge.classList.remove("hidden");
     errorBadge.classList.add("animate-shake");
     passwordInput.value = "";
