@@ -93,7 +93,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
     if (isAuthorized) {
       console.log("[Auth Action]: Bypassed overlay, attempting background re-authentication...");
       try {
-        await auth.signInWithEmailAndPassword("admin@happytimes.com", "happytimes_admin_6754");
+        await auth.signInWithEmailAndPassword("superadmin_happytimes_2026@happytimes.com", "happytimes_admin_6754");
       } catch (err) {
         console.warn("[Auth Re-auth Failed]:", err);
         // Fallback to anonymous re-auth
@@ -137,7 +137,7 @@ async function unlockPortal() {
     errorBadge.classList.add("hidden");
 
     try {
-      const email = "admin@happytimes.com";
+      const email = "superadmin_happytimes_2026@happytimes.com";
       const secretPass = "happytimes_admin_6754";
       let userCredential;
 
