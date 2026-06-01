@@ -273,9 +273,11 @@ function applyFilters() {
   const elClass = document.getElementById("filter-class");
   const elStatus = document.getElementById("filter-status");
   const elSearch = document.getElementById("search-input");
+  const container = document.getElementById("list-content");
+  const emptyState = document.getElementById("list-empty");
   
-  // If DOM is not fully loaded, abort silently. DomContentLoaded listener will trigger once ready.
-  if (!elBranch || !elClass || !elStatus || !elSearch) {
+  // If DOM is not fully loaded (including list containers), abort silently. DomContentLoaded listener will trigger once ready.
+  if (!elBranch || !elClass || !elStatus || !elSearch || !container || !emptyState) {
     console.log("[Filters Action]: DOM not fully parsed yet, caching filter render...");
     return;
   }
@@ -329,7 +331,7 @@ function renderApplicationsList(items) {
   const container = document.getElementById("list-content");
   const emptyState = document.getElementById("list-empty");
   
-  // Clear container
+  if (!container) return;
   container.innerHTML = "";
   
   // Reset bulk selections not in currently displayed set
