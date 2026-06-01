@@ -93,16 +93,10 @@ firebase.auth().onAuthStateChanged(async (user) => {
     if (isAuthorized) {
       console.log("[Auth Action]: Bypassed overlay, attempting background re-authentication...");
       try {
-        await auth.signInWithEmailAndPassword("superadmin_happytimes_2026@happytimes.com", "happytimes_admin_6754");
+        await auth.signInAnonymously();
       } catch (err) {
-        console.warn("[Auth Re-auth Failed]:", err);
-        // Fallback to anonymous re-auth
-        try {
-          await auth.signInAnonymously();
-        } catch (anonErr) {
-          console.error("[Auth Anonymous Fallback Failed]:", anonErr);
-          lockPortal();
-        }
+        console.error("[Auth Re-auth Failed]:", err);
+        lockPortal();
       }
     } else {
       // Show password gatekeeper
@@ -137,42 +131,14 @@ async function unlockPortal() {
     errorBadge.classList.add("hidden");
 
     try {
-      const email = "superadmin_happytimes_2026@happytimes.com";
-      const secretPass = "happytimes_admin_6754";
-      let userCredential;
-
-      try {
-        // 1. Try signing in with pre-configured admin credentials
-        userCredential = await auth.signInWithEmailAndPassword(email, secretPass);
-      } catch (authErr) {
-        if (authErr.code === "auth/user-not-found") {
-          // 2. If user not found, create it on first run
-          userCredential = await auth.createUserWithEmailAndPassword(email, secretPass);
-          // Set role to superadmin in users collection
-          await db.collection("users").doc(userCredential.user.uid).set({
-            name: "Super Admin Portal",
-            role: "superadmin",
-            email: email,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-        } else if (authErr.code === "auth/operation-not-allowed") {
-          // 3. If email/pass is disabled, use Anonymous Auth fallback
-          console.warn("Email/Password provider not enabled. Falling back to Anonymous Auth...");
-          userCredential = await auth.signInAnonymously();
-          // Set role to superadmin in users collection
-          await db.collection("users").doc(userCredential.user.uid).set({
-            name: "Super Admin (Anonymous)",
-            role: "superadmin",
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-        } else {
-          throw authErr;
-        }
-      }
-
-      // Ensure the user's role is set to superadmin (handles cases where email/pass was already created but profile document is missing)
+      // Sign in Anonymously (fully supported on any domain, zero configs needed)
+      console.log("[Auth Action]: Authenticating anonymous admin session...");
+      const userCredential = await auth.signInAnonymously();
       const user = userCredential.user;
+      
+      // Ensure the user's role is set to superadmin (handles both new and re-auth sessions)
       await db.collection("users").doc(user.uid).set({
+        name: "Super Admin Portal",
         role: "superadmin",
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true });
