@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Times Preschool — Enrollment Form</title>
+  <!-- Google Fonts (Poppins & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#E8451A',
+              light: '#FF6B3D',
+            },
+            navy: {
+              DEFAULT: '#1A2340',
+              light: '#2E3A5F',
+              lighter: '#54628C'
+            },
+            success: '#4caf50',
+            danger: '#e53935'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Firebase SDKs (Compat version is extremely robust for Vanilla JS) -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans text-navy min-h-screen relative overflow-x-hidden flex flex-col justify-between py-6 px-4 md:py-12 md:px-8">
+
+  <!-- Background Orbs -->
+  <div class="reg-bg-orb reg-bg-orb-1"></div>
+  <div class="reg-bg-orb reg-bg-orb-2"></div>
+  <div class="reg-bg-orb reg-bg-orb-3"></div>
+
+
+
+  <!-- Main Container -->
+  <div class="max-w-[520px] w-100 mx-auto z-10 flex-grow flex flex-col justify-center">
+    
+    <!-- Header -->
+    <header class="text-center mb-7 animate-fade-in-down">
+      <div class="reg-logo-badge">
+        <i data-lucide="graduation-cap" class="w-7 h-7 stroke-[2.5]"></i>
+      </div>
+      <h1 class="font-poppins text-[28px] font-extrabold text-navy leading-none mt-3">Happy Times</h1>
+      <p class="text-xs text-navy-lighter font-semibold tracking-[1.5px] uppercase mt-1">Preschool & Montessori</p>
+    </header>
+
+    <!-- Progress Steps Tracker -->
+    <div class="reg-progress mb-6 px-2 animate-fade-in-up delay-200">
+      
+      <!-- Step 1 Dot -->
+      <div class="reg-progress-item">
+        <button id="step-dot-1" class="reg-step-dot active" aria-label="Step 1: Student Information">
+          <i data-lucide="baby" class="w-[18px] h-[18px]"></i>
+        </button>
+        <span id="step-label-1" class="reg-step-label active">Student Info</span>
+        <div id="step-line-1" class="reg-step-line"></div>
+      </div>
+
+      <!-- Step 2 Dot -->
+      <div class="reg-progress-item">
+        <button id="step-dot-2" class="reg-step-dot" disabled aria-label="Step 2: Guardian Information">
+          <i data-lucide="user" class="w-[18px] h-[18px]"></i>
+        </button>
+        <span id="step-label-2" class="reg-step-label">Parent Info</span>
+        <div id="step-line-2" class="reg-step-line"></div>
+      </div>
+
+      <!-- Step 3 Dot -->
+      <div class="reg-progress-item">
+        <button id="step-dot-3" class="reg-step-dot" disabled aria-label="Step 3: Preview & Submit">
+          <i data-lucide="check-circle-2" class="w-[18px] h-[18px]"></i>
+        </button>
+        <span id="step-label-3" class="reg-step-label">Submit</span>
+      </div>
+      
+    </div>
+
+    <!-- Registration Form Card -->
+    <main class="reg-card animate-fade-in-up delay-300">
+      
+      <form id="regForm" onsubmit="event.preventDefault();">
+        
+        <!-- STEP 1: Student Information -->
+        <div id="step-panel-1" class="step-panel active">
+          <div class="flex items-center gap-3.5 mb-5">
+            <div class="reg-step-icon-wrap">
+              <i data-lucide="baby" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-navy">Student Information</h2>
+              <p class="text-xs text-navy-lighter mt-0.5">Tell us about your little one</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <!-- Student Name -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="studentName">
+                Child's Full Name <span class="text-primary font-bold">*</span>
+              </label>
+              <input id="studentName" type="text" class="reg-input" placeholder="e.g. Aarav Sharma" required autocomplete="off" autocapitalize="words">
+              <span id="err-studentName" class="reg-field-error hidden"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Name is required</span>
+            </div>
+
+            <!-- Branch & Class Select Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <!-- Branch -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="branch">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Branch <span class="text-primary font-bold">*</span>
+                </label>
+                <select id="branch" class="reg-select" required>
+                  <option value="">Select Branch</option>
+                  <option value="padmanabhanagar">Padmanabhanagar</option>
+                  <option value="outer-ring-road">Outer Ring Road</option>
+                  <option value="chikkalsandra">Chikkalsandra</option>
+                  <option value="rr-nagar">RR Nagar</option>
+                </select>
+                <span id="err-branch" class="reg-field-error hidden"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Branch is required</span>
+              </div>
+
+              <!-- Class -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="className">
+                  <i data-lucide="school" class="w-3.5 h-3.5"></i> Class <span class="text-primary font-bold">*</span>
+                </label>
+                <select id="className" class="reg-select" required>
+                  <option value="">Select Class</option>
+                  <option value="Daycare">Daycare</option>
+                  <option value="Pre-Mont">Pre-Mont</option>
+                  <option value="Mont-1">Mont-1</option>
+                  <option value="Mont -2">Mont -2</option>
+                  <option value="Mont -3">Mont -3</option>
+                </select>
+                <span id="err-className" class="reg-field-error hidden"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Class is required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Guardian Information & Verification -->
+        <div id="step-panel-2" class="step-panel hidden">
+          <div class="flex items-center gap-3.5 mb-5">
+            <div class="reg-step-icon-wrap">
+              <i data-lucide="user" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-navy">Guardian Information</h2>
+              <p class="text-xs text-navy-lighter mt-0.5">Enter details and contact numbers</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <!-- Parent 1 Name -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="parent1Name">
+                Primary Guardian Full Name <span class="text-primary font-bold">*</span>
+              </label>
+              <input id="parent1Name" type="text" class="reg-input" placeholder="e.g. Priya Sharma" required autocomplete="off" autocapitalize="words">
+              <span id="err-parent1Name" class="reg-field-error hidden"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Guardian name is required</span>
+            </div>
+
+            <!-- Relation Toggle -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy">Relation</label>
+              <div class="flex gap-2">
+                <button type="button" id="rel-mother" class="reg-toggle-btn active" onclick="setRelation('parent1Relation', 'Mother')">Mother</button>
+                <button type="button" id="rel-father" class="reg-toggle-btn" onclick="setRelation('parent1Relation', 'Father')">Father</button>
+              </div>
+              <input type="hidden" id="parent1Relation" value="Mother">
+            </div>
+
+            <!-- Primary Mobile Number -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="parent1Phone">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i> Primary Mobile Number <span class="text-primary font-bold">*</span>
+              </label>
+              
+              <div class="flex items-center border-2 border-gray-200 rounded-2xl bg-white/70 overflow-hidden focus-within:border-primary focus-within:bg-white focus-within:ring-4 focus-within:ring-primary/8 transition-all duration-300 h-[50px] w-full">
+                <span class="bg-gray-50 border-r border-gray-200 px-4 h-full flex items-center justify-center text-[15px] font-semibold text-navy-lighter select-none">+91</span>
+                <input id="parent1Phone" type="tel" class="w-full h-full px-4 text-[15px] font-semibold text-navy bg-transparent outline-none border-none" placeholder="9876543210" maxlength="10" required autocomplete="off">
+              </div>
+              <span id="err-parent1Phone" class="reg-field-error hidden"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Valid 10-digit number required</span>
+            </div>
+
+            <!-- Primary Email -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="parent1Email">
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i> Primary Email <span class="text-gray-400 font-normal">(optional)</span>
+              </label>
+              <input id="parent1Email" type="email" class="reg-input" placeholder="parent@email.com" autocomplete="off" inputmode="email" autocapitalize="off" autocorrect="off">
+            </div>
+
+            <!-- Divider -->
+            <hr class="border-none border-t border-gray-150 my-2">
+
+            <!-- Secondary Guardian (Optional) -->
+            <h3 class="text-sm font-bold text-navy">Secondary Guardian (Optional)</h3>
+
+            <!-- Parent 2 Name -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy" for="parent2Name">Full Name</label>
+              <input id="parent2Name" type="text" class="reg-input" placeholder="e.g. Rajesh Sharma" autocomplete="off" autocapitalize="words">
+            </div>
+
+            <!-- Parent 2 Relation -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy">Relation</label>
+              <div class="flex gap-2">
+                <button type="button" id="rel-father-2" class="reg-toggle-btn active" onclick="setRelation('parent2Relation', 'Father')">Father</button>
+                <button type="button" id="rel-mother-2" class="reg-toggle-btn" onclick="setRelation('parent2Relation', 'Mother')">Mother</button>
+              </div>
+              <input type="hidden" id="parent2Relation" value="Father">
+            </div>
+
+            <!-- Parent 2 Phone -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="parent2Phone">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i> Mobile Number
+              </label>
+              <div class="flex items-center border-2 border-gray-200 rounded-2xl bg-white/70 overflow-hidden focus-within:border-primary focus-within:bg-white focus-within:ring-4 focus-within:ring-primary/8 transition-all duration-300 h-[50px] w-full">
+                <span class="bg-gray-50 border-r border-gray-200 px-4 h-full flex items-center justify-center text-[15px] font-semibold text-navy-lighter select-none">+91</span>
+                <input id="parent2Phone" type="tel" class="w-full h-full px-4 text-[15px] font-semibold text-navy bg-transparent outline-none border-none" placeholder="9876543210" maxlength="10" autocomplete="off">
+              </div>
+              <span id="err-parent2Phone" class="reg-field-error hidden"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Valid 10-digit number required</span>
+            </div>
+
+            <!-- Parent 2 Email -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-navy flex items-center gap-1.5" for="parent2Email">
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i> Email
+              </label>
+              <input id="parent2Email" type="email" class="reg-input" placeholder="father@email.com" autocomplete="off" inputmode="email" autocapitalize="off" autocorrect="off">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Preview & Submit -->
+        <div id="step-panel-3" class="step-panel hidden">
+          <div class="flex items-center gap-3.5 mb-5">
+            <div class="reg-step-icon-wrap success-theme">
+              <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-navy">Review & Submit</h2>
+              <p class="text-xs text-navy-lighter mt-0.5">Confirm your details before final registration</p>
+            </div>
+          </div>
+
+          <div class="reg-preview-card">
+            <!-- Child Details -->
+            <div class="reg-preview-section">
+              <h4 class="reg-preview-section-title">
+                <i data-lucide="baby" class="w-4 h-4"></i> Child Details
+              </h4>
+              <div class="reg-preview-grid">
+                <div class="reg-preview-item">
+                  <span class="reg-preview-label">Full Name</span>
+                  <span id="preview-studentName" class="reg-preview-value">—</span>
+                </div>
+                <div class="reg-preview-item">
+                  <span class="reg-preview-label">Branch Center</span>
+                  <span id="preview-branch" class="reg-preview-value">—</span>
+                </div>
+                <div class="reg-preview-item">
+                  <span class="reg-preview-label">Target Class</span>
+                  <span id="preview-className" class="reg-preview-value">—</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Guardian Details -->
+            <div class="reg-preview-section">
+              <h4 class="reg-preview-section-title">
+                <i data-lucide="user" class="w-4 h-4"></i> Primary Guardian
+              </h4>
+              <div class="reg-preview-grid">
+                <div class="reg-preview-item">
+                  <span class="reg-preview-label">Name & Relation</span>
+                  <span id="preview-parent1Name" class="reg-preview-value">—</span>
+                </div>
+                <div class="reg-preview-item">
+                  <span class="reg-preview-label">Mobile Number</span>
+                  <span id="preview-parent1Phone" class="reg-preview-value font-bold">—</span>
+                </div>
+                <div id="preview-row-parent1Email" class="reg-preview-item hidden">
+                  <span class="reg-preview-label">Email Address</span>
+                  <span id="preview-parent1Email" class="reg-preview-value">—</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Secondary Guardian Details -->
+            <div id="preview-section-parent2" class="reg-preview-section hidden">
+              <h4 class="reg-preview-section-title">
+                <i data-lucide="users" class="w-4 h-4"></i> Secondary Guardian
+              </h4>
+              <div class="reg-preview-grid">
+                <div class="reg-preview-item">
+                  <span class="reg-preview-label">Name & Relation</span>
+                  <span id="preview-parent2Name" class="reg-preview-value">—</span>
+                </div>
+                <div id="preview-row-parent2Phone" class="reg-preview-item hidden">
+                  <span class="reg-preview-label">Mobile Number</span>
+                  <span id="preview-parent2Phone" class="reg-preview-value">—</span>
+                </div>
+                <div id="preview-row-parent2Email" class="reg-preview-item hidden">
+                  <span class="reg-preview-label">Email Address</span>
+                  <span id="preview-parent2Email" class="reg-preview-value">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Global Submission Error Box -->
+        <div id="global-submit-error" class="reg-error-banner mt-4 hidden">
+          <i data-lucide="alert-circle" class="w-[18px] h-[18px]"></i>
+          <span id="global-submit-error-text">Something went wrong. Please try again.</span>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="reg-nav">
+          <button type="button" id="back-btn" class="reg-btn reg-btn-back hidden" onclick="handleBack()">
+            <i data-lucide="chevron-left" class="w-[18px] h-[18px]"></i>
+            <span id="back-btn-text">Back</span>
+          </button>
+
+          <div class="flex-grow"></div>
+
+          <!-- Step 1 & 2 Continue button -->
+          <button type="button" id="continue-btn" class="reg-btn reg-btn-next" onclick="handleContinue()">
+            Continue
+            <i data-lucide="chevron-right" class="w-[18px] h-[18px]"></i>
+          </button>
+
+          <!-- Step 3 Final Submit button -->
+          <button type="button" id="submit-btn" class="reg-btn reg-btn-submit hidden" onclick="handleFinalSubmit()">
+            <span id="submit-btn-idle" class="flex items-center gap-1.5">
+              <i data-lucide="heart" class="w-[18px] h-[18px]"></i> Submit Registration
+            </span>
+            <span id="submit-btn-loading" class="flex items-center gap-1.5 hidden">
+              <i data-lucide="loader-2" class="w-[18px] h-[18px] spin"></i> Submitting...
+            </span>
+          </button>
+        </div>
+
+      </form>
+
+    </main>
+
+    <!-- Success Screen (Hidden by default) -->
+    <div id="success-screen" class="hidden">
+      <div class="reg-success-container animate-scale-in">
+        <div class="reg-success-ring"></div>
+        <div class="reg-success-icon animate-fade-in-up">
+          <i data-lucide="check-circle-2" class="w-16 h-16"></i>
+        </div>
+
+        <h1 class="reg-success-title animate-fade-in-up delay-200">Registration Submitted!</h1>
+        <p class="reg-success-desc animate-fade-in-up delay-300">
+          Thank you for submitting <strong id="success-student-name">Child</strong>'s application at Happy Times Preschool.
+        </p>
+
+        <div class="reg-success-info animate-fade-in-up delay-400">
+          <div class="reg-success-info-item">
+            <i data-lucide="sparkles" class="w-[18px] h-[18px]"></i>
+            <span>Our administration will verify and approve your application shortly.</span>
+          </div>
+          <div class="reg-success-info-item">
+            <i data-lucide="shield-check" class="w-[18px] h-[18px]"></i>
+            <span>Your mobile number is logged securely for portal login access.</span>
+          </div>
+          <div class="reg-success-info-item">
+            <i data-lucide="heart" class="w-[18px] h-[18px]"></i>
+            <span>Our mobile app is coming soon with exciting new features and updates!</span>
+          </div>
+        </div>
+
+        <div class="reg-success-footer animate-fade-in-up delay-500">
+          <div class="reg-logo-badge w-12 h-12 mb-2">
+            <i data-lucide="graduation-cap" class="w-6 h-6 stroke-[2.5]"></i>
+          </div>
+          <p class="font-poppins font-bold text-navy">Happy Times Preschool & Montessori</p>
+          <p class="reg-footer-contact">
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i> 9980413994 / 9972344442
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="reg-footer" class="reg-footer animate-fade-in-up delay-500">
+      <p>© 2006–2026 Happy Times Preschool & Montessori. Est. since 2006.</p>
+      <p class="reg-footer-contact justify-center">
+        <i data-lucide="phone" class="w-3.5 h-3.5"></i> 9980413994 / 9972344442
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1798 @@
+﻿================================================================================
+  HAPPY TIMES PRESCHOOL & MONTESSORI -- COMPLETE USER DIRECTORY
+  Generated on: 1/6/2026, 6:51:28 pm
+================================================================================
+
+--------------------------------------------------------------------------------
+  SUMMARY
+--------------------------------------------------------------------------------
+  Staff / Admin Users                          : 1
+  Accepted Parent Accounts (Portal Access)     : 3
+  -------------------------------------------------
+  Pending Registrations (awaiting approval)    : 94
+  Approved Registrations                       : 5
+  Rejected Registrations                       : 2
+  Total Registrations                          : 101
+--------------------------------------------------------------------------------
+
+================================================================================
+                          SECTION A - STAFF USERS (1)  
+================================================================================
+
+  Includes: Super Admins and Branch Admins. Sorted A-Z by name.
+
+  [01] Prathap Admin
+       Role         : Super Admin (All Branches)
+       Email        : prathap.v5214@gmail.com
+       Branch       : All Branches (Global)
+       Firebase UID : a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13
+       Doc ID       : a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13
+       Created At   : 28/5/2026, 7:48:54 pm
+       Updated At   : 28/5/2026, 7:52:08 pm
+       ------------------------------------------------------------------------
+
+================================================================================
+                    SECTION B - ACCEPTED PARENT ACCOUNTS (3)  
+================================================================================
+
+  Parents who are whitelisted and can log in via OTP. Sorted A-Z.
+
+  [01] Bhavana Prasad
+       Relation     : Mother
+       Phone        : +919972344442
+       Email        : happytimespreschool27@gmail.com
+       Portal Login : [YES] Logged in (UID: OpKFmBu9t8XvGR9WaUWKwcK0Nuk2)
+       Students     : student_pooja_1779984167925
+       Doc ID       : OpKFmBu9t8XvGR9WaUWKwcK0Nuk2
+       Created At   : 28/5/2026, 9:32:49 pm
+       ------------------------------------------------------------------------
+  [02] Prathap V
+       Relation     : Mother
+       Phone        : +919606664929
+       Email        : prathap.v5214@gmail.com
+       Portal Login : [YES] Logged in (UID: AkoyQTW4UIMKQXVCILi1PEHIVvF2)
+       Students     : student_prathap_1779981275378, student_baby1_1779973331090, student_bhanupriya_1779974900000
+       Doc ID       : AkoyQTW4UIMKQXVCILi1PEHIVvF2
+       Created At   : 28/5/2026, 8:44:36 pm
+       ------------------------------------------------------------------------
+  [03] Ramesh Kumar
+       Relation     : -
+       Phone        : +919980413994
+       Email        : -
+       Portal Login : [NO]  Not yet logged in
+       Students     : student_test_1
+       Doc ID       : parent_seed
+       Created At   : 28/5/2026, 4:37:07 pm
+       ------------------------------------------------------------------------
+
+================================================================================
+                SECTION C - PENDING REGISTRATIONS [PENDING] (94)  
+================================================================================
+
+  Families who submitted the form and are waiting for admin approval.
+
+  * Sorted A-Z by student name.
+
+  [01] STUDENT : Aaradya Nehana. S
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 2:44:07 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Manimala R
+         Phone    : +91 9741199837
+         Email    : manimalar15@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Anand S
+         Phone    : +91 9538694289
+         Email    : anand.sivapuram@gmail.com
+       Doc ID    : sMfAHTidsqiKQNHYxO5r
+       ........................................................................
+  [02] STUDENT : Aarna Meda
+       Branch    : Chikkalsandra
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:02:09 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Navya Nagaraj
+         Phone    : +91 9538288899
+         Email    : navya.n.raj@gmail.com
+         OTP      : [VERIFIED] UID: rWq8Wnn0dFhEQ0g23cl47bRtall1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Guru Prasad M
+         Phone    : +91 9538887439
+         Email    : gurumeda.prasad@gmail.com
+       Doc ID    : YToRdH4GU4y8RMjqPHXF
+       ........................................................................
+  [03] STUDENT : Advithi Palguna
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:32:30 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Nethravathi M G
+         Phone    : +91 9731447722
+         Email    : -
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Palguna N
+         Phone    : +91 9731447733
+         Email    : -
+       Doc ID    : 2QkwI88Pwn8dkzZcF2sc
+       ........................................................................
+  [04] STUDENT : Agasthya Santhosh
+       Branch    : Padmanabhanagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:36:47 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Swathi R Shekar
+         Phone    : +91 9886198513
+         Email    : swathirshkr@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Santhosh Kumar M S
+         Phone    : +91 9481194450
+         Email    : swathirshkr@gmail.com
+       Doc ID    : kZbrV6slNZV2n5uKLYO9
+       ........................................................................
+  [05] STUDENT : Agastya Acharya
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:24:33 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Shruthi Deepak
+         Phone    : +91 9164706790
+         Email    : shruthi0905@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Deepak Puttur
+         Phone    : +91 9916888333
+         Email    : deepakp8691@gmail.com
+       Doc ID    : MZW9pFqR5UhJyInQoMqR
+       ........................................................................
+  [06] STUDENT : Aira Deepak
+       Branch    : RR Nagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 12:56:56 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Haritha Neelamraju
+         Phone    : +91 9742945480
+         Email    : harithaneelamraj@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Deepak V
+         Phone    : +91 9886803991
+         Email    : dpak.v88@gmail.com
+       Doc ID    : 22wQ8KalhbK0a75Xi9gV
+       ........................................................................
+  [07] STUDENT : Aleena A
+       Branch    : Padmanabhanagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 12:02:32 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Naseema S
+         Phone    : +91 8296689024
+         Email    : naseemas068@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Arif
+         Phone    : +91 8453845202
+         Email    : -
+       Doc ID    : iu0QrYGALRoQ1MBUWNwT
+       ........................................................................
+  [08] STUDENT : Aprameya P
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:22:20 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Amruthashree P
+         Phone    : +91 9164131875
+         Email    : -
+       Doc ID    : Pd7806sYFEErUfDH9tWk
+       ........................................................................
+  [09] STUDENT : Arihant Jain
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 7:35:39 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Mr. sudhir kumar Jain
+         Phone    : +91 9986133226
+         Email    : sujyosk2@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Mrs. Nagajyothi p
+         Phone    : +91 9986833226
+         Email    : sujyosk2@gmail.com
+       Doc ID    : MSZmgNWgplsBCHqTUAqd
+       ........................................................................
+  [10] STUDENT : ARIHANT JAIN
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:00:58 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Nagajyothi
+         Phone    : +91 9986833226
+         Email    : sujyosj2@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Sudhir Kumar Jain
+         Phone    : +91 9986133226
+         Email    : sujyosk2@gmail.com
+       Doc ID    : CfZ3fNYQXUg8zgI8hBir
+       ........................................................................
+  [11] STUDENT : Arvi A
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:26:23 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Vijayalakshmi B
+         Phone    : +91 9972367517
+         Email    : Vijayalakshmi8796@gmail.com
+         OTP      : [VERIFIED] UID: yIxGcx4pmCWWevfDa8D6Ls8mGDx2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Aries KA
+         Phone    : +91 7019210496
+         Email    : aries22yards@gmail.com
+       Doc ID    : 0y31XMlID8jCQe3GBPa0
+       ........................................................................
+  [12] STUDENT : Atharva
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 9:30:24 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Sumangala
+         Phone    : +91 9902946434
+         Email    : suma.biradar14@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Prashanth
+         Phone    : +91 9902423888
+         Email    : bhalke.prashant@gmail.com
+       Doc ID    : 0HmirIkCik17HBOS5Ddn
+       ........................................................................
+  [13] STUDENT : Atharva.S.k
+       Branch    : RR Nagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:36:29 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Anushri
+         Phone    : +91 9606738019
+         Email    : anushivu283@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Shivaprakash
+         Phone    : +91 9148021695
+         Email    : anushivu283@gmail.com
+       Doc ID    : nr1bcUKJRoabCQuIJWz2
+       ........................................................................
+  [14] STUDENT : AVYANRAJ RAM
+       Branch    : RR Nagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 11:07:45 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Nethravathi C
+         Phone    : +91 8884908836
+         Email    : nethravathi.c15@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Santhosh B R
+         Phone    : +91 9008715726
+         Email    : santhoshbr.no@gmail.com
+       Doc ID    : wzjiqiR3VNr7xhuAqufh
+       ........................................................................
+  [15] STUDENT : B.S. Ruthvika
+       Branch    : Padmanabhanagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:49:21 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Shiva kumar B R
+         Phone    : +91 8012417916
+         Email    : -
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Divya B
+         Phone    : +91 8012417916
+         Email    : divyachowdaryece@gmail.com
+       Doc ID    : eDq0N0PlscZkDbOS5AH0
+       ........................................................................
+  [16] STUDENT : Bala
+       Branch    : Outer Ring Road
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 31/5/2026, 2:43:44 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Dhanasunthar
+         Phone    : +91 9363303009
+         Email    : dhanasunthar06@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Shubu
+         Phone    : +91 7758025829
+         Email    : -
+       Doc ID    : 4dj1iznsS8v2cQDyY4Rd
+       ........................................................................
+  [17] STUDENT : Bhanupriya
+       Branch    : Padmanabhanagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:23:48 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : awd
+         Phone    : +91 9606664929
+         Email    : -
+       Doc ID    : KY5ZNUlXQXumyfXLNz6S
+       ........................................................................
+  [18] STUDENT : Bhargava Deshpande
+       Branch    : Chikkalsandra
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:03:13 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Varsha M. Rao
+         Phone    : +91 7338570302
+         Email    : -
+         OTP      : [VERIFIED] UID: QG9t9JdpoyUx6CHizbB71IDeRUG2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Abhishek Deshpande
+         Phone    : +91 9845296679
+         Email    : deabhi0@gmail.com
+       Doc ID    : FCaltRy4jufRBOHXyHbr
+       ........................................................................
+  [19] STUDENT : Bhavish L
+       Branch    : Outer Ring Road
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 31/5/2026, 12:52:08 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Prathima C
+         Phone    : +91 9880161199
+         Email    : prathu8@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Lokesh K
+         Phone    : +91 9886750931
+         Email    : loki.sadar@gmail.com
+       Doc ID    : BFOU02xFpQDpg878RPKf
+       ........................................................................
+  [20] STUDENT : Bhavishka L
+       Branch    : Outer Ring Road
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 31/5/2026, 12:53:25 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Prathima C
+         Phone    : +91 9880161199
+         Email    : prathu8@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Lokesh K
+         Phone    : +91 9886750931
+         Email    : loki.sadar@gmail.com
+       Doc ID    : xpkVwDExHFYncHQ2wnp7
+       ........................................................................
+  [21] STUDENT : Charvi Gowda BS
+       Branch    : Outer Ring Road
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:40:44 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : ROOPA SHANKAR
+         Phone    : +91 8722380748
+         Email    : roopashankar2011@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Shankaralingegowda
+         Phone    : +91 8497046041
+         Email    : -
+       Doc ID    : MddBDkuKO74VeumLm843
+       ........................................................................
+  [22] STUDENT : Dhwani A Aithal
+       Branch    : Chikkalsandra
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 9:33:59 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Pavithra R
+         Phone    : +91 9986532079
+         Email    : Aradhya.pavithra6@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Ashweej S Aithal
+         Phone    : +91 9738619281
+         Email    : ashweejsaithal@gmail.com
+       Doc ID    : v2Qy8YMqiL3f2obbHKN4
+       ........................................................................
+  [23] STUDENT : Dimpana.M
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 9:03:58 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Harshitha.S
+         Phone    : +91 8431201232
+         Email    : -
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Muniraju.K
+         Phone    : +91 7892138979
+         Email    : -
+       Doc ID    : G0JXgul4chFvfOckzXkN
+       ........................................................................
+  [24] STUDENT : Dushyanth. A
+       Branch    : Outer Ring Road
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 1:16:30 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Dhanalakshmi EC
+         Phone    : +91 8197484329
+         Email    : dhanalakshmi9035@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Kiran Babu
+         Phone    : +91 6363576752
+         Email    : kiran.ak1824@gmail.com
+       Doc ID    : OcW7nzWblaOUoWyVijXD
+       ........................................................................
+  [25] STUDENT : E.K.Vedhanth
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 1:16:30 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : T.Rachana
+         Phone    : +91 7075182022
+         Email    : rachanarachu255@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Kishore Kumar E.C
+         Phone    : +91 9738216932
+         Email    : -
+       Doc ID    : 3Y4dvHITg9uV0MunE2ne
+       ........................................................................
+  [26] STUDENT : Eshanth BR
+       Branch    : Outer Ring Road
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:43:06 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Rajeev CR
+         Phone    : +91 9741896929
+         Email    : gururajaelectserv@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Shwetha Rajeev
+         Phone    : +91 8792770147
+         Email    : shwetharajeev20@gmail.com
+       Doc ID    : VLREs3gW7i8RKJ5okHlQ
+       ........................................................................
+  [27] STUDENT : Ethan KP
+       Branch    : RR Nagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 11:44:51 am
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Prajith KC
+         Phone    : +91 9446172658
+         Email    : athiracp080@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Athira CP
+         Phone    : +91 8547242152
+         Email    : athiracp080@gmail.com
+       Doc ID    : mazJxe01JpTko0V2Rmgt
+       ........................................................................
+  [28] STUDENT : Gaurav
+       Branch    : Outer Ring Road
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 9:39:11 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Yogendra Ck
+         Phone    : +91 7259694789
+         Email    : yogendrack35@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Anusuya
+         Phone    : +91 6363926351
+         Email    : aanu48273@gmail.com
+       Doc ID    : s0Sh2vC67ReiP1QKmFaU
+       ........................................................................
+  [29] STUDENT : Gokul.R
+       Branch    : Chikkalsandra
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:16:39 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Sowmya
+         Phone    : +91 7676361713
+         Email    : sowmyagokul01@gmail.com
+         OTP      : [VERIFIED] UID: eQwCrEe5WqeW9JqHXPoNteWYUdo2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Rajesh
+         Phone    : +91 9632050069
+         Email    : -
+       Doc ID    : dLgkUq13seSJJ7bUXuOY
+       ........................................................................
+  [30] STUDENT : Hafsa Raunaq
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 31/5/2026, 12:45:19 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Faraz Hakim Shaikh
+         Phone    : +91 7829467643
+         Email    : farazshaik@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : mubeena s
+         Phone    : +91 8861407377
+         Email    : 4mubeena.s@gmail.com
+       Doc ID    : Y1jzf5Nw1a0t6tnMFfL0
+       ........................................................................
+  [31] STUDENT : Hanvithaa N
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:17:11 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Nandakumar P
+         Phone    : +91 9535172238
+         Email    : iamnandu143@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Geetha A
+         Phone    : +91 9035602572
+         Email    : geetha.gee16@gmail.com
+       Doc ID    : hCUjEd2PXfVxj6JdnPcy
+       ........................................................................
+  [32] STUDENT : Heshika I
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:35:44 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Divya
+         Phone    : +91 9482334395
+         Email    : divyaiyyappa18@gmail.com
+         OTP      : [VERIFIED] UID: SBmpTHxXJTWCDiFGhMAWmCk2dEv2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Iyyappan
+         Phone    : +91 9900496242
+         Email    : iyappa23@gmail.com
+       Doc ID    : FluN9eN0wvek3aYHKkQV
+       ........................................................................
+  [33] STUDENT : Hitha V
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 2:16:17 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Himaja K
+         Phone    : +91 9483726766
+         Email    : -
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Vijay Kumar B C
+         Phone    : +91 9035548637
+         Email    : -
+       Doc ID    : Td1n5YhIxjth9Uxl9kmA
+       ........................................................................
+  [34] STUDENT : Iraa Mansi
+       Branch    : RR Nagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:24:50 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Sinchana S
+         Phone    : +91 9980916131
+         Email    : sinchana.sinchurs@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Manoj Shiva
+         Phone    : +91 9742179712
+         Email    : manshiv@outlook.com
+       Doc ID    : MM7yyebkqgSzfpAGAtpW
+       ........................................................................
+  [35] STUDENT : Jashvik U
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 9:44:31 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Rakshitha R
+         Phone    : +91 8892136015
+         Email    : rakshitharachu02@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Umesha S
+         Phone    : +91 9740087486
+         Email    : umee.umesh@gmail.com
+       Doc ID    : UoCOpjYj3Dq6rdyp8bDL
+       ........................................................................
+  [36] STUDENT : Jathin
+       Branch    : RR Nagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:23:05 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Bhanu Rathan
+         Phone    : +91 8277199197
+         Email    : bhanurathan61@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Rathan Kumar
+         Phone    : +91 9900537008
+         Email    : ratanbm@gmail.com
+       Doc ID    : 0YhIdHsgQrmnhpSBzb5v
+       ........................................................................
+  [37] STUDENT : Jeevan GV
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:10:24 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Asha S
+         Phone    : +91 8553308969
+         Email    : ashas846@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Venkatagiri AG
+         Phone    : +91 8553884842
+         Email    : shakthiag@gmail.com
+       Doc ID    : kiOTZ6OmsRDtqlPsn7my
+       ........................................................................
+  [38] STUDENT : Jeshwanth Kumar.K
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:25:01 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Usha
+         Phone    : +91 9398191149
+         Email    : ushodhaya317@gmail.com
+         OTP      : [VERIFIED] UID: LdQcVf0EwmYpQeCMCTmauRmAVFI2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Sandeep Kumar.K
+         Phone    : +91 9449536822
+         Email    : smanjunath447@gmail.com
+       Doc ID    : 59GHpc5BaTPHmt4Z711a
+       ........................................................................
+  [39] STUDENT : Jhaswitha .A
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:16:41 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Anand Narayan
+         Phone    : +91 8123492997
+         Email    : avi.anand21@gmail.com
+         OTP      : [VERIFIED] UID: zvbwvIESoKMDMjAPiPpjsUM9Soz2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Manoj Narayan
+         Phone    : +91 9880008584
+         Email    : avi.anand21@gmail.com
+       Doc ID    : tAC4BSQQiwCyILOG5FxL
+       ........................................................................
+  [40] STUDENT : Joshvin Suriy
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:27:27 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Vinod Kumar K P
+         Phone    : +91 9110645264
+         Email    : vinodkp145@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Jyothi
+         Phone    : +91 7204069980
+         Email    : jyothivinod9294@gmail.com
+       Doc ID    : ljMJOvNytNDOspswHRVZ
+       ........................................................................
+  [41] STUDENT : Karunya Ashok
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:54:46 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Sukanya
+         Phone    : +91 9066266196
+         Email    : sukisukanyamallem@gmail.com
+         OTP      : [VERIFIED] UID: jnFXWvd2uCfvM3PftBApoox0JWu2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Ashok
+         Phone    : +91 8801283833
+         Email    : ashokpalasani1224@gmail.com
+       Doc ID    : P1whwneznVTMJvnSklu8
+       ........................................................................
+  [42] STUDENT : Kirthan Raj C
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:42:00 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Akila
+         Phone    : +91 7338081111
+         Email    : akilad992@gmail.com
+         OTP      : [VERIFIED] UID: HbVpSnJkO8M9raS5bFXkj2WVsL02
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Chethan N
+         Phone    : +91 9035188087
+         Email    : -
+       Doc ID    : iRZ0JYEau21eocX8tHSQ
+       ........................................................................
+  [43] STUDENT : Kritarth. K.H
+       Branch    : Chikkalsandra
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:40:33 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Sampritha
+         Phone    : +91 9620301607
+         Email    : samprithasam1@gmail.com
+         OTP      : [VERIFIED] UID: IULNnkllZsNmsCQz7PJue7h2l0m1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Karthik.H.U
+         Phone    : +91 9738663687
+         Email    : Karthikruthi29@gmail.com
+       Doc ID    : gqvk8PiJlCyUAPT7C2Lw
+       ........................................................................
+  [44] STUDENT : Kruthi I
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:01:59 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Indra Kumar B
+         Phone    : +91 9945233776
+         Email    : itsindrakumar@gmail.com
+         OTP      : [VERIFIED] UID: 369sxfeJLrdtc8tiVC2rPOEbgVq1
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Yashaswini S
+         Phone    : +91 9538458783
+         Email    : itsprathiksha8@gmail.com
+       Doc ID    : JqpcmcjbuuuMu9gQcobk
+       ........................................................................
+  [45] STUDENT : Kshama Nayak
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:36:36 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Bhagyashree Kamath
+         Phone    : +91 8217317179
+         Email    : bhagyashreekamath94@gmail.com
+         OTP      : [VERIFIED] UID: A9RrjoIsmdXxCmWWZWKwybeuRHB3
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Nagendra Nayak
+         Phone    : +91 8904825967
+         Email    : naganna16@redffmail.com
+       Doc ID    : CQo1IlCufsKnbefg5N2X
+       ........................................................................
+  [46] STUDENT : Kushi.S
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 11:41:04 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Uma.R
+         Phone    : +91 9845701026
+         Email    : rajendranraja1026@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Shivaprakesh.D
+         Phone    : +91 9611059176
+         Email    : -
+       Doc ID    : r9WuEW8eHWvrNPE62ocC
+       ........................................................................
+  [47] STUDENT : Lenisha Sahoo
+       Branch    : Outer Ring Road
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 9:05:58 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Smruti Sekhar Sahoo
+         Phone    : +91 9886285875
+         Email    : sekhar.sahoo2008@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Sucharita Jena
+         Phone    : +91 8763781238
+         Email    : -
+       Doc ID    : l4TBHMM2Pl5RXNbCLvUN
+       ........................................................................
+  [48] STUDENT : Maanya. C
+       Branch    : Padmanabhanagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:21:37 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Deeksha KGN
+         Phone    : +91 8095113127
+         Email    : kgnsona@gmail.com
+         OTP      : [VERIFIED] UID: 4scvT9x8TDQ154Ylt2RISEg2RBu1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Charan.R
+         Phone    : +91 9035196789
+         Email    : -
+       Doc ID    : eh380DMEIWYCIfPyzjse
+       ........................................................................
+  [49] STUDENT : Mohammed Aadbeen Sheikh
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 7:11:19 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Afreen Anjum
+         Phone    : +91 9206705009
+         Email    : afreenanjum938@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Mohammed Imran Pasha
+         Phone    : +91 8892297798
+         Email    : Mohammedimran@gmail.com
+       Doc ID    : 25BVj9oPrJREHTYs9BHM
+       ........................................................................
+  [50] STUDENT : Mukalla Ranvit Kumar
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 12:15:22 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : M Ararna
+         Phone    : +91 7619607366
+         Email    : ravi123mrk@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : M Ravi Kumar
+         Phone    : +91 9886918458
+         Email    : ravi123mrk@gmail.com
+       Doc ID    : JSBZo9POjPVXLcYTT2of
+       ........................................................................
+  [51] STUDENT : Naksh Karpoor
+       Branch    : Chikkalsandra
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:24:26 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Anoosha K
+         Phone    : +91 9611758690
+         Email    : anoosha.kulkarni@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Raghavendra K
+         Phone    : +91 8892010981
+         Email    : csraghavendrakarpoor@gmail.com
+       Doc ID    : Yf3I5GcycLxSSoVnXubA
+       ........................................................................
+  [52] STUDENT : Nayonila
+       Branch    : RR Nagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:17:35 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Shruthi V
+         Phone    : +91 8105942706
+         Email    : cutygals28@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Kumar T
+         Phone    : +91 9442893258
+         Email    : tdkumar26@gmail.com
+       Doc ID    : whDVA1vBhk5P9OD6G0z7
+       ........................................................................
+  [53] STUDENT : Neel Hari
+       Branch    : Padmanabhanagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 9:28:55 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Vani Cn
+         Phone    : +91 9880600942
+         Email    : vanicn1990@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Harisha Lp
+         Phone    : +91 9740667913
+         Email    : harishlp913@gmail.com
+       Doc ID    : UhJeCFLp4r75UY4r3Ii2
+       ........................................................................
+  [54] STUDENT : Nishika G
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 7:41:34 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Kavyashree T
+         Phone    : +91 9964964140
+         Email    : kavya.t694@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Girish K V
+         Phone    : +91 9964399139
+         Email    : girishgowd87@gmail.com
+       Doc ID    : mtObsLn88Y88mcckOiEK
+       ........................................................................
+  [55] STUDENT : Pramati U. K
+       Branch    : Outer Ring Road
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:25:27 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : NANDINI NM
+         Phone    : +91 9632893163
+         Email    : nmnandini93@gmail.com
+         OTP      : [VERIFIED] UID: 3VWHciCYHubssdJ1J5eG5guwyZs2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Udayakrishna K
+         Phone    : +91 8951250275
+         Email    : -
+       Doc ID    : 08v0x0ZgtGOHVL93Lr9d
+       ........................................................................
+  [56] STUDENT : R Venkata Mokshith
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:24:01 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Divya
+         Phone    : +91 7353915511
+         Email    : -
+         OTP      : [VERIFIED] UID: OBhTGvlmj8MH90mcitu1tgsbGn22
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Ganesh
+         Phone    : +91 9964065142
+         Email    : -
+       Doc ID    : W40FSn1vWakDTlFtjTmI
+       ........................................................................
+  [57] STUDENT : Reegan George.T
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:53:59 am
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Terin S G
+         Phone    : +91 9066263110
+         Email    : teringeorge.10@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Reena Mary S
+         Phone    : +91 7022863773
+         Email    : reenamary75@gmail.com
+       Doc ID    : F3Lbe0rdqbsygE7ywFvK
+       ........................................................................
+  [58] STUDENT : Reyansh
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:41:16 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Pavithra
+         Phone    : +91 9620506143
+         Email    : -
+       Doc ID    : 84iluYtD7ur9sxtbhaK9
+       ........................................................................
+  [59] STUDENT : Ridhi M
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:38:05 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Mohan SP
+         Phone    : +91 9916046677
+         Email    : spmohan66@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Namitha AN
+         Phone    : +91 9845734527
+         Email    : namithaan100@gmail.com
+       Doc ID    : oo5lq86dgqiPOqSaCT4d
+       ........................................................................
+  [60] STUDENT : Rishank Samarth
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:12:47 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Kavita Hiremath
+         Phone    : +91 9945315987
+         Email    : kavita.hmath@gmail.com
+         OTP      : [VERIFIED] UID: 60Rrk91R5OQg5xT5uz9LBDOgLjT2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Siddarameshwara M
+         Phone    : +91 9206359399
+         Email    : sidhrameshm@gamil.com
+       Doc ID    : bEh0fkdaXR8Q6yfYKkes
+       ........................................................................
+  [61] STUDENT : Riyansh Manjunatha
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:40:07 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Manjunatha M
+         Phone    : +91 9620312543
+         Email    : -
+         OTP      : [VERIFIED] UID: KISWgyNH92PDvhyW0B4uJD9ro5p2
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Kavitha DV
+         Phone    : +91 9148436612
+         Email    : kavithadv05@gmail.com
+       Doc ID    : 6NSL1A7cblWyGAB9k0dG
+       ........................................................................
+  [62] STUDENT : Saanvi. S
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 7:20:08 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Sunil
+         Phone    : +91 8722570214
+         Email    : sunilr0950@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : K S Lavanya
+         Phone    : +91 9742167409
+         Email    : lvnya55555@gmail.com
+       Doc ID    : yzNHBjXtnXViUmNMemh0
+       ........................................................................
+  [63] STUDENT : Shanwik M
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 8:45:45 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Mukesh N
+         Phone    : +91 9986917305
+         Email    : mukeshn96@gmail.com
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : Pushpa NH
+         Phone    : +91 9743249011
+         Email    : -
+       Doc ID    : OgouHR93dZnsEZnMLnuw
+       ........................................................................
+  [64] STUDENT : Shanwik M
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:57:00 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Pushpa
+         Phone    : +91 9743249011
+         Email    : pushpanaik97@gmail.com
+         OTP      : [VERIFIED] UID: Z1PUSEKuARMzFhDtt96U56VNIZ53
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Mukesh
+         Phone    : +91 9986917305
+         Email    : -
+       Doc ID    : PKfjRwf1ZdnNKqZkfd4T
+       ........................................................................
+  [65] STUDENT : Shivani R
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 31/5/2026, 10:22:45 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Mangaleshwari B N
+         Phone    : +91 9880000318
+         Email    : mangala.dsce08@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Ravi D
+         Phone    : +91 9902226072
+         Email    : mangaleshwariravi5@gmail.com
+       Doc ID    : yXDO3mKQvFPekYtV8Qh9
+       ........................................................................
+  [66] STUDENT : Shriijaa Shrinivas
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 12:04:52 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Pooja Chikkur
+         Phone    : +91 9880560289
+         Email    : srinivasshadadal@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Shrinivas Shadadal
+         Phone    : +91 8971081155
+         Email    : -
+       Doc ID    : zwy1AanUkfRCRiHrbKgs
+       ........................................................................
+  [67] STUDENT : Shrita S Miraskar
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 9:51:43 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Aruna Rao
+         Phone    : +91 9980712368
+         Email    : arunaraobagre@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Shashi Kumar Miraskar
+         Phone    : +91 9986019529
+         Email    : shashi.mrsk@gmail.com
+       Doc ID    : TgEXntaE8FWqpXLUzAxC
+       ........................................................................
+  [68] STUDENT : Shriyan  Pavan Kagalkar
+       Branch    : RR Nagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:14:38 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : kamalakshi kagalkar
+         Phone    : +91 7829649094
+         Email    : kannikarkamal@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Pavan Kagalkar
+         Phone    : +91 9689913504
+         Email    : -
+       Doc ID    : CQVn4IPkBuYKXjEYQl8w
+       ........................................................................
+  [69] STUDENT : Spatika N
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:23:00 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Madhushree S
+         Phone    : +91 9620480413
+         Email    : madhumurthy1419@gmail.com
+         OTP      : [VERIFIED] UID: 8OJurU3YMNNzP3eZt9JtKKxtecn1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Nagarjun S
+         Phone    : +91 8050268277
+         Email    : nagarjuntnp@gmail.com
+       Doc ID    : xSUNyL6An6ZKLy5pYQRK
+       ........................................................................
+  [70] STUDENT : Suhrit Krishna
+       Branch    : Outer Ring Road
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 11:57:22 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Manasi Kumar
+         Phone    : +91 9986394523
+         Email    : manasik2000@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Venkatesh TS
+         Phone    : +91 9900029509
+         Email    : venkatesh.ts@gmail.com
+       Doc ID    : cjzQk6nt8NOX67qXlgvi
+       ........................................................................
+  [71] STUDENT : TANISH S GOWDA
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:21:39 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : CHAITHRA H N
+         Phone    : +91 9739113128
+         Email    : chaithrahn.18@gmail.com
+         OTP      : [VERIFIED] UID: SruYmK0V6vT3vk6e1h3Rr8qY6De2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : SHIVA PRASAD
+         Phone    : +91 9620173666
+         Email    : -
+       Doc ID    : WBvKfw9xvHK9tAjDsPRy
+       ........................................................................
+  [72] STUDENT : Tannistha Kumar
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 6:35:55 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Tanusree Dutta
+         Phone    : +91 9920968206
+         Email    : tanusree.dutta@iihs.ac.in
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Nandan Kumar
+         Phone    : +91 7678044902
+         Email    : nandan.bhu50@gmail.com
+       Doc ID    : 3FiVwNeyEDruW3fCGY82
+       ........................................................................
+  [73] STUDENT : Tanvik YR
+       Branch    : Chikkalsandra
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:45:19 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : SUPRIYA Yr
+         Phone    : +91 7411529210
+         Email    : njsupriya@gmail.com
+         OTP      : [VERIFIED] UID: 5AybXVGpzaW12Zg4Ci0T2CNx38J2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Raghavesh YP
+         Phone    : +91 9620210414
+         Email    : -
+       Doc ID    : 9lEuci263FzlwtMtk3W7
+       ........................................................................
+  [74] STUDENT : Tarak Agastya
+       Branch    : RR Nagar
+       Class     : Pre-Mont
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:46:55 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Pooja K
+         Phone    : +91 8088719751
+         Email    : pooja.akshay1811@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Varshith
+         Phone    : +91 6361076273
+         Email    : tejaswini.varshith2919@gmail.com
+       Doc ID    : LwhX9DXlUOoAWwkanNXM
+       ........................................................................
+  [75] STUDENT : Thananya Prabhakaran
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:26:05 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Kalpana Chinraj
+         Phone    : +91 8431300093
+         Email    : kalpana.c2025@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Prabhakaran Balakrishnan
+         Phone    : +91 8553387200
+         Email    : prabhakar.civil@gmail.com
+       Doc ID    : WfNcijbpLytrJXDcCenL
+       ........................................................................
+  [76] STUDENT : Tharun Vinod
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 3:32:51 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Sindhuja Muthaiyan
+         Phone    : +91 9620308832
+         Email    : msindhu90@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Vinod Rajamanickam
+         Phone    : +91 9845588987
+         Email    : vinod7386@gmail.com
+       Doc ID    : pwlh20VVVRyPfTjCaYa9
+       ........................................................................
+  [77] STUDENT : Tharushi Manjunath
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 6:40:35 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Purvitha Ramesh
+         Phone    : +91 8867641834
+         Email    : -
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Manjunath S
+         Phone    : +91 9008289541
+         Email    : -
+       Doc ID    : 26eSzf7WWG0Mriz1HTCJ
+       ........................................................................
+  [78] STUDENT : Unnathi A
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:42:02 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Niveditha S
+         Phone    : +91 9380526657
+         Email    : nivedithaskgowda@gmail.com
+         OTP      : [VERIFIED] UID: 8yuwa55cWNceDFxujqKgJgshS7S2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Abhishek B U
+         Phone    : +91 8861949646
+         Email    : abhihsn007@gmail.com
+       Doc ID    : vv9IfuIHH9dCEwbucvLP
+       ........................................................................
+  [79] STUDENT : V K Eekshith
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:14:58 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Lavanya
+         Phone    : +91 8904221709
+         Email    : mglavanyanaidu10@gmail.com
+         OTP      : [VERIFIED] UID: vnmrPQY2FqXPiPhmTGt0kAQD5w13
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Krishna Vamsi
+         Phone    : +91 8122912537
+         Email    : krishnavamsivb@gmail.com
+       Doc ID    : h0jahV38wdAUqKRple3D
+       ........................................................................
+  [80] STUDENT : VAINAVI NV
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:36:40 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : NANDINI S
+         Phone    : +91 7019956387
+         Email    : nandhinisundar.ns@gmail.com
+         OTP      : [VERIFIED] UID: hqWrGaBbxsYI59gaVoRqd0rJnwM2
+       Doc ID    : ipikUfY6s8WyiYurlq6Q
+       ........................................................................
+  [81] STUDENT : Vardhan S V
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 9:07:24 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Megha HV
+         Phone    : +91 9686158379
+         Email    : -
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Venkatesh Sivapuram
+         Phone    : +91 9164019739
+         Email    : -
+       Doc ID    : kMWWQ97fm4dgnwwRI9hP
+       ........................................................................
+  [82] STUDENT : Vasuki P
+       Branch    : Outer Ring Road
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:29:41 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Vibha
+         Phone    : +91 7619185211
+         Email    : vibhapradeep66082@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Pradeep
+         Phone    : +91 7795857357
+         Email    : vibhapradeep66082@gmail.com
+       Doc ID    : RWxWYqrhLKARrzM4Wy8H
+       ........................................................................
+  [83] STUDENT : Vedanth K
+       Branch    : RR Nagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 30/5/2026, 10:17:59 am
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Varsha K
+         Phone    : +91 9731591032
+         Email    : kumara026@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Kumarswamy
+         Phone    : +91 9611899920
+         Email    : kumara026@gmail.com
+       Doc ID    : Jz6HT5MXAh7Yv1vkFMzi
+       ........................................................................
+  [84] STUDENT : Vedika Mallya K
+       Branch    : Chikkalsandra
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:41:18 pm
+
+       PRIMARY GUARDIAN (Father)
+         Name     : Ashwin Mallya K
+         Phone    : +91 9844304351
+         Email    : -
+         OTP      : [VERIFIED] UID: y9udYKaNimSlraJjOv0Yoq0IJlG2
+
+       SECONDARY GUARDIAN (Mother)
+         Name     : PT Bhuvana Kamath
+         Phone    : +91 9743152132
+         Email    : -
+       Doc ID    : X2bzO7RrHTV0NBOnYvw2
+       ........................................................................
+  [85] STUDENT : Veditha C R
+       Branch    : Padmanabhanagar
+       Class     : Mont -2
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:25:43 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Spoorthi B U
+         Phone    : +91 9164941636
+         Email    : spoorthibu25@gmail.com
+         OTP      : [VERIFIED] UID: 8nbWt2VYOcXiJQ8LGff0svMM4KC3
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Raghu C A
+         Phone    : +91 8105368054
+         Email    : iamraghuca@gmail.com
+       Doc ID    : kv4ZV1Z8wyIvvvmvlLlo
+       ........................................................................
+  [86] STUDENT : Vihaan Chandrushekar
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:41:12 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Neelavathy R
+         Phone    : +91 8867342413
+         Email    : -
+         OTP      : [VERIFIED] UID: 7g5fNOSJlBbhxOFEWUrdYbLcB7s2
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Chandra Shekar L
+         Phone    : +91 9900268659
+         Email    : -
+       Doc ID    : euVjlHMCXjpahcCWDEiG
+       ........................................................................
+  [87] STUDENT : Vihaan R Rao
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 9:36:34 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Karbar Swathi
+         Phone    : +91 9502946819
+         Email    : swathi.karbar@yahoo.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Rahul S Rao
+         Phone    : +91 9986873636
+         Email    : rahurao@gmail.com
+       Doc ID    : 0R5AZaIQ5rsNIPIXdqzr
+       ........................................................................
+  [88] STUDENT : Vishruth Vasishta V
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 3:49:21 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Soumya  AN
+         Phone    : +91 8088319909
+         Email    : soumya.nbg04@gmail.com
+         OTP      : [VERIFIED] UID: YMAtzeaMQ7RvttkNiGKOsBJ5gj83
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Vineeth V
+         Phone    : +91 8892227150
+         Email    : Vineethv0403@gmail.com
+       Doc ID    : fO7XCF4WunOltYXWv1me
+       ........................................................................
+  [89] STUDENT : Viviktha V Kalkur
+       Branch    : Chikkalsandra
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 11:11:03 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Deepthi Vivek
+         Phone    : +91 9740489648
+         Email    : -
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Vivek
+         Phone    : +91 9964276747
+         Email    : -
+       Doc ID    : Xi91LiGee9TaUFFxXGZT
+       ........................................................................
+  [90] STUDENT : Y Shiv Nikhil
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 31/5/2026, 6:34:55 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Maalashree
+         Phone    : +91 9108309888
+         Email    : maalaparamesh5@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Yashwanth Kumar
+         Phone    : +91 9206232235
+         Email    : yashraj511989@gmail.com
+       Doc ID    : 99VTza0U8WBQydcLmQzH
+       ........................................................................
+  [91] STUDENT : Yoshna J
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 4:50:42 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Nithya K M
+         Phone    : +91 8892034270
+         Email    : nithyamurugan1997@gmail.com
+         OTP      : [VERIFIED] UID: bxWkralRSbP4tUbRG5OEqNPCT3n1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Jagan M
+         Phone    : +91 9066383338
+         Email    : jaganmani002m@gmail.com
+       Doc ID    : 73aqxhkjv7PUmmt5sb5l
+       ........................................................................
+  [92] STUDENT : Yoshna J
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 1/6/2026, 5:24:00 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Nithya K M
+         Phone    : +91 8892034270
+         Email    : nithyamurugan1997@gmail.com
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Jagan M
+         Phone    : +91 9066383338
+         Email    : -
+       Doc ID    : bUOpCxsnGrYyLsEiGCA1
+       ........................................................................
+  [93] STUDENT : Yukthashree E
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 5:02:37 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Deevika M
+         Phone    : +91 9739123714
+         Email    : deevika1999m@gmail.com
+         OTP      : [VERIFIED] UID: Fq4zJFt7uwUq5bdFhF7D8qkY1dj1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Elumalai P
+         Phone    : +91 9500057117
+         Email    : ezhumalai19850604@gmail.com
+       Doc ID    : XN4m3wORjEiFaFqH5Qz9
+       ........................................................................
+  [94] STUDENT : Yunay R
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : PENDING (Awaiting Admin Approval)
+       Submitted : 29/5/2026, 7:09:48 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Lekha M
+         Phone    : +91 9972448701
+         Email    : lekhaleku@gmail.com
+         OTP      : [VERIFIED] UID: sWuf8gLlbQTemzuEbuh8srHHely1
+
+       SECONDARY GUARDIAN (Father)
+         Name     : Ramprasad
+         Phone    : +91 9620046946
+         Email    : -
+       Doc ID    : Ostr5G4RrLUwstl0bG1P
+       ........................................................................
+
+================================================================================
+                     SECTION D - APPROVED REGISTRATIONS (5)  
+================================================================================
+
+  Registrations accepted by admin. Parents are whitelisted. Sorted A-Z.
+
+  [01] STUDENT : baby1
+       Branch    : Chikkalsandra
+       Class     : Playgroup
+       Status    : APPROVED
+       Submitted : 28/5/2026, 4:40:55 pm
+       Approved  : 28/5/2026, 6:32:11 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : v prathap
+         Phone    : +91 9606664929
+         Email    : -
+       Doc ID    : fEIc4stNOlXuXJKqksKv
+       ........................................................................
+  [02] STUDENT : Bhanupriya
+       Branch    : Padmanabhanagar
+       Class     : Playgroup
+       Status    : APPROVED
+       Submitted : 28/5/2026, 7:33:53 pm
+       Approved  : 28/5/2026, 7:50:06 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Bhanupriya
+         Phone    : +91 9606664929
+         Email    : pv561837@gmail.com
+         OTP      : [VERIFIED] UID: e7EqeyNkzjcWJLrwRlg59re5lb32
+       Doc ID    : N97rQhvXp3Yxk9etlkmn
+       ........................................................................
+  [03] STUDENT : Pooja
+       Branch    : Padmanabhanagar
+       Class     : Mont -3
+       Status    : APPROVED
+       Submitted : 28/5/2026, 9:29:30 pm
+       Approved  : 28/5/2026, 9:32:50 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Bhavana Prasad
+         Phone    : +91 9972344442
+         Email    : happytimespreschool27@gmail.com
+         OTP      : [VERIFIED] UID: OpKFmBu9t8XvGR9WaUWKwcK0Nuk2
+       Doc ID    : e0EQ6xw6SONLRuA2kuKI
+       ........................................................................
+  [04] STUDENT : Prathap
+       Branch    : Outer Ring Road
+       Class     : LKG
+       Status    : APPROVED
+       Submitted : 28/5/2026, 8:39:53 pm
+       Approved  : 28/5/2026, 8:44:37 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Prathap V
+         Phone    : +91 9606664929
+         Email    : prathap.v5214@gmail.com
+         OTP      : [VERIFIED] UID: AkoyQTW4UIMKQXVCILi1PEHIVvF2
+       Doc ID    : 3LXmUVcDoqAQEq7gtb5V
+       ........................................................................
+  [05] STUDENT : test2
+       Branch    : Padmanabhanagar
+       Class     : LKG
+       Status    : APPROVED
+       Submitted : 28/5/2026, 6:13:49 pm
+       Approved  : 28/5/2026, 6:32:10 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : v prathap
+         Phone    : +91 9606664929
+         Email    : -
+       Doc ID    : IeSFDS8SsBaP06S9x791
+       ........................................................................
+
+================================================================================
+                     SECTION E - REJECTED REGISTRATIONS (2)  
+================================================================================
+
+  Registrations that were declined by admin. Sorted A-Z.
+
+  [01] STUDENT : hihihi
+       Branch    : Padmanabhanagar
+       Class     : Mont-1
+       Status    : REJECTED
+       Submitted : 28/5/2026, 9:03:50 pm
+       Rejected  : 28/5/2026, 9:04:06 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Prathap V
+         Phone    : +91 9606664929
+         Email    : prathap.v5214@gmail.com
+         OTP      : [VERIFIED] UID: AkoyQTW4UIMKQXVCILi1PEHIVvF2
+       Doc ID    : DxZbz5IQX8AbO5iF1c2v
+       ........................................................................
+  [02] STUDENT : v prathap
+       Branch    : Outer Ring Road
+       Class     : Daycare
+       Status    : REJECTED
+       Submitted : 28/5/2026, 9:26:56 pm
+       Rejected  : 28/5/2026, 9:27:10 pm
+
+       PRIMARY GUARDIAN (Mother)
+         Name     : Prathap V
+         Phone    : +91 9606664929
+         Email    : prathap.v5214@gmail.com
+         OTP      : [VERIFIED] UID: AkoyQTW4UIMKQXVCILi1PEHIVvF2
+       Doc ID    : ZEfPx68W5Y75nKyiBxlt
+       ........................................................................
+
+================================================================================
+  END OF REPORT -- HAPPY TIMES PRESCHOOL & MONTESSORI
+================================================================================
