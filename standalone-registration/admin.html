@@ -251,6 +251,19 @@
           <i data-lucide="x-circle" class="w-4 h-4"></i> Reject Selected
         </button>
       </div>
+    <!-- List Header / Quick Actions -->
+    <div id="list-header-actions" class="mb-4 flex items-center justify-between px-2 hidden">
+      <button 
+        id="quick-select-all-btn" 
+        onclick="triggerQuickSelectAll()" 
+        class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-gray-200 text-navy font-semibold px-4 py-2.5 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 text-xs shadow-sm shadow-navy/5"
+      >
+        <i data-lucide="square-dashed-mouse-pointer" id="quick-select-icon" class="w-4 h-4 text-primary"></i>
+        <span id="quick-select-text">Select All Submissions</span>
+      </button>
+      <div id="list-filtered-count-badge" class="text-xs text-navy-lighter font-semibold">
+        Showing <span id="filtered-count-val">0</span> entries
+      </div>
     </div>
 
     <!-- Registration Applications List -->

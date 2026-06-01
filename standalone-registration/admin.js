@@ -315,10 +315,17 @@ function renderApplicationsList(items) {
 
   if (items.length === 0) {
     emptyState.classList.remove("hidden");
+    const actionsBar = document.getElementById("list-header-actions");
+    if (actionsBar) actionsBar.classList.add("hidden");
     return;
   }
   
   emptyState.classList.add("hidden");
+  const actionsBar = document.getElementById("list-header-actions");
+  if (actionsBar) {
+    actionsBar.classList.remove("hidden");
+    document.getElementById("filtered-count-val").innerText = items.length;
+  }
   
   items.forEach(item => {
     const isSelected = selectedIds.has(item.id);
@@ -477,6 +484,8 @@ function updateBulkActionToolbar() {
   const toolbar = document.getElementById("bulk-actions-panel");
   const countSpan = document.getElementById("selected-count");
   const selectAllBox = document.getElementById("select-all-box");
+  const quickSelectText = document.getElementById("quick-select-text");
+  const quickSelectIcon = document.getElementById("quick-select-icon");
   
   const totalSelectable = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)").length;
   
@@ -488,15 +497,59 @@ function updateBulkActionToolbar() {
     if (selectedIds.size === totalSelectable) {
       selectAllBox.checked = true;
       selectAllBox.indeterminate = false;
+      
+      // Update quick select button to Deselect All
+      if (quickSelectText) quickSelectText.innerText = "Deselect All";
+      if (quickSelectIcon) {
+        quickSelectIcon.setAttribute("data-lucide", "square-x");
+        quickSelectIcon.className = "w-4 h-4 text-danger";
+      }
     } else {
       selectAllBox.checked = false;
       selectAllBox.indeterminate = true;
+      
+      // Update quick select button to Select All
+      if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
+      if (quickSelectIcon) {
+        quickSelectIcon.setAttribute("data-lucide", "square-dashed-mouse-pointer");
+        quickSelectIcon.className = "w-4 h-4 text-primary";
+      }
     }
   } else {
     toolbar.classList.add("hidden");
     selectAllBox.checked = false;
     selectAllBox.indeterminate = false;
+    
+    // Reset quick select button to Select All
+    if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
+    if (quickSelectIcon) {
+      quickSelectIcon.setAttribute("data-lucide", "square-dashed-mouse-pointer");
+      quickSelectIcon.className = "w-4 h-4 text-primary";
+    }
   }
+  
+  lucide.createIcons();
+}
+
+function triggerQuickSelectAll() {
+  const checkboxes = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)");
+  if (checkboxes.length === 0) return;
+  
+  const allChecked = Array.from(checkboxes).every(box => box.checked);
+  
+  checkboxes.forEach(box => {
+    box.checked = !allChecked;
+    const card = document.getElementById(`card-${box.value}`);
+    if (!allChecked) {
+      selectedIds.add(box.value);
+      if (card) card.classList.add("selected");
+    } else {
+      selectedIds.delete(box.value);
+      if (card) card.classList.remove("selected");
+    }
+  });
+  
+  updateBulkActionToolbar();
 }
 
 // 10. Database Logic: Real-time Approvals & Rejections
