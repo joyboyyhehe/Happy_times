@@ -94,21 +94,11 @@ firebase.auth().onAuthStateChanged(async (user) => {
 // On Load Check
 document.addEventListener("DOMContentLoaded", () => {
   // Bind enter key on password input
-  const pwInput = document.getElementById("gatekeeper-password");
-  if (pwInput) {
-    pwInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") unlockPortal();
-    });
-  }
+  document.getElementById("gatekeeper-password").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") unlockPortal();
+  });
   
-  // If we are already logged in and submissions have loaded, apply filters and render
-  if (allSubmissions && allSubmissions.length > 0) {
-    applyFilters();
-  }
-  
-  if (window.lucide && typeof lucide.createIcons === 'function') {
-    lucide.createIcons();
-  }
+  lucide.createIcons();
 });
 
 // 3. Gatekeeper Authentication Flow
@@ -226,15 +216,10 @@ function updateStats() {
     else if (item.status === "rejected") rejected++;
   });
   
-  const elPending = document.getElementById("stat-pending");
-  const elApproved = document.getElementById("stat-approved");
-  const elRejected = document.getElementById("stat-rejected");
-  const elTotal = document.getElementById("stat-total");
-  
-  if (elPending) elPending.innerText = pending;
-  if (elApproved) elApproved.innerText = approved;
-  if (elRejected) elRejected.innerText = rejected;
-  if (elTotal) elTotal.innerText = allSubmissions.length;
+  document.getElementById("stat-pending").innerText = pending;
+  document.getElementById("stat-approved").innerText = approved;
+  document.getElementById("stat-rejected").innerText = rejected;
+  document.getElementById("stat-total").innerText = allSubmissions.length;
 }
 
 // 6. Filtering & Search Workflows
@@ -269,23 +254,10 @@ function updateActiveStatCardHighlight(status) {
 }
 
 function applyFilters() {
-  const elBranch = document.getElementById("filter-branch");
-  const elClass = document.getElementById("filter-class");
-  const elStatus = document.getElementById("filter-status");
-  const elSearch = document.getElementById("search-input");
-  const container = document.getElementById("list-content");
-  const emptyState = document.getElementById("list-empty");
-  
-  // If DOM is not fully loaded (including list containers), abort silently. DomContentLoaded listener will trigger once ready.
-  if (!elBranch || !elClass || !elStatus || !elSearch || !container || !emptyState) {
-    console.log("[Filters Action]: DOM not fully parsed yet, caching filter render...");
-    return;
-  }
-  
-  const branchFilter = elBranch.value;
-  const classFilter = elClass.value;
-  const statusFilter = elStatus.value;
-  const searchVal = elSearch.value.toLowerCase().trim();
+  const branchFilter = document.getElementById("filter-branch").value;
+  const classFilter = document.getElementById("filter-class").value;
+  const statusFilter = document.getElementById("filter-status").value;
+  const searchVal = document.getElementById("search-input").value.toLowerCase().trim();
   
   // Sync card highlight
   updateActiveStatCardHighlight(statusFilter);
@@ -331,7 +303,7 @@ function renderApplicationsList(items) {
   const container = document.getElementById("list-content");
   const emptyState = document.getElementById("list-empty");
   
-  if (!container) return;
+  // Clear container
   container.innerHTML = "";
   
   // Reset bulk selections not in currently displayed set
@@ -342,19 +314,11 @@ function renderApplicationsList(items) {
   updateBulkActionToolbar();
 
   if (items.length === 0) {
-    if (emptyState) emptyState.classList.remove("hidden");
-    const actionsBar = document.getElementById("list-header-actions");
-    if (actionsBar) actionsBar.classList.add("hidden");
+    emptyState.classList.remove("hidden");
     return;
   }
   
-  if (emptyState) emptyState.classList.add("hidden");
-  const actionsBar = document.getElementById("list-header-actions");
-  if (actionsBar) {
-    actionsBar.classList.remove("hidden");
-    const countVal = document.getElementById("filtered-count-val");
-    if (countVal) countVal.innerText = items.length;
-  }
+  emptyState.classList.add("hidden");
   
   items.forEach(item => {
     const isSelected = selectedIds.has(item.id);
@@ -513,79 +477,26 @@ function updateBulkActionToolbar() {
   const toolbar = document.getElementById("bulk-actions-panel");
   const countSpan = document.getElementById("selected-count");
   const selectAllBox = document.getElementById("select-all-box");
-  const quickSelectText = document.getElementById("quick-select-text");
-  const quickSelectIcon = document.getElementById("quick-select-icon");
   
-  const listContent = document.getElementById("list-content");
-  const totalSelectable = listContent ? listContent.querySelectorAll("input[type='checkbox']:not(:disabled)").length : 0;
+  const totalSelectable = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)").length;
   
   if (selectedIds.size > 0) {
-    if (countSpan) countSpan.innerText = selectedIds.size;
-    if (toolbar) toolbar.classList.remove("hidden");
+    countSpan.innerText = selectedIds.size;
+    toolbar.classList.remove("hidden");
     
     // Set matching select all checkbox state
-    if (selectAllBox) {
-      if (selectedIds.size === totalSelectable) {
-        selectAllBox.checked = true;
-        selectAllBox.indeterminate = false;
-        
-        // Update quick select button to Deselect All
-        if (quickSelectText) quickSelectText.innerText = "Deselect All";
-        if (quickSelectIcon) {
-          quickSelectIcon.setAttribute("data-lucide", "square-x");
-          quickSelectIcon.className = "w-4 h-4 text-danger";
-        }
-      } else {
-        selectAllBox.checked = false;
-        selectAllBox.indeterminate = true;
-        
-        // Update quick select button to Select All
-        if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
-        if (quickSelectIcon) {
-          quickSelectIcon.setAttribute("data-lucide", "square-dashed-mouse-pointer");
-          quickSelectIcon.className = "w-4 h-4 text-primary";
-        }
-      }
+    if (selectedIds.size === totalSelectable) {
+      selectAllBox.checked = true;
+      selectAllBox.indeterminate = false;
+    } else {
+      selectAllBox.checked = false;
+      selectAllBox.indeterminate = true;
     }
   } else {
-    if (toolbar) toolbar.classList.add("hidden");
-    if (selectAllBox) {
-      selectAllBox.checked = false;
-      selectAllBox.indeterminate = false;
-    }
-    
-    // Reset quick select button to Select All
-    if (quickSelectText) quickSelectText.innerText = "Select All Submissions";
-    if (quickSelectIcon) {
-      quickSelectIcon.setAttribute("data-lucide", "square-dashed-mouse-pointer");
-      quickSelectIcon.className = "w-4 h-4 text-primary";
-    }
+    toolbar.classList.add("hidden");
+    selectAllBox.checked = false;
+    selectAllBox.indeterminate = false;
   }
-  
-  if (window.lucide && typeof lucide.createIcons === 'function') {
-    lucide.createIcons();
-  }
-}
-
-function triggerQuickSelectAll() {
-  const checkboxes = document.querySelectorAll("#list-content input[type='checkbox']:not(:disabled)");
-  if (checkboxes.length === 0) return;
-  
-  const allChecked = Array.from(checkboxes).every(box => box.checked);
-  
-  checkboxes.forEach(box => {
-    box.checked = !allChecked;
-    const card = document.getElementById(`card-${box.value}`);
-    if (!allChecked) {
-      selectedIds.add(box.value);
-      if (card) card.classList.add("selected");
-    } else {
-      selectedIds.delete(box.value);
-      if (card) card.classList.remove("selected");
-    }
-  });
-  
-  updateBulkActionToolbar();
 }
 
 // 10. Database Logic: Real-time Approvals & Rejections
@@ -716,12 +627,10 @@ async function handleBulkAction(action) {
 // 12. Helper loaders & Toasts UI
 function showLoading(isLoading) {
   const loadingDiv = document.getElementById("list-loading");
-  if (loadingDiv) {
-    if (isLoading) {
-      loadingDiv.classList.remove("hidden");
-    } else {
-      loadingDiv.classList.add("hidden");
-    }
+  if (isLoading) {
+    loadingDiv.classList.remove("hidden");
+  } else {
+    loadingDiv.classList.add("hidden");
   }
 }
 
