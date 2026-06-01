@@ -15,7 +15,23 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 const db = firebase.firestore();
+
+// Function to toggle PIN visibility with eye/eye-off icons
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById("gatekeeper-password");
+  const eyeIcon = document.getElementById("eye-icon");
+  
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    eyeIcon.setAttribute("data-lucide", "eye-off");
+  } else {
+    passwordInput.type = "password";
+    eyeIcon.setAttribute("data-lucide", "eye");
+  }
+  lucide.createIcons();
+}
 
 // 2. Global State Variables
 let allSubmissions = [];
