@@ -29,7 +29,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 async function createAdmin() {
-  const email = 'happytimespreschool27@gmail.com';
+  const email = 'usharanijuniordps@gmail.com';
   const password = 'happytimes_admin_6754';
   
   console.log(`Creating user ${email} in Firebase Auth...`);
@@ -41,7 +41,7 @@ async function createAdmin() {
     
     console.log('Writing superadmin profile to Firestore users collection...');
     await setDoc(doc(db, 'users', user.uid), {
-      name: 'Super Admin (happytimespreschool27)',
+      name: 'Super Admin (usharanijuniordps)',
       role: 'superadmin',
       email: email,
       createdAt: new Date()
