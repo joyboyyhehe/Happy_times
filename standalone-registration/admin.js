@@ -94,11 +94,21 @@ firebase.auth().onAuthStateChanged(async (user) => {
 // On Load Check
 document.addEventListener("DOMContentLoaded", () => {
   // Bind enter key on password input
-  document.getElementById("gatekeeper-password").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") unlockPortal();
-  });
+  const pwInput = document.getElementById("gatekeeper-password");
+  if (pwInput) {
+    pwInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") unlockPortal();
+    });
+  }
   
-  lucide.createIcons();
+  // If we are already logged in and submissions have loaded, apply filters and render
+  if (allSubmissions && allSubmissions.length > 0) {
+    applyFilters();
+  }
+  
+  if (window.lucide && typeof lucide.createIcons === 'function') {
+    lucide.createIcons();
+  }
 });
 
 // 3. Gatekeeper Authentication Flow
@@ -259,10 +269,21 @@ function updateActiveStatCardHighlight(status) {
 }
 
 function applyFilters() {
-  const branchFilter = document.getElementById("filter-branch").value;
-  const classFilter = document.getElementById("filter-class").value;
-  const statusFilter = document.getElementById("filter-status").value;
-  const searchVal = document.getElementById("search-input").value.toLowerCase().trim();
+  const elBranch = document.getElementById("filter-branch");
+  const elClass = document.getElementById("filter-class");
+  const elStatus = document.getElementById("filter-status");
+  const elSearch = document.getElementById("search-input");
+  
+  // If DOM is not fully loaded, abort silently. DomContentLoaded listener will trigger once ready.
+  if (!elBranch || !elClass || !elStatus || !elSearch) {
+    console.log("[Filters Action]: DOM not fully parsed yet, caching filter render...");
+    return;
+  }
+  
+  const branchFilter = elBranch.value;
+  const classFilter = elClass.value;
+  const statusFilter = elStatus.value;
+  const searchVal = elSearch.value.toLowerCase().trim();
   
   // Sync card highlight
   updateActiveStatCardHighlight(statusFilter);
