@@ -118,7 +118,7 @@ async function unlockPortal() {
     try {
       // Sign in with Email and Password (100% background, zero redirects, zero popups)
       console.log("[Auth Action]: Authenticating superadmin via redirect-free Email/Password...");
-      const email = 'superadmin@happytimes.com';
+      const email = 'happytimespreschool27@gmail.com';
       const secretPass = 'happytimes_admin_6754';
       
       const userCredential = await auth.signInWithEmailAndPassword(email, secretPass);
