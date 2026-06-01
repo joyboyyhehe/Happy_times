@@ -223,11 +223,44 @@ function updateStats() {
 }
 
 // 6. Filtering & Search Workflows
+function filterByStatCard(status) {
+  const statusSelect = document.getElementById("filter-status");
+  if (statusSelect) {
+    statusSelect.value = status;
+    updateActiveStatCardHighlight(status);
+    applyFilters();
+  }
+}
+
+function updateActiveStatCardHighlight(status) {
+  const cards = {
+    'pending': document.getElementById('card-pending'),
+    'approved': document.getElementById('card-approved'),
+    'rejected': document.getElementById('card-rejected'),
+    'all': document.getElementById('card-all')
+  };
+  
+  Object.keys(cards).forEach(key => {
+    const card = cards[key];
+    if (card) {
+      card.classList.remove('active-pending', 'active-approved', 'active-rejected', 'active-all');
+    }
+  });
+  
+  const activeCard = cards[status];
+  if (activeCard) {
+    activeCard.classList.add(`active-${status}`);
+  }
+}
+
 function applyFilters() {
   const branchFilter = document.getElementById("filter-branch").value;
   const classFilter = document.getElementById("filter-class").value;
   const statusFilter = document.getElementById("filter-status").value;
   const searchVal = document.getElementById("search-input").value.toLowerCase().trim();
+  
+  // Sync card highlight
+  updateActiveStatCardHighlight(statusFilter);
   
   const filtered = allSubmissions.filter(item => {
     // 1. Branch Filter

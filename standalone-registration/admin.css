@@ -295,6 +295,38 @@ input[type="checkbox"].accent-primary:checked::after {
   transform: scale(0.97) !important;
 }
 
+/* Interactive & Active Stat Cards */
+.admin-stat-card.interactive {
+  cursor: pointer;
+}
+.admin-stat-card.interactive:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+.admin-stat-card.interactive.active-pending {
+  background: rgba(255, 248, 230, 0.9) !important;
+  border-color: var(--warning) !important;
+  border-left-width: 5px !important;
+  box-shadow: 0 10px 28px -5px rgba(255, 167, 38, 0.2) !important;
+}
+.admin-stat-card.interactive.active-approved {
+  background: rgba(238, 248, 239, 0.9) !important;
+  border-color: var(--success) !important;
+  border-left-width: 5px !important;
+  box-shadow: 0 10px 28px -5px rgba(76, 175, 80, 0.2) !important;
+}
+.admin-stat-card.interactive.active-rejected {
+  background: rgba(253, 238, 237, 0.9) !important;
+  border-color: var(--danger) !important;
+  border-left-width: 5px !important;
+  box-shadow: 0 10px 28px -5px rgba(229, 57, 53, 0.2) !important;
+}
+.admin-stat-card.interactive.active-all {
+  background: rgba(253, 239, 235, 0.9) !important;
+  border-color: var(--primary) !important;
+  border-left-width: 5px !important;
+  box-shadow: 0 10px 28px -5px rgba(232, 69, 26, 0.2) !important;
+}
+
 @media (max-width: 640px) {
   .registration-card {
     padding: 16px;
