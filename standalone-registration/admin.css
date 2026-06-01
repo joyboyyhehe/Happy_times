@@ -1,0 +1,303 @@
+/* ═══════════════════════════════════════════════
+   Happy Times — Approval Portal Custom Styling
+   Premium Glassmorphism & Keyframe Animations
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --bg-warm: #FDFBF7;
+  --navy: #1A2340;
+  --navy-light: #2E3A5F;
+  --navy-lighter: #54628C;
+  --primary: #E8451A;
+  --primary-light: #FF6B3D;
+  --success: #4CAF50;
+  --danger: #E53935;
+  --warning: #FFA726;
+  --shadow-glass: 
+    0 16px 40px -10px rgba(26, 35, 64, 0.06),
+    0 1px 2px rgba(255, 255, 255, 0.5) inset;
+}
+
+body {
+  background-color: var(--bg-warm);
+}
+
+/* Floating Background Orbs */
+.admin-bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.admin-bg-orb-1 {
+  width: 500px; height: 500px;
+  background: rgba(232, 69, 26, 0.05);
+  top: -150px; left: -150px;
+  animation: floatOrb 12s ease-in-out infinite;
+}
+.admin-bg-orb-2 {
+  width: 400px; height: 400px;
+  background: rgba(245, 166, 35, 0.04);
+  bottom: -100px; right: -100px;
+  animation: floatOrb 15s ease-in-out infinite reverse;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+/* Stats Cards */
+.admin-stat-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-glass);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.admin-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px -8px rgba(26, 35, 64, 0.09);
+  background: white;
+}
+
+/* Filter Bar */
+.admin-filter-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 22px;
+  padding: 16px 20px;
+  box-shadow: var(--shadow-glass);
+}
+
+/* Registration Application Card */
+.registration-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: var(--shadow-glass);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.registration-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -8px rgba(26, 35, 64, 0.08);
+  background: white;
+  border-color: rgba(26, 35, 64, 0.08);
+}
+.registration-card.selected {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 28px -6px rgba(232, 69, 26, 0.08);
+}
+
+/* Select Form Fields Dropdowns */
+.admin-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231A2340' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* Interactive Quick Buttons */
+.btn-action-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+.btn-action-icon-approve {
+  background: rgba(76, 175, 80, 0.08);
+  color: var(--success);
+  border: 1px solid rgba(76, 175, 80, 0.12);
+}
+.btn-action-icon-approve:hover {
+  background: var(--success);
+  color: white;
+  box-shadow: 0 6px 16px -3px rgba(76, 175, 80, 0.3);
+  transform: scale(1.05);
+}
+.btn-action-icon-reject {
+  background: rgba(229, 57, 53, 0.08);
+  color: var(--danger);
+  border: 1px solid rgba(229, 57, 53, 0.12);
+}
+.btn-action-icon-reject:hover {
+  background: var(--danger);
+  color: white;
+  box-shadow: 0 6px 16px -3px rgba(229, 57, 53, 0.3);
+  transform: scale(1.05);
+}
+
+/* Status Badges */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  border-radius: 50px;
+}
+.admin-badge-pending {
+  background: rgba(255, 167, 38, 0.1);
+  color: var(--warning);
+  border: 1px solid rgba(255, 167, 38, 0.15);
+}
+.admin-badge-approved {
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(76, 175, 80, 0.15);
+}
+.admin-badge-rejected {
+  background: rgba(229, 57, 53, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(229, 57, 53, 0.15);
+}
+
+/* Premium Animations */
+.animate-scale-in {
+  animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.delay-200 { animation-delay: 0.15s; }
+.delay-300 { animation-delay: 0.25s; }
+
+/* Custom Checkbox styles */
+input[type="checkbox"].accent-primary {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #E5E7EB;
+  border-radius: 5px;
+  background-color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+  outline: none;
+}
+input[type="checkbox"].accent-primary:hover {
+  border-color: #CBD5E1;
+}
+input[type="checkbox"].accent-primary:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+input[type="checkbox"].accent-primary:checked::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 1px;
+}
+
+/* Toast System styles */
+.admin-toast {
+  background: rgba(26, 35, 64, 0.95);
+  backdrop-filter: blur(12px);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 16px 32px rgba(26, 35, 64, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 280px;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateX(120%);
+  animation: slideToastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 0.3s ease;
+}
+.admin-toast.fade-out {
+  opacity: 0;
+}
+.admin-toast-success {
+  border-left: 4px solid var(--success);
+}
+.admin-toast-danger {
+  border-left: 4px solid var(--danger);
+}
+.admin-toast-info {
+  border-left: 4px solid var(--warning);
+}
+
+@keyframes slideToastIn {
+  to { transform: translateX(0); }
+}
+
+/* Card details transitions */
+.parent-details-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.parent-details-panel.open {
+  max-height: 800px; /* high limit to fit content */
+  opacity: 1;
+}
+
+/* Interactive elements */
+.tap-effect {
+  transition: transform 0.1s ease;
+}
+.tap-effect:active {
+  transform: scale(0.97) !important;
+}
+
+@media (max-width: 640px) {
+  .registration-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
