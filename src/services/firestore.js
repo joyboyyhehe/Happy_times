@@ -139,10 +139,44 @@ export async function setAttendanceRecord(branchId, classId, date, studentId, st
     markedBy: uid(),
     timestamp: serverTimestamp(),
   }, { merge: true });
+
+  // Optimize: Sync to monthly attendance summary
+  const [yearStr, monthStr] = date.split('-');
+  const summaryPath = doc(db, 'attendance_summary', `${studentId}_${yearStr}_${monthStr}`);
+  try {
+    await updateDoc(summaryPath, {
+      [`records.${date}`]: status,
+      updatedAt: serverTimestamp(),
+      studentId: studentId,
+    });
+  } catch (err) {
+    // Fallback if document doesn't exist yet
+    await setDoc(summaryPath, {
+      studentId: studentId,
+      records: {
+        [date]: status,
+      },
+      updatedAt: serverTimestamp(),
+    }, { merge: true });
+  }
 }
 
 export async function getStudentAttendanceMonth(studentId, branchId, classId, year, month) {
   // Returns map { 'YYYY-MM-DD': status }
+  const yearStr = String(year);
+  const monthStr = String(month).padStart(2, '0');
+  const summaryPath = doc(db, 'attendance_summary', `${studentId}_${yearStr}_${monthStr}`);
+  
+  try {
+    const summarySnap = await getDoc(summaryPath);
+    if (summarySnap.exists()) {
+      return summarySnap.data().records || {};
+    }
+  } catch (err) {
+    console.warn('Failed to fetch attendance summary, falling back to daily scans:', err);
+  }
+
+  // Fallback: Multi-read daily documents for backward compatibility
   const result = {};
   const daysInMonth = new Date(year, month, 0).getDate();
   const fetches = [];
@@ -154,6 +188,20 @@ export async function getStudentAttendanceMonth(studentId, branchId, classId, ye
     );
   }
   await Promise.all(fetches);
+
+  // Proactively save back to summary collection for future O(1) retrieval
+  if (Object.keys(result).length > 0) {
+    try {
+      await setDoc(summaryPath, {
+        studentId: studentId,
+        records: result,
+        updatedAt: serverTimestamp(),
+      }, { merge: true });
+    } catch (err) {
+      console.error('Failed to cache attendance summary:', err);
+    }
+  }
+
   return result;
 }
 

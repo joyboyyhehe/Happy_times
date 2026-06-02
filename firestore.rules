@@ -97,22 +97,26 @@ service cloud.firestore {
 
     // --- /attendance ---
     match /attendance/{attendanceId} {
-      allow read: if true;
+      allow read: if isAuthenticated();
       allow write: if isSuperAdmin();
-      allow read: if isBranchAdmin() && resource.data.branchId == getUserData().branchId;
-      allow write: if isBranchAdmin() && 
-        request.resource.data.branchId == getUserData().branchId &&
-        (resource == null || resource.data.branchId == getUserData().branchId);
-      allow read: if isParent() && 
-        request.auth.uid in get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.parentUids;
+      allow read, write: if isBranchAdmin() && (resource == null || resource.data.branchId == getUserData().branchId);
+      
+      match /records/{studentId} {
+        allow read, write: if isSuperAdmin();
+        allow read, write: if isBranchAdmin();
+        allow read: if isParent() && request.auth.uid in get(/databases/$(database)/documents/students/$(studentId)).data.parentUids;
+      }
     }
 
     // --- /fees ---
-    match /fees/{feeId} {
+    match /fees/{studentId} {
       allow read, write: if isSuperAdmin();
-      allow read: if isParent() && 
-        request.auth.uid in get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.parentUids;
-      // Branch admins have no access to fees
+      allow read: if isParent() && request.auth.uid in get(/databases/$(database)/documents/students/$(studentId)).data.parentUids;
+      
+      match /payments/{paymentId} {
+        allow read, write: if isSuperAdmin();
+        allow read: if isParent() && request.auth.uid in get(/databases/$(database)/documents/students/$(studentId)).data.parentUids;
+      }
     }
 
     // --- /posts ---
@@ -137,6 +141,19 @@ service cloud.firestore {
     match /settings/{settingId} {
       allow read: if isAuthenticated();
       allow write: if isSuperAdmin();
+    }
+
+    // --- /fcm_tokens ---
+    match /fcm_tokens/{userId} {
+      allow read, write: if isAuthenticated() && (request.auth.uid == userId || isSuperAdmin());
+    }
+
+    // --- /attendance_summary ---
+    match /attendance_summary/{summaryId} {
+      allow read, write: if isSuperAdmin();
+      allow read, write: if isBranchAdmin();
+      allow read: if isParent() && 
+        (resource == null || request.auth.uid in get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.parentUids);
     }
   }
 }

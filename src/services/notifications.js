@@ -3,7 +3,7 @@ import { getToken, onMessage } from 'firebase/messaging';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth } from '../config/firebase.js';
 
-const VAPID_KEY = ''; // TODO: Add VAPID key from Firebase Console → Cloud Messaging
+const VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
 
 export async function initNotifications() {
   try {
@@ -19,8 +19,8 @@ export async function initNotifications() {
       return;
     }
 
-    // Register service worker for FCM
-    const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+    // Get the active Workbox service worker registration
+    const registration = await navigator.serviceWorker.ready;
 
     const token = await getToken(messaging, {
       vapidKey: VAPID_KEY,

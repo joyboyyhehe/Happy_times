@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../config/firebase.js';
 import {
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   GoogleAuthProvider,
   RecaptchaVerifier,
   signInWithPhoneNumber,
@@ -22,6 +24,43 @@ export default function LoginScreen() {
   const navigate = useNavigate();
   const { refreshProfile } = useAuth();
 
+  useEffect(() => {
+    // Process Google redirect sign-in result when returning to the app
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result && result.user) {
+          setLoading(true);
+          const email = result.user.email;
+          const whitelistEntry = await checkStaffWhitelist(email);
+          if (!whitelistEntry) {
+            await auth.signOut();
+            setUnauthorizedEmail(email);
+            setView('unauthorized');
+            setLoading(false);
+            return;
+          }
+
+          await createOrUpdateUser(result.user.uid, {
+            email,
+            name: result.user.displayName || email,
+            role: whitelistEntry.role,
+            branchId: whitelistEntry.branchId || null,
+            lastLogin: new Date(),
+          });
+
+          const profile = await refreshProfile();
+          if (profile) navigateByRole(profile.role);
+        }
+      })
+      .catch((e) => {
+        console.error('[Auth] Google Redirect Error:', e);
+        setError('Google Sign-In failed or was cancelled during redirect. Please try again.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   function navigateByRole(role) {
     initNotifications().catch(console.error);
     switch (role) {
@@ -37,31 +76,38 @@ export default function LoginScreen() {
     setError(null);
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const email = result.user.email;
 
-      // Check whitelist
-      const whitelistEntry = await checkStaffWhitelist(email);
-      if (!whitelistEntry) {
-        await auth.signOut();
-        setUnauthorizedEmail(email);
-        setView('unauthorized');
-        setLoading(false);
-        return;
-      }
+      // Proactively detect mobile iOS/Android WebViews or stand-alone PWA apps which block popups
+      const isWebView = /FBAN|FBAV|Instagram|Twitter|Line|WhatsApp/i.test(navigator.userAgent) || 
+                        (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad') || navigator.userAgent.includes('iPod')) && !navigator.userAgent.includes('Safari');
+      const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 
-      // Create or update user profile in Firestore
-      await createOrUpdateUser(result.user.uid, {
-        email,
-        name: result.user.displayName || email,
-        role: whitelistEntry.role,
-        branchId: whitelistEntry.branchId || null,
-        lastLogin: new Date(),
-      });
+      if (isWebView || isStandalone) {
+        console.log('[Auth] Mobile PWA/WebView environment detected. Falling back to redirect.');
+        await signInWithRedirect(auth, provider);
+      } else {
+        const result = await signInWithPopup(auth, provider);
+        const email = result.user.email;
 
-      const profile = await refreshProfile();
-      if (profile) {
-        navigateByRole(profile.role);
+        const whitelistEntry = await checkStaffWhitelist(email);
+        if (!whitelistEntry) {
+          await auth.signOut();
+          setUnauthorizedEmail(email);
+          setView('unauthorized');
+          setLoading(false);
+          return;
+        }
+
+        await createOrUpdateUser(result.user.uid, {
+          email,
+          name: result.user.displayName || email,
+          role: whitelistEntry.role,
+          branchId: whitelistEntry.branchId || null,
+          lastLogin: new Date(),
+        });
+
+        const profile = await refreshProfile();
+        if (profile) navigateByRole(profile.role);
       }
     } catch (e) {
       console.error('[Auth] Google Sign-In Error:', e);
@@ -78,21 +124,18 @@ export default function LoginScreen() {
   }
 
   async function handleSendOtp() {
-    if (phone.length < 10) { setError('Enter a valid phone number'); return; }
+    if (phone.length < 10) { setError('Enter a valid 10-digit mobile number'); return; }
     setLoading(true);
     setError(null);
     try {
       const formatted = phone.startsWith('+') ? phone : `+91${phone}`;
-
       if (window.recaptchaVerifier) {
         try { window.recaptchaVerifier.clear(); } catch (err) { /* ignore */ }
         window.recaptchaVerifier = null;
       }
-
       window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
         size: 'invisible',
       });
-
       const result = await signInWithPhoneNumber(auth, formatted, window.recaptchaVerifier);
       setConfirmResult(result);
       setView('otp');
@@ -134,197 +177,220 @@ export default function LoginScreen() {
   }
 
   return (
-    <div className="page-shell">
-      <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{ height: '40px' }} />
+    <div className="login-shell">
+      {/* Decorative background */}
+      <div className="login-bg">
+        <div className="login-bg-blob login-bg-blob-1" />
+        <div className="login-bg-blob login-bg-blob-2" />
+      </div>
 
-        {/* Logo */}
-        <div style={{
-          width: 64, height: 64,
-          background: 'linear-gradient(135deg, #E8451A, #F5A623)',
-          borderRadius: 'var(--radius-lg)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 4px 16px rgba(232,69,26,0.3)',
-        }}>
-          <span style={{ color: 'white', fontWeight: 800, fontSize: 18, letterSpacing: -0.5 }}>HT</span>
+      {/* Top brand strip */}
+      <div className="login-brand-strip">
+        <div className="login-logo-sm">
+          <span>HT</span>
         </div>
+        <span className="login-brand-name">Happy Times</span>
+      </div>
 
-        <div style={{ height: '24px' }} />
+      {/* Card */}
+      <div className="login-card-wrap">
+        <div className="login-card">
 
-        {/* ── UNAUTHORIZED VIEW ── */}
-        {view === 'unauthorized' && (
-          <div className="fade-in">
-            <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--text-dark)' }}>
-              Unauthorized
-            </h1>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 6 }}>
-              The account <strong>{unauthorizedEmail}</strong> is not registered as staff at Happy Times Preschool.
-            </p>
-            <div style={{ height: '24px' }} />
-            <div className="alert-error">
-              <span>🔒</span>
-              <span>Please contact the Super Admin to get your account whitelisted.</span>
+          {/* ── UNAUTHORIZED VIEW ── */}
+          {view === 'unauthorized' && (
+            <div className="fade-in">
+              <div className="login-card-icon login-card-icon--danger">🔒</div>
+              <h1 className="login-card-title">Access Denied</h1>
+              <p className="login-card-sub">
+                <strong>{unauthorizedEmail}</strong> is not registered as staff.
+                Please contact the Super Admin.
+              </p>
+              <div style={{ height: 24 }} />
+              <button
+                className="btn btn-outline w-full"
+                onClick={() => { setView('select'); setError(null); }}
+              >
+                ← Back to login
+              </button>
             </div>
-            <div style={{ height: '24px' }} />
-            <button
-              className="btn btn-outline w-full"
-              onClick={() => { setView('select'); setError(null); }}
-            >← Back to login</button>
-          </div>
-        )}
+          )}
 
-        {view !== 'unauthorized' && (
-          <>
-            <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--text-dark)' }}>
-              {view === 'otp' ? 'Enter OTP' : view === 'phone' ? 'Parent Login' : 'Welcome!'}
-            </h1>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 6 }}>
-              {view === 'otp'
-                ? `Sent to +91 ${phone}`
-                : view === 'phone'
-                ? 'Enter your registered mobile number'
-                : 'Happy Times Preschool & Montessori'}
-            </p>
+          {/* ── SELECT VIEW ── */}
+          {view === 'select' && (
+            <div className="fade-in">
+              <div className="login-card-icon">👋</div>
+              <h1 className="login-card-title">Welcome back!</h1>
+              <p className="login-card-sub">Happy Times Preschool &amp; Montessori</p>
 
-            <div style={{ height: '40px' }} />
+              <div style={{ height: 32 }} />
 
-            {/* ── SELECT VIEW ── */}
-            {view === 'select' && (
-              <div className="flex flex-col gap-12 fade-in">
+              <div className="login-role-grid">
+                {/* Parent */}
                 <button
                   id="login-parent"
-                  className="card card-interactive"
+                  className="login-role-btn"
                   onClick={() => setView('phone')}
-                  style={{ display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', textAlign: 'left' }}
                 >
-                  <div style={{
-                    width: 46, height: 46, borderRadius: 12,
-                    background: 'var(--accent-light)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'var(--primary)', fontSize: 22,
-                  }}>📱</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-dark)' }}>I'm a Parent</div>
-                    <div style={{ fontSize: 12, color: 'var(--text-hint)', marginTop: 2 }}>Sign in with mobile number + OTP</div>
+                  <div className="login-role-icon login-role-icon--parent">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
                   </div>
-                  <span style={{ color: 'var(--primary)', fontSize: 18 }}>›</span>
+                  <div className="login-role-label">I'm a Parent</div>
+                  <div className="login-role-hint">Mobile + OTP</div>
+                  <div className="login-role-arrow">→</div>
                 </button>
 
+                {/* Staff */}
                 <button
                   id="login-staff"
-                  className="card card-interactive"
+                  className="login-role-btn login-role-btn--staff"
                   onClick={loading ? undefined : handleGoogleSignIn}
                   disabled={loading}
-                  style={{ display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', textAlign: 'left', opacity: loading ? 0.6 : 1 }}
                 >
-                  <div style={{
-                    width: 46, height: 46, borderRadius: 12,
-                    background: 'var(--info-light)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'var(--info)', fontSize: 22,
-                  }}>👤</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-dark)' }}>I'm Staff</div>
-                    <div style={{ fontSize: 12, color: 'var(--text-hint)', marginTop: 2 }}>Admins — sign in with Google</div>
+                  <div className="login-role-icon login-role-icon--staff">
+                    {loading ? (
+                      <div className="spinner spinner-sm" />
+                    ) : (
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                      </svg>
+                    )}
                   </div>
-                  {loading ? <div className="spinner spinner-sm" /> : <span style={{ color: 'var(--info)', fontSize: 18 }}>›</span>}
+                  <div className="login-role-label">I'm Staff</div>
+                  <div className="login-role-hint">Sign in with Google</div>
+                  <div className="login-role-arrow">→</div>
                 </button>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* ── PHONE VIEW ── */}
-            {view === 'phone' && (
-              <div className="flex flex-col gap-20 fade-in">
-                <div style={{
-                  display: 'flex', border: '1px solid rgba(26,35,64,0.12)',
-                  borderRadius: 'var(--radius-md)', overflow: 'hidden', background: 'white',
-                }}>
-                  <div style={{
-                    padding: '14px', borderRight: '1px solid rgba(26,35,64,0.12)',
-                    fontWeight: 600, fontSize: 15, color: 'var(--primary)',
-                  }}>+91</div>
-                  <input
-                    id="phone-input"
-                    type="tel"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    maxLength={10}
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                    placeholder="Mobile number"
-                    style={{
-                      flex: 1, border: 'none', padding: '14px', fontSize: 16,
-                      color: 'var(--text-dark)', outline: 'none', background: 'transparent',
-                      fontFamily: 'var(--font)',
-                    }}
-                  />
-                </div>
+          {/* ── PHONE VIEW ── */}
+          {view === 'phone' && (
+            <div className="fade-in">
+              <div className="login-card-icon login-card-icon--phone">📱</div>
+              <h1 className="login-card-title">Parent Login</h1>
+              <p className="login-card-sub">Enter your registered mobile number</p>
+
+              <div style={{ height: 28 }} />
+
+              <div className="login-phone-input-wrap">
+                <div className="login-phone-prefix">+91</div>
+                <input
+                  id="phone-input"
+                  type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={10}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+                  placeholder="Mobile number"
+                  className="login-phone-input"
+                  autoFocus
+                />
+              </div>
+
+              <div style={{ height: 16 }} />
+
+              <button
+                id="send-otp-btn"
+                className="btn btn-primary"
+                onClick={handleSendOtp}
+                disabled={loading}
+                style={{ borderRadius: 'var(--radius-md)', height: 52, fontSize: 16 }}
+              >
+                {loading
+                  ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} />
+                  : 'Send OTP →'}
+              </button>
+
+              <div style={{ height: 12 }} />
+
+              <button
+                className="login-back-btn"
+                onClick={() => { setView('select'); setError(null); }}
+              >
+                ← Back
+              </button>
+            </div>
+          )}
+
+          {/* ── OTP VIEW ── */}
+          {view === 'otp' && (
+            <div className="fade-in">
+              <div className="login-card-icon login-card-icon--otp">🔢</div>
+              <h1 className="login-card-title">Enter OTP</h1>
+              <p className="login-card-sub">Sent to +91 {phone}</p>
+
+              <div style={{ height: 28 }} />
+
+              <input
+                id="otp-input"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                placeholder="· · · · · ·"
+                className="login-otp-input"
+                autoFocus
+              />
+
+              <div style={{ height: 16 }} />
+
+              <button
+                id="verify-otp-btn"
+                className="btn btn-primary"
+                onClick={handleVerifyOtp}
+                disabled={loading}
+                style={{ borderRadius: 'var(--radius-md)', height: 52, fontSize: 16 }}
+              >
+                {loading
+                  ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} />
+                  : 'Verify OTP ✓'}
+              </button>
+
+              <div style={{ height: 16 }} />
+
+              <div className="login-otp-footer">
                 <button
-                  id="send-otp-btn"
-                  className="btn btn-primary"
+                  className="login-back-btn"
+                  onClick={() => { setView('phone'); setOtp(''); setError(null); }}
+                >
+                  ← Change number
+                </button>
+                <button
+                  className="login-resend-btn"
                   onClick={handleSendOtp}
                   disabled={loading}
                 >
-                  {loading ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} /> : 'Send OTP'}
+                  Resend OTP
                 </button>
-                <button
-                  onClick={() => { setView('select'); setError(null); }}
-                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 14 }}
-                >← Back</button>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* ── OTP VIEW ── */}
-            {view === 'otp' && (
-              <div className="flex flex-col gap-20 fade-in">
-                <input
-                  id="otp-input"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={6}
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                  placeholder="------"
-                  style={{
-                    textAlign: 'center', fontSize: 28, fontWeight: 700,
-                    letterSpacing: 12, padding: '14px', border: '1px solid rgba(26,35,64,0.12)',
-                    borderRadius: 'var(--radius-md)', color: 'var(--text-dark)',
-                    outline: 'none', background: 'white', fontFamily: 'var(--font)',
-                  }}
-                />
-                <button
-                  id="verify-otp-btn"
-                  className="btn btn-primary"
-                  onClick={handleVerifyOtp}
-                  disabled={loading}
-                >
-                  {loading ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} /> : 'Verify OTP'}
-                </button>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <button
-                    onClick={() => { setView('phone'); setOtp(''); setError(null); }}
-                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 14 }}
-                  >← Change number</button>
-                  <button
-                    onClick={handleSendOtp}
-                    disabled={loading}
-                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 14 }}
-                  >Resend OTP</button>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-
-        {/* Error */}
-        {error && (
-          <div className="alert-error mt-16">
-            <span>⚠</span>
-            <span>{error}</span>
-          </div>
-        )}
-
-        <div id="recaptcha-container" />
+          {/* Error */}
+          {error && (
+            <div className="alert-error" style={{ marginTop: 16 }}>
+              <span>⚠</span>
+              <span>{error}</span>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Footer */}
+      <p className="login-footer-text">
+        Secure &amp; private · Happy Times Preschool
+      </p>
+
+      <div id="recaptcha-container" />
     </div>
   );
 }
