@@ -223,6 +223,17 @@ export default function LoginScreen() {
     if (phone.length < 10) { setError('Enter a valid 10-digit mobile number'); return; }
     setLoading(true);
     setError(null);
+    
+    // Set a 15-second safety timeout in case reCAPTCHA verification hangs
+    const safetyTimeout = setTimeout(() => {
+      setLoading(false);
+      setError('OTP request timed out. Please check your network or try opening in a standard browser (Safari/Chrome).');
+      if (window.recaptchaVerifier) {
+        try { window.recaptchaVerifier.clear(); } catch (err) {}
+        window.recaptchaVerifier = null;
+      }
+    }, 15000);
+
     try {
       const formatted = phone.startsWith('+') ? phone : `+91${phone}`;
       if (window.recaptchaVerifier) {
@@ -233,10 +244,13 @@ export default function LoginScreen() {
         size: 'invisible',
       });
       const result = await signInWithPhoneNumber(auth, formatted, window.recaptchaVerifier);
+      
+      clearTimeout(safetyTimeout);
       setConfirmResult(result);
       setView('otp');
       setLoading(false);
     } catch (e) {
+      clearTimeout(safetyTimeout);
       console.error('[Auth] Send OTP Error:', e);
       logTelemetryEvent('login_failed', { reason: 'otp_send_failed' });
       logTelemetryError(e, { category: 'auth', isCritical: true });
@@ -253,8 +267,16 @@ export default function LoginScreen() {
     if (otp.length !== 6) { setError('Enter the 6-digit OTP'); return; }
     setLoading(true);
     setError(null);
+    
+    // Set a 15-second safety timeout for verification
+    const safetyTimeout = setTimeout(() => {
+      setLoading(false);
+      setError('OTP verification timed out. Please check your connection and try again.');
+    }, 15000);
+
     try {
       await confirmResult.confirm(otp);
+      clearTimeout(safetyTimeout);
       const profile = await refreshProfile();
       if (profile) {
         logTelemetryEvent('login_success', { role: profile.role });
@@ -267,6 +289,7 @@ export default function LoginScreen() {
         setLoading(false);
       }
     } catch (e) {
+      clearTimeout(safetyTimeout);
       logTelemetryEvent('otp_failed', { code: e.code });
       logTelemetryEvent('login_failed', { reason: 'otp_verification_failed' });
       logTelemetryError(e, { category: 'auth', isCritical: !e.message?.includes('OTP') && !e.code?.includes('code') });
@@ -485,9 +508,14 @@ export default function LoginScreen() {
                 disabled={loading}
                 style={{ borderRadius: 'var(--radius-md)', height: 52, fontSize: 16 }}
               >
-                {loading
-                  ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} />
-                  : 'Send OTP →'}
+                {loading ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                    <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} />
+                    <span>Sending...</span>
+                  </div>
+                ) : (
+                  'Send OTP →'
+                )}
               </button>
 
               <div style={{ height: 12 }} />
@@ -532,9 +560,14 @@ export default function LoginScreen() {
                 disabled={loading}
                 style={{ borderRadius: 'var(--radius-md)', height: 52, fontSize: 16 }}
               >
-                {loading
-                  ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} />
-                  : 'Verify OTP ✓'}
+                {loading ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                    <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} />
+                    <span>Verifying...</span>
+                  </div>
+                ) : (
+                  'Verify OTP ✓'
+                )}
               </button>
 
               <div style={{ height: 16 }} />

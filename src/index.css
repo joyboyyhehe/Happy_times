@@ -1914,6 +1914,11 @@ input:autofill:focus {
   transform: scale(0.98);
 }
 
+.login-card .btn .spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-top-color: #ffffff !important;
+}
+
 /* Override alert-error for dark theme */
 .login-card .alert-error {
   background: rgba(229,57,53,0.12);

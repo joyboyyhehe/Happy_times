@@ -431,6 +431,9 @@ export async function batchSaveAttendance(branchId, classId, date, records) {
 }
 
 export async function getStudentAttendanceMonth(studentId, branchId, classId, year, month) {
+  if (!studentId || !branchId || !classId) {
+    return {};
+  }
   // Returns map { 'YYYY-MM-DD': status }
   const yearStr = String(year);
   const monthStr = String(month).padStart(2, '0');
@@ -632,11 +635,41 @@ export async function getPosts({ branchId = null, classId = null, limitCount = 1
 
 export async function getPostsForParent(branchId, classId) {
   // Parent sees: class posts + branch posts + all-branch posts
-  const [classPosts, branchPosts, allPosts] = await Promise.all([
-    getDocs(query(collection(db, 'posts'), where('scope', '==', 'class'), where('classId', '==', classId), orderBy('timestamp', 'desc'), limit(30))),
-    getDocs(query(collection(db, 'posts'), where('scope', '==', 'branch'), where('branchId', '==', branchId), orderBy('timestamp', 'desc'), limit(30))),
-    getDocs(query(collection(db, 'posts'), where('scope', 'in', ['all', 'all_branches']), orderBy('timestamp', 'desc'), limit(20))),
-  ]);
+  const queries = [];
+  
+  if (classId) {
+    queries.push(
+      getDocs(query(collection(db, 'posts'), where('scope', '==', 'class'), where('classId', '==', classId), orderBy('timestamp', 'desc'), limit(30)))
+        .catch(err => {
+          console.warn('[firestore] Failed to query class posts:', err);
+          return { docs: [] };
+        })
+    );
+  } else {
+    queries.push(Promise.resolve({ docs: [] }));
+  }
+  
+  if (branchId) {
+    queries.push(
+      getDocs(query(collection(db, 'posts'), where('scope', '==', 'branch'), where('branchId', '==', branchId), orderBy('timestamp', 'desc'), limit(30)))
+        .catch(err => {
+          console.warn('[firestore] Failed to query branch posts:', err);
+          return { docs: [] };
+        })
+    );
+  } else {
+    queries.push(Promise.resolve({ docs: [] }));
+  }
+  
+  queries.push(
+    getDocs(query(collection(db, 'posts'), where('scope', 'in', ['all', 'all_branches']), orderBy('timestamp', 'desc'), limit(20)))
+      .catch(err => {
+        console.warn('[firestore] Failed to query global posts:', err);
+        return { docs: [] };
+      })
+  );
+
+  const [classPosts, branchPosts, allPosts] = await Promise.all(queries);
   const seen = new Set();
   const merged = [];
   [...classPosts.docs, ...branchPosts.docs, ...allPosts.docs].forEach(d => {

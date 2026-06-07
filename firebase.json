@@ -1,4 +1,16 @@
 {
+  "functions": [
+    {
+      "source": "scratch/onPostCreated",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firestore-debug.log"
+      ]
+    }
+  ],
   "firestore": {
     "database": "(default)",
     "location": "nam5",

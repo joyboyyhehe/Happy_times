@@ -113,7 +113,7 @@ exports.onPostCreated = onDocumentCreated("posts/{postId}", async (event) => {
 
   // Find all students that match this post's targeting
   let studentsQuery;
-  if (post.branchId === "all") {
+  if (!post.branchId || post.branchId === "all" || post.scope === "all" || post.scope === "all_branches") {
     // Post targets all branches
     studentsQuery = db.collection("students").where("status", "==", "active");
   } else {
