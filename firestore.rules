@@ -174,7 +174,7 @@ service cloud.firestore {
     match /logs/{logId} {
       allow read: if isSuperAdmin();
       allow read: if isBranchAdmin() && resource.data.actorUid == request.auth.uid;
-      allow create: if isAuthenticated();
+      allow create: if isAuthenticated() || request.resource.data.actionType == "install_gate_event";
       allow update, delete: if false; // Logs are write-once, immutable
     }
 

@@ -4,10 +4,9 @@ import { useAuth } from './contexts/AuthContext.jsx';
 import LoginScreen from './pages/auth/LoginScreen.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import { logTelemetryEvent } from './services/telemetry.js';
-import { isStandalone } from './utils/appMode.js';
+import { isStandalone, isInstalledApp } from './utils/appMode.js';
 import { auth } from './config/firebase.js';
 import AppLogo from './components/AppLogo.jsx';
-
 
 // Lazy load dashboard chunks for optimal mobile page-load speed
 const ParentDashboard = lazy(() => import('./pages/parent/ParentDashboard.jsx'));
@@ -15,10 +14,17 @@ const BranchAdminDashboard = lazy(() => import('./pages/branchadmin/BranchAdminD
 const SuperAdminDashboard = lazy(() => import('./pages/superadmin/SuperAdminDashboard.jsx'));
 const FeeRecorder = lazy(() => import('./pages/superadmin/FeeRecorder.jsx'));
 
+// Check if installation gate is bypassed
+function isBypassed() {
+  const disableInstallGate = import.meta.env.VITE_DISABLE_INSTALL_GATE === 'true';
+  const emergencyBypass = sessionStorage.getItem('emergency_bypass') === 'true';
+  return isInstalledApp() || disableInstallGate || emergencyBypass;
+}
 
 function ProtectedRoute({ children, allowedRoles }) {
   const { user, profile, loading, refreshProfile } = useAuth();
   const [retrying, setRetrying] = useState(false);
+  const bypassed = isBypassed();
 
   if (loading) {
     return (
@@ -28,6 +34,11 @@ function ProtectedRoute({ children, allowedRoles }) {
         </div>
       </div>
     );
+  }
+
+  // Enforce PWA installation gate
+  if (!bypassed) {
+    return <Navigate to="/" replace />;
   }
 
   if (!user) return <Navigate to="/login" replace />;
@@ -78,6 +89,7 @@ function ProtectedRoute({ children, allowedRoles }) {
 
 function SplashRouter() {
   const { user, profile, loading } = useAuth();
+  const bypassed = isBypassed();
 
   if (loading) {
     return (
@@ -86,6 +98,11 @@ function SplashRouter() {
         <div className="spinner" />
       </div>
     );
+  }
+
+  // Enforce PWA installation gate
+  if (!bypassed) {
+    return <Navigate to="/" replace />;
   }
 
   if (!user) return <LoginScreen />;
@@ -100,7 +117,7 @@ function SplashRouter() {
 
 function MainRouter() {
   const { user, loading } = useAuth();
-  const standalone = isStandalone();
+  const bypassed = isBypassed();
 
   if (loading) {
     return (
@@ -110,26 +127,22 @@ function MainRouter() {
     );
   }
 
-  // If already authenticated, bypass landing page and go straight to portal
-  if (user) {
+  // If already authenticated and bypassed, go straight to portal
+  if (user && bypassed) {
     return <Navigate to="/portal" replace />;
   }
 
-  if (standalone) {
+  if (bypassed) {
     return <Navigate to="/portal" replace />;
   }
+
   return <LandingPage />;
 }
 
-/**
- * LoginRoute: handles /login navigation
- * - If already authenticated: redirect to /portal (dashboard)
- * - Otherwise: always show LoginScreen (both browser and standalone)
- */
 function LoginRoute() {
   const { user, loading } = useAuth();
+  const bypassed = isBypassed();
 
-  // While auth state is being resolved, show spinner
   if (loading) {
     return (
       <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -138,20 +151,39 @@ function LoginRoute() {
     );
   }
 
-  // Already logged in — send to portal/dashboard
-  if (user) {
+  // If already authenticated and bypassed, go straight to portal
+  if (user && bypassed) {
     return <Navigate to="/portal" replace />;
   }
 
-  // If in browser mode and NOT explicitly bypassed via Landing Page: redirect to Landing Page
-  const standalone = isStandalone();
-  const loginAllowed = sessionStorage.getItem('browser_login_allowed') === 'true';
-  if (!standalone && !loginAllowed) {
+  // Enforce PWA installation gate
+  if (!bypassed) {
     return <Navigate to="/" replace />;
   }
 
-  // Always show login screen (browser or installed)
   return <LoginScreen />;
+}
+
+// Emergency Login Route: Bypasses the installation gate completely
+function EmergencyLoginRoute() {
+  useEffect(() => {
+    sessionStorage.setItem('emergency_bypass', 'true');
+    logTelemetryEvent('emergency_bypass_triggered');
+    // Log directly to firestore logs collection
+    import('./config/firebase.js').then(({ db }) => {
+      import('firebase/firestore').then(({ collection, addDoc, serverTimestamp }) => {
+        addDoc(collection(db, 'logs'), {
+          actionType: 'install_gate_event',
+          event: 'emergency_login_used',
+          details: 'Emergency login bypass requested via /emergency-login URL',
+          timestamp: serverTimestamp(),
+          userAgent: navigator.userAgent
+        }).catch(err => console.warn('Failed to write emergency bypass log:', err));
+      });
+    });
+  }, []);
+
+  return <Navigate to="/login" replace />;
 }
 
 function OfflineBanner() {
@@ -238,6 +270,9 @@ export default function App() {
 
         {/* Auth — redirects to landing page in browser mode if unauthenticated */}
         <Route path="/login" element={<LoginRoute />} />
+
+        {/* Emergency Login Bypass */}
+        <Route path="/emergency-login" element={<EmergencyLoginRoute />} />
 
         {/* Portal splash router */}
         <Route path="/portal" element={<SplashRouter />} />
