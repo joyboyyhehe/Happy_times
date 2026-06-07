@@ -17,6 +17,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
+const analytics = firebase.analytics();
+
 
 // 2. Global State Variables
 let currentStep = 1;
@@ -383,6 +385,16 @@ async function handleFinalSubmit() {
       status: 'pending',
       submittedAt: firebase.firestore.FieldValue.serverTimestamp()
     });
+    
+    // Log parent registration submit event to Firebase Analytics
+    try {
+      analytics.logEvent('parent_registration_submitted', {
+        branch: formData.branch,
+        className: formData.className
+      });
+    } catch (ae) {
+      console.warn('Telemetry event parent_registration_submitted failed:', ae);
+    }
     
     // On success: show success screen
     document.getElementById('regForm').classList.add('hidden');

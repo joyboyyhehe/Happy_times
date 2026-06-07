@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
+import { getFirestore, enableMultiTabIndexedDbPersistence } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getMessaging, isSupported } from 'firebase/messaging';
+import { getAnalytics, isSupported as isAnalyticsSupported } from 'firebase/analytics';
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -18,13 +20,15 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-// Enable offline persistence
+// Enable offline persistence with multi-tab support
 if (typeof window !== 'undefined') {
-  enableIndexedDbPersistence(db).catch((err) => {
+  enableMultiTabIndexedDbPersistence(db).catch((err) => {
     if (err.code === 'failed-precondition') {
-      console.warn('Firestore offline persistence failed: multiple tabs open');
+      console.warn('Firestore multi-tab persistence unavailable: persistence already enabled in another tab');
     } else if (err.code === 'unimplemented') {
       console.warn('Firestore offline persistence unsupported by browser');
+    } else {
+      console.warn('Firestore offline persistence error:', err);
     }
   });
 }
@@ -38,6 +42,23 @@ export const getMessagingInstance = async () => {
     messagingInstance = getMessaging(app);
   }
   return messagingInstance;
+};
+
+// Analytics initialization with browser compatibility checks
+let analyticsInstance = null;
+export const getAnalyticsInstance = async () => {
+  if (analyticsInstance) return analyticsInstance;
+  if (typeof window !== 'undefined') {
+    try {
+      const supported = await isAnalyticsSupported();
+      if (supported) {
+        analyticsInstance = getAnalytics(app);
+      }
+    } catch (err) {
+      console.warn('Firebase Analytics not supported in this environment:', err);
+    }
+  }
+  return analyticsInstance;
 };
 
 export default app;

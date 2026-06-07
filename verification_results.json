@@ -1,0 +1,221 @@
+{
+  "summary": {
+    "criticalBlockers": 0,
+    "newBugs": 0,
+    "fixedBugs": 0,
+    "remainingBugs": 0,
+    "goDecision": "GO"
+  },
+  "results": [
+    {
+      "phase": 6,
+      "testName": "Unauthenticated read users",
+      "status": "PASS",
+      "details": "Read blocked (Error: permission-denied)",
+      "timestamp": "2026-06-06T06:59:51.949Z"
+    },
+    {
+      "phase": 6,
+      "testName": "Unauthenticated read students",
+      "status": "PASS",
+      "details": "Read blocked (Error: permission-denied)",
+      "timestamp": "2026-06-06T06:59:52.316Z"
+    },
+    {
+      "phase": 5,
+      "testName": "Temporary Parent Lifecycle - Create & Link",
+      "status": "PASS",
+      "details": "Temporary parent EbvM2OeVT9XKo9ORFek2RjiQg0c2 created and linked to child.",
+      "timestamp": "2026-06-06T06:59:55.410Z"
+    },
+    {
+      "phase": 6,
+      "testName": "Parent write student feeTotal",
+      "status": "PASS",
+      "details": "Mutation blocked (Error: permission-denied)",
+      "timestamp": "2026-06-06T06:59:57.529Z"
+    },
+    {
+      "phase": 6,
+      "testName": "Parent create post",
+      "status": "PASS",
+      "details": "Post creation blocked (Error: permission-denied)",
+      "timestamp": "2026-06-06T06:59:58.271Z"
+    },
+    {
+      "phase": 6,
+      "testName": "Parent read child details",
+      "status": "PASS",
+      "details": "Successfully read linked child name: Abhinav Surya Kamble",
+      "timestamp": "2026-06-06T06:59:58.720Z"
+    },
+    {
+      "phase": 6,
+      "testName": "Parent read other child details",
+      "status": "PASS",
+      "details": "Read blocked (Error: permission-denied)",
+      "timestamp": "2026-06-06T06:59:59.108Z"
+    },
+    {
+      "phase": 6,
+      "testName": "Branch Admin cross-branch post write",
+      "status": "PASS",
+      "details": "Cross-branch write blocked (Error: permission-denied)",
+      "timestamp": "2026-06-06T07:00:00.644Z"
+    },
+    {
+      "phase": 4,
+      "testName": "FCM Token Registration & Sync",
+      "status": "PASS",
+      "details": "FCM token correctly saved to user doc and fcm_tokens collection.",
+      "timestamp": "2026-06-06T07:00:02.762Z"
+    },
+    {
+      "phase": 5,
+      "testName": "SA Create Global Post",
+      "status": "PASS",
+      "details": "Created global post: Fo4uBTfAYGKG7p9A14ca",
+      "timestamp": "2026-06-06T07:00:04.731Z"
+    },
+    {
+      "phase": 5,
+      "testName": "SA Create Scoped Branch Post",
+      "status": "PASS",
+      "details": "Created branch post: 8cM1a95lkfVRbT35hDct",
+      "timestamp": "2026-06-06T07:00:05.132Z"
+    },
+    {
+      "phase": 5,
+      "testName": "SA Create Scoped Class Post",
+      "status": "PASS",
+      "details": "Created class post: fJroUv0gutaY4bECmxrh",
+      "timestamp": "2026-06-06T07:00:05.495Z"
+    },
+    {
+      "phase": 5,
+      "testName": "Parent Submit Leave",
+      "status": "PASS",
+      "details": "Created leave request: 9i0YuKubhUzLOwgKZ0O8",
+      "timestamp": "2026-06-06T07:00:06.971Z"
+    },
+    {
+      "phase": 5,
+      "testName": "SA Approve Leave & Log",
+      "status": "PASS",
+      "details": "Leave status successfully updated to approved and logged.",
+      "timestamp": "2026-06-06T07:00:10.014Z"
+    },
+    {
+      "phase": 5,
+      "testName": "SA Fee Payment Entry",
+      "status": "PASS",
+      "details": "Successfully incremented feePaid by 1000. New: 1000",
+      "timestamp": "2026-06-06T07:00:11.609Z"
+    },
+    {
+      "phase": 5,
+      "testName": "BA Record Attendance",
+      "status": "PASS",
+      "details": "Attendance document successfully saved: student_abhinav_surya_kamble_1780577323600_2026-06-06",
+      "timestamp": "2026-06-06T07:00:13.210Z"
+    },
+    {
+      "phase": 5,
+      "testName": "Parent Feed Scoped Posts Visibility",
+      "status": "PASS",
+      "details": "Parent successfully receives global, branch-specific, and class-specific posts.",
+      "timestamp": "2026-06-06T07:00:14.273Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Temporary Parent Auth Account",
+      "status": "PASS",
+      "details": "Successfully deleted QA temporary parent auth account.",
+      "timestamp": "2026-06-06T07:00:14.785Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Temporary Parent Document",
+      "status": "PASS",
+      "details": "Deleted temporary parent profile: EbvM2OeVT9XKo9ORFek2RjiQg0c2",
+      "timestamp": "2026-06-06T07:00:16.482Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete Post Fo4uBTfAYGKG7p9A14ca",
+      "status": "PASS",
+      "details": "Deleted QA post: Fo4uBTfAYGKG7p9A14ca",
+      "timestamp": "2026-06-06T07:00:16.890Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete Post 8cM1a95lkfVRbT35hDct",
+      "status": "PASS",
+      "details": "Deleted QA post: 8cM1a95lkfVRbT35hDct",
+      "timestamp": "2026-06-06T07:00:17.272Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete Post fJroUv0gutaY4bECmxrh",
+      "status": "PASS",
+      "details": "Deleted QA post: fJroUv0gutaY4bECmxrh",
+      "timestamp": "2026-06-06T07:00:17.697Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete Leave 9i0YuKubhUzLOwgKZ0O8",
+      "status": "PASS",
+      "details": "Deleted QA leave request: 9i0YuKubhUzLOwgKZ0O8",
+      "timestamp": "2026-06-06T07:00:18.101Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete Attendance Record",
+      "status": "PASS",
+      "details": "Deleted QA attendance: student_abhinav_surya_kamble_1780577323600_2026-06-06",
+      "timestamp": "2026-06-06T07:00:18.691Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Rollback - Restore Student parentUids",
+      "status": "PASS",
+      "details": "Restored TEST_STUDENT_ID parentUids to: [\"jaYqYyqGFUUQ9GJA8JijA2WD9xM2\"]",
+      "timestamp": "2026-06-06T07:00:19.292Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Rollback - Restore Fee Paid Amount",
+      "status": "PASS",
+      "details": "Restored feePaid by decrementing 1000. New total: 0",
+      "timestamp": "2026-06-06T07:00:20.123Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete QA Payment Doc 5ub934ZX5jjawBHnuZBZ",
+      "status": "PASS",
+      "details": "Deleted temporary payment record: 5ub934ZX5jjawBHnuZBZ",
+      "timestamp": "2026-06-06T07:00:20.963Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete QA Audit Log Doc O97br6VIZlL8vap0mB3T (Blocked)",
+      "status": "PASS",
+      "details": "Deletion correctly blocked by security rules (Error: permission-denied)",
+      "timestamp": "2026-06-06T07:00:22.649Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Cleanup - Delete QA Audit Log Doc OxoRhffnps5ROsgnz1a5 (Blocked)",
+      "status": "PASS",
+      "details": "Deletion correctly blocked by security rules (Error: permission-denied)",
+      "timestamp": "2026-06-06T07:00:23.558Z"
+    },
+    {
+      "phase": 7,
+      "testName": "Rollback - Database State Restoration",
+      "status": "PASS",
+      "details": "All modified records and temporary fields successfully rolled back.",
+      "timestamp": "2026-06-06T07:00:23.558Z"
+    }
+  ]
+}

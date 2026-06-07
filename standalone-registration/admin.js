@@ -38,6 +38,12 @@ let allSubmissions = [];
 let selectedIds = new Set();
 let registrationsListener = null;
 
+let currentPageIndex = 0;
+let pageFirstDocs = [];
+let pageLastDocs = [];
+let currentPageDocs = [];
+const pageSize = 25;
+
 // Presets mappings
 const branchNames = {
   'padmanabhanagar': 'Padmanabhanagar',
@@ -179,47 +185,166 @@ async function lockPortal() {
   location.reload();
 }
 
-// 4. Initialize Dashboard & Real-time Listeners
+// 4. Initialize Dashboard & Paginated Loading
 function initializeDashboard() {
-  showLoading(true);
+  // Update stats once on load
+  updateStats();
   
-  // Real-time listener for `/registrations` sorted by submittedAt desc
-  registrationsListener = db.collection("registrations")
-    .orderBy("submittedAt", "desc")
-    .onSnapshot((snapshot) => {
-      allSubmissions = [];
-      snapshot.forEach(doc => {
-        allSubmissions.push({ id: doc.id, ...doc.data() });
-      });
-      
-      // Update global count cards
-      updateStats();
-      
-      // Apply filters and render
-      applyFilters();
-      
-      showLoading(false);
-    }, (err) => {
-      console.error("Firestore onSnapshot error:", err);
-      showGlobalError("Failed to stream registrations. Check network or security rules.");
-      showLoading(false);
+  // Load first page
+  pageFirstDocs = [];
+  pageLastDocs = [];
+  loadPage(0);
+}
+
+async function loadPage(pageIndex) {
+  showLoading(true);
+  hideGlobalError();
+  try {
+    let q = db.collection("registrations").orderBy("submittedAt", "desc");
+    
+    // Apply server-side filters if selected
+    const branchFilter = document.getElementById("filter-branch").value;
+    const classFilter = document.getElementById("filter-class").value;
+    const statusFilter = document.getElementById("filter-status").value;
+    
+    if (branchFilter) {
+      q = q.where("branch", "==", branchFilter);
+    }
+    if (statusFilter !== "all") {
+      q = q.where("status", "==", statusFilter);
+    }
+    if (classFilter) {
+      q = q.where("className", "==", classFilter);
+    }
+
+    // Determine cursor
+    if (pageIndex > 0 && pageLastDocs[pageIndex - 1]) {
+      q = q.startAfter(pageLastDocs[pageIndex - 1]);
+    }
+    
+    q = q.limit(pageSize);
+    
+    const snapshot = await q.get();
+    
+    currentPageDocs = [];
+    snapshot.forEach(doc => {
+      currentPageDocs.push({ id: doc.id, ...doc.data(), _doc: doc });
     });
+    
+    allSubmissions = currentPageDocs; // for inline processing compatibility
+    
+    if (currentPageDocs.length > 0) {
+      pageFirstDocs[pageIndex] = currentPageDocs[0]._doc;
+      pageLastDocs[pageIndex] = currentPageDocs[currentPageDocs.length - 1]._doc;
+    }
+    
+    currentPageIndex = pageIndex;
+    
+    // Check if next page exists
+    let nextCheckQ = db.collection("registrations").orderBy("submittedAt", "desc");
+    if (branchFilter) nextCheckQ = nextCheckQ.where("branch", "==", branchFilter);
+    if (statusFilter !== "all") nextCheckQ = nextCheckQ.where("status", "==", statusFilter);
+    if (classFilter) nextCheckQ = nextCheckQ.where("className", "==", classFilter);
+    
+    if (pageLastDocs[pageIndex]) {
+      nextCheckQ = nextCheckQ.startAfter(pageLastDocs[pageIndex]);
+    }
+    const nextSnap = await nextCheckQ.limit(1).get();
+    const hasNext = !nextSnap.empty;
+    
+    // Update UI controls
+    document.getElementById("page-indicator").innerText = `Page ${currentPageIndex + 1}`;
+    document.getElementById("prev-page-btn").disabled = (currentPageIndex === 0);
+    document.getElementById("next-page-btn").disabled = !hasNext;
+    document.getElementById("pagination-controls").classList.remove("hidden");
+    
+    applyFilters(true);
+  } catch (err) {
+    console.warn("[Pagination] Error loading page with filters, attempting index-free base query:", err);
+    await loadPageBaseOnly(pageIndex);
+  } finally {
+    showLoading(false);
+  }
+}
+
+async function loadPageBaseOnly(pageIndex) {
+  try {
+    let q = db.collection("registrations").orderBy("submittedAt", "desc");
+    if (pageIndex > 0 && pageLastDocs[pageIndex - 1]) {
+      q = q.startAfter(pageLastDocs[pageIndex - 1]);
+    }
+    q = q.limit(pageSize);
+    
+    const snapshot = await q.get();
+    currentPageDocs = [];
+    snapshot.forEach(doc => {
+      currentPageDocs.push({ id: doc.id, ...doc.data(), _doc: doc });
+    });
+    
+    allSubmissions = currentPageDocs;
+    
+    if (currentPageDocs.length > 0) {
+      pageFirstDocs[pageIndex] = currentPageDocs[0]._doc;
+      pageLastDocs[pageIndex] = currentPageDocs[currentPageDocs.length - 1]._doc;
+    }
+    
+    currentPageIndex = pageIndex;
+    
+    let nextCheckQ = db.collection("registrations").orderBy("submittedAt", "desc");
+    if (pageLastDocs[pageIndex]) {
+      nextCheckQ = nextCheckQ.startAfter(pageLastDocs[pageIndex]);
+    }
+    const nextSnap = await nextCheckQ.limit(1).get();
+    const hasNext = !nextSnap.empty;
+    
+    document.getElementById("page-indicator").innerText = `Page ${currentPageIndex + 1}`;
+    document.getElementById("prev-page-btn").disabled = (currentPageIndex === 0);
+    document.getElementById("next-page-btn").disabled = !hasNext;
+    document.getElementById("pagination-controls").classList.remove("hidden");
+    
+    applyFilters(false);
+  } catch (err) {
+    console.error("[Pagination] Critical error on base query:", err);
+    showGlobalError("Failed to fetch registrations.");
+  }
+}
+
+function loadNextPage() {
+  loadPage(currentPageIndex + 1);
+}
+
+function loadPrevPage() {
+  if (currentPageIndex > 0) {
+    loadPage(currentPageIndex - 1);
+  }
+}
+
+function onFilterChange() {
+  pageFirstDocs = [];
+  pageLastDocs = [];
+  loadPage(0);
 }
 
 // 5. Update Stats
-function updateStats() {
-  let pending = 0, approved = 0, rejected = 0;
-  
-  allSubmissions.forEach(item => {
-    if (item.status === "pending") pending++;
-    else if (item.status === "approved") approved++;
-    else if (item.status === "rejected") rejected++;
-  });
-  
-  document.getElementById("stat-pending").innerText = pending;
-  document.getElementById("stat-approved").innerText = approved;
-  document.getElementById("stat-rejected").innerText = rejected;
-  document.getElementById("stat-total").innerText = allSubmissions.length;
+async function updateStats() {
+  try {
+    const snapshot = await db.collection("registrations").get();
+    let pending = 0, approved = 0, rejected = 0;
+    
+    snapshot.forEach(doc => {
+      const item = doc.data();
+      if (item.status === "pending") pending++;
+      else if (item.status === "approved") approved++;
+      else if (item.status === "rejected") rejected++;
+    });
+    
+    document.getElementById("stat-pending").innerText = pending;
+    document.getElementById("stat-approved").innerText = approved;
+    document.getElementById("stat-rejected").innerText = rejected;
+    document.getElementById("stat-total").innerText = snapshot.size;
+  } catch (e) {
+    console.error("Failed to update stats:", e);
+  }
 }
 
 // 6. Filtering & Search Workflows
@@ -228,7 +353,7 @@ function filterByStatCard(status) {
   if (statusSelect) {
     statusSelect.value = status;
     updateActiveStatCardHighlight(status);
-    applyFilters();
+    onFilterChange();
   }
 }
 
@@ -253,48 +378,41 @@ function updateActiveStatCardHighlight(status) {
   }
 }
 
-function applyFilters() {
+function applyFilters(isServerFiltered = false) {
   const branchFilter = document.getElementById("filter-branch").value;
   const classFilter = document.getElementById("filter-class").value;
   const statusFilter = document.getElementById("filter-status").value;
   const searchVal = document.getElementById("search-input").value.toLowerCase().trim();
   
-  // Sync card highlight
   updateActiveStatCardHighlight(statusFilter);
   
-  const filtered = allSubmissions.filter(item => {
-    // 1. Branch Filter
-    if (branchFilter && item.branch !== branchFilter) return false;
-    
-    // 2. Class Filter
-    if (classFilter && item.className !== classFilter) return false;
-    
-    // 3. Status Filter
-    if (statusFilter !== "all") {
-      if (item.status !== statusFilter) return false;
-    }
-    
-    // 4. Search Filter
-    if (searchVal) {
-      const studentName = (item.studentName || "").toLowerCase();
-      const parent1Name = (item.parent1?.name || "").toLowerCase();
-      const parent1Phone = (item.parent1?.phone || "").toLowerCase();
-      const parent2Name = (item.parent2?.name || "").toLowerCase();
-      const parent2Phone = (item.parent2?.phone || "").toLowerCase();
-      
-      const match = studentName.includes(searchVal) ||
-                    parent1Name.includes(searchVal) ||
-                    parent1Phone.includes(searchVal) ||
-                    parent2Name.includes(searchVal) ||
-                    parent2Phone.includes(searchVal);
-      
-      if (!match) return false;
-    }
-    
-    return true;
-  });
+  let filtered = allSubmissions;
   
-  // Render applications list
+  if (!isServerFiltered || searchVal) {
+    filtered = allSubmissions.filter(item => {
+      if (branchFilter && item.branch !== branchFilter) return false;
+      if (classFilter && item.className !== classFilter) return false;
+      if (statusFilter !== "all" && item.status !== statusFilter) return false;
+      
+      if (searchVal) {
+        const studentName = (item.studentName || "").toLowerCase();
+        const parent1Name = (item.parent1?.name || "").toLowerCase();
+        const parent1Phone = (item.parent1?.phone || "").toLowerCase();
+        const parent2Name = (item.parent2?.name || "").toLowerCase();
+        const parent2Phone = (item.parent2?.phone || "").toLowerCase();
+        
+        const match = studentName.includes(searchVal) ||
+                      parent1Name.includes(searchVal) ||
+                      parent1Phone.includes(searchVal) ||
+                      parent2Name.includes(searchVal) ||
+                      parent2Phone.includes(searchVal);
+        
+        if (!match) return false;
+      }
+      return true;
+    });
+  }
+  
   renderApplicationsList(filtered);
 }
 

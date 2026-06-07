@@ -3,31 +3,22 @@ import { lazy, Suspense, useState, useEffect } from 'react';
 import { useAuth } from './contexts/AuthContext.jsx';
 import LoginScreen from './pages/auth/LoginScreen.jsx';
 import LandingPage from './pages/LandingPage.jsx';
+import { logTelemetryEvent } from './services/telemetry.js';
+import { isStandalone } from './utils/appMode.js';
+import { auth } from './config/firebase.js';
+import AppLogo from './components/AppLogo.jsx';
+
 
 // Lazy load dashboard chunks for optimal mobile page-load speed
 const ParentDashboard = lazy(() => import('./pages/parent/ParentDashboard.jsx'));
 const BranchAdminDashboard = lazy(() => import('./pages/branchadmin/BranchAdminDashboard.jsx'));
 const SuperAdminDashboard = lazy(() => import('./pages/superadmin/SuperAdminDashboard.jsx'));
+const FeeRecorder = lazy(() => import('./pages/superadmin/FeeRecorder.jsx'));
 
-/** Returns true when the app is running as an installed PWA (standalone / fullscreen) */
-function isInstalledPWA() {
-  return (
-    window.matchMedia('(display-mode: standalone)').matches ||
-    window.matchMedia('(display-mode: fullscreen)').matches ||
-    window.navigator.standalone === true // iOS Safari
-  );
-}
-
-/** Root redirect: installed PWA → /login, browser first visit → /landingpage */
-function RootRedirect() {
-  if (isInstalledPWA()) {
-    return <Navigate to="/login" replace />;
-  }
-  return <Navigate to="/landingpage" replace />;
-}
 
 function ProtectedRoute({ children, allowedRoles }) {
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading, refreshProfile } = useAuth();
+  const [retrying, setRetrying] = useState(false);
 
   if (loading) {
     return (
@@ -40,8 +31,47 @@ function ProtectedRoute({ children, allowedRoles }) {
   }
 
   if (!user) return <Navigate to="/login" replace />;
-  if (allowedRoles && profile && !allowedRoles.includes(profile.role)) {
-    return <Navigate to="/login" replace />;
+
+  // Profile loaded but null = Firestore couldn't fetch it
+  if (!profile && !loading) {
+    return (
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', padding: 24 }}>
+        <div style={{ textAlign: 'center', maxWidth: 300 }}>
+          <div style={{ fontSize: 40, marginBottom: 16 }}>⚠️</div>
+          <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8, color: 'var(--text-dark)' }}>
+            Profile not loaded
+          </div>
+          <div style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 24, lineHeight: 1.5 }}>
+            Could not load your account. This may be a network issue.
+          </div>
+          <button
+            className="btn btn-primary"
+            style={{ marginBottom: 12 }}
+            disabled={retrying}
+            onClick={async () => {
+              setRetrying(true);
+              await refreshProfile();
+              setRetrying(false);
+            }}
+          >
+            {retrying ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} /> : 'Retry'}
+          </button>
+          <br />
+          <button
+            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}
+            onClick={() => { auth.signOut(); window.location.href = '/login'; }}
+          >
+            Sign out and try again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (allowedRoles && profile) {
+    if (!allowedRoles.includes(profile.role)) {
+      return <Navigate to="/login" replace />;
+    }
   }
   return children;
 }
@@ -52,34 +82,82 @@ function SplashRouter() {
   if (loading) {
     return (
       <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{
-          width: 64, height: 64,
-          background: 'linear-gradient(135deg, #E8451A, #F5A623)',
-          borderRadius: 'var(--radius-lg)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 4px 16px rgba(232,69,26,0.3)',
-          marginBottom: 20,
-        }}>
-          <span style={{ color: 'white', fontWeight: 800, fontSize: 18 }}>HT</span>
-        </div>
+        <AppLogo variant="splash" />
         <div className="spinner" />
       </div>
     );
   }
 
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <LoginScreen />;
 
   switch (profile?.role) {
     case 'superadmin': return <Navigate to="/super-admin" replace />;
     case 'branchadmin': return <Navigate to="/branch-admin" replace />;
     case 'parent': return <Navigate to="/parent" replace />;
-    default: return <Navigate to="/login" replace />;
+    default: return <LoginScreen />;
   }
+}
+
+function MainRouter() {
+  const { user, loading } = useAuth();
+  const standalone = isStandalone();
+
+  if (loading) {
+    return (
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div className="spinner" />
+      </div>
+    );
+  }
+
+  // If already authenticated, bypass landing page and go straight to portal
+  if (user) {
+    return <Navigate to="/portal" replace />;
+  }
+
+  if (standalone) {
+    return <Navigate to="/portal" replace />;
+  }
+  return <LandingPage />;
+}
+
+/**
+ * LoginRoute: handles /login navigation
+ * - If already authenticated: redirect to /portal (dashboard)
+ * - Otherwise: always show LoginScreen (both browser and standalone)
+ */
+function LoginRoute() {
+  const { user, loading } = useAuth();
+
+  // While auth state is being resolved, show spinner
+  if (loading) {
+    return (
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div className="spinner" />
+      </div>
+    );
+  }
+
+  // Already logged in — send to portal/dashboard
+  if (user) {
+    return <Navigate to="/portal" replace />;
+  }
+
+  // If in browser mode and NOT explicitly bypassed via Landing Page: redirect to Landing Page
+  const standalone = isStandalone();
+  const loginAllowed = sessionStorage.getItem('browser_login_allowed') === 'true';
+  if (!standalone && !loginAllowed) {
+    return <Navigate to="/" replace />;
+  }
+
+  // Always show login screen (browser or installed)
+  return <LoginScreen />;
 }
 
 function OfflineBanner() {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [showRestored, setShowRestored] = useState(false);
+  const [queuedWrites, setQueuedWrites] = useState(window.pendingWritesCount || 0);
 
   useEffect(() => {
     function handleOnline() {
@@ -91,13 +169,19 @@ function OfflineBanner() {
     function handleOffline() {
       setIsOffline(true);
       setShowRestored(false);
+      logTelemetryEvent('offline_mode_enabled');
+    }
+    function handlePendingWritesChange(e) {
+      setQueuedWrites(e.detail || 0);
     }
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
+    window.addEventListener('pendingWritesChanged', handlePendingWritesChange);
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('pendingWritesChanged', handlePendingWritesChange);
     };
   }, []);
 
@@ -113,7 +197,7 @@ function OfflineBanner() {
         transition: 'all 0.3s ease'
       }}>
         <span>📴</span>
-        <span>You are offline. Working in offline mode with cached data.</span>
+        <span>You are offline. Working in offline mode. {queuedWrites > 0 ? `(${queuedWrites} pending sync)` : ''}</span>
       </div>
     );
   }
@@ -149,14 +233,11 @@ export default function App() {
     }>
       <OfflineBanner />
       <Routes>
-        {/* Root: smart redirect based on PWA install state */}
-        <Route path="/" element={<RootRedirect />} />
+        {/* Main Entry point: renders LandingPage in browser or redirects to portal in standalone */}
+        <Route path="/" element={<MainRouter />} />
 
-        {/* Landing page — shown when opened in browser for the first time */}
-        <Route path="/landingpage" element={<LandingPage />} />
-
-        {/* Auth */}
-        <Route path="/login" element={<LoginScreen />} />
+        {/* Auth — redirects to landing page in browser mode if unauthenticated */}
+        <Route path="/login" element={<LoginRoute />} />
 
         {/* Portal splash router */}
         <Route path="/portal" element={<SplashRouter />} />
@@ -178,6 +259,15 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        {/* ─── Super Admin: Fee Recorder dedicated route ─── */}
+        <Route
+          path="/super-admin/fees"
+          element={
+            <ProtectedRoute allowedRoles={['superadmin']}>
+              <FeeRecorder />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/super-admin/*"
           element={
@@ -186,6 +276,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   );

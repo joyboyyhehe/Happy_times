@@ -24,7 +24,7 @@ service cloud.firestore {
     function isBranchAdmin() {
       return isAuthenticated() && 
         exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
-        getUserData().role == 'branchadmin';
+        (getUserData().role == 'branchadmin' || getUserData().role == 'teacher' || getUserData().role == 'staff');
     }
     
     function isParent() {
@@ -43,6 +43,16 @@ service cloud.firestore {
       allow write: if isSuperAdmin();
     }
 
+    // --- /staff_whitelist ---
+    match /staff_whitelist/{email} {
+      allow read: if isAuthenticated() && (
+        (request.auth.token.email != null && request.auth.token.email.lower() == email) ||
+        isSuperAdmin() ||
+        isBranchAdmin()
+      );
+      allow write: if isSuperAdmin();
+    }
+
     // --- /users ---
     match /users/{userId} {
       // Super Admin can do everything
@@ -52,7 +62,7 @@ service cloud.firestore {
       allow read: if isAuthenticated() && (
         request.auth.uid == userId || 
         isStaff() ||
-        (request.auth.token.email != null && resource.data.email == request.auth.token.email) ||
+        (request.auth.token.email != null && resource.data.email.lower() == request.auth.token.email.lower()) ||
         (request.auth.token.phone_number != null && (
           resource.data.phone == request.auth.token.phone_number ||
           request.auth.token.phone_number == '+91' + resource.data.phone
@@ -62,7 +72,7 @@ service cloud.firestore {
       // Let new users link their authenticated account to a pre-created profile
       allow update: if isAuthenticated() && 
         (
-          (request.auth.token.email != null && resource.data.email == request.auth.token.email) ||
+          (request.auth.token.email != null && resource.data.email.lower() == request.auth.token.email.lower()) ||
           (request.auth.token.phone_number != null && (
             resource.data.phone == request.auth.token.phone_number ||
             request.auth.token.phone_number == '+91' + resource.data.phone
@@ -71,8 +81,20 @@ service cloud.firestore {
         request.resource.data.uid == request.auth.uid &&
         request.resource.data.role == resource.data.role;
         
-      // Allow registrations to create temporary parent/user references if needed
-      allow create: if isSuperAdmin(); // Restrict user creation to Super Admins to prevent admin escalation
+      // Allow users to update their own profile safely (e.g. for fcmTokens)
+      allow update: if isAuthenticated() && request.auth.uid == userId &&
+        (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'branchId', 'email', 'phone']));
+        
+      // Allow staff to create their own profile on first login (chicken-and-egg: no doc yet = can't check role)
+      // The whitelist check in the app code ensures only authorized staff reach this write path.
+      allow create: if isAuthenticated() && request.auth.uid == userId && (
+        (request.resource.data.role == 'parent') ||
+        (
+          request.resource.data.role in ['superadmin', 'branchadmin', 'teacher', 'staff'] &&
+          exists(/databases/$(database)/documents/staff_whitelist/$(request.auth.token.email.lower())) &&
+          request.resource.data.role == get(/databases/$(database)/documents/staff_whitelist/$(request.auth.token.email.lower())).data.role
+        )
+      );
     }
 
     // --- /registrations (Public parent registration submissions) ---
@@ -83,16 +105,35 @@ service cloud.firestore {
 
     // --- /students ---
     match /students/{studentId} {
-      allow read: if isAuthenticated(); // Restrict public student access to authenticated sessions only
       allow write: if isSuperAdmin();
-      allow read: if isBranchAdmin() && resource.data.branchId == getUserData().branchId;
-      allow read: if isParent() && request.auth.uid in resource.data.parentUids;
+      allow read: if isAuthenticated() && (
+        isSuperAdmin() ||
+        (isBranchAdmin() && resource.data.branchId == getUserData().branchId) ||
+        (
+          isParent() &&
+          (
+            request.auth.uid in resource.data.parentUids ||
+            request.auth.uid in resource.data.linkedParentIds
+          )
+        )
+      );
       
       // Let parents update their child's record on first login to link parentUids
       allow update: if isAuthenticated() && 
         request.auth.token.phone_number != null &&
         exists(/databases/$(database)/documents/users/$('parent_' + getCleanPhone(request.auth.token.phone_number))) &&
         studentId in get(/databases/$(database)/documents/users/$('parent_' + getCleanPhone(request.auth.token.phone_number))).data.linkedStudentIds;
+
+      // Allow parents to update non-critical profile info for their linked child
+      allow update: if isAuthenticated() && 
+        (
+          request.auth.uid in resource.data.parentUids ||
+          request.auth.uid in resource.data.linkedParentIds
+        ) &&
+        (!request.resource.data.diff(resource.data).affectedKeys().hasAny([
+          'name', 'classId', 'className', 'branchId', 'feeTotal', 'feePaid', 
+          'parentUids', 'linkedParentIds', 'createdAt', 'phone1'
+        ]));
     }
 
     // --- /attendance ---
@@ -137,6 +178,17 @@ service cloud.firestore {
       allow update, delete: if false; // Logs are write-once, immutable
     }
 
+    // --- /critical_logs ---
+    match /critical_logs/{logId} {
+      allow create: if request.auth != null
+        && request.resource.data.category in [
+          'auth_failure', 'attendance_write_failure', 'payment_failure', 'notification_failure',
+          'permission_denied', 'uncaught_exception', 'unhandled_promise_rejection'
+        ];
+      allow read: if isSuperAdmin();
+      allow update, delete: if false; // Immutable logs
+    }
+
     // --- /settings ---
     match /settings/{settingId} {
       allow read: if isAuthenticated();
@@ -154,6 +206,22 @@ service cloud.firestore {
       allow read, write: if isBranchAdmin();
       allow read: if isParent() && 
         (resource == null || request.auth.uid in get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.parentUids);
+    }
+
+    // --- /leaves ---
+    match /leaves/{leaveId} {
+      allow read, write: if isSuperAdmin();
+      allow read, write: if isBranchAdmin() && 
+        (resource == null || resource.data.branchId == getUserData().branchId) &&
+        (request.resource == null || request.resource.data.branchId == getUserData().branchId);
+      allow create: if isParent() && request.resource.data.parentUid == request.auth.uid;
+      allow read: if isParent() && (resource == null || resource.data.parentUid == request.auth.uid);
+    }
+
+    // --- /config ---
+    match /config/{configId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
     }
   }
 }

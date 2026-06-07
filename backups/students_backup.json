@@ -1,0 +1,3338 @@
+[
+  {
+    "id": "ZvhXAqYoxuhdFMMxlTgb",
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "archived": false,
+    "dob": "2024-06-05",
+    "active": true,
+    "classId": "Mont-3",
+    "phone1": "",
+    "updatedBy": "Prathap V",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "name": "Keerthana",
+    "parentUids": [],
+    "className": "Mont-3",
+    "phone2": "",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780631489,
+      "nanoseconds": 425000000
+    }
+  },
+  {
+    "id": "student_a_shambhavi_alse_1780378582450",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780378583,
+      "nanoseconds": 575000000
+    },
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "archived": false,
+    "enrollmentDate": "2026-06-02",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3",
+    "updatedBy": "Prathap V",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "name": "A Shambhavi Alse",
+    "parentUids": [],
+    "className": "Mont-3"
+  },
+  {
+    "id": "student_aaradya_nehana._s_1780577266762",
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667127,
+      "nanoseconds": 179000000
+    },
+    "name": "Aaradya Nehana. S",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 767000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_aarna_meda_1780577409619",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667127,
+      "nanoseconds": 583000000
+    },
+    "name": "Aarna Meda",
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 48000000
+    }
+  },
+  {
+    "id": "student_aazim_syed_1780577266762",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667128,
+      "nanoseconds": 8000000
+    },
+    "name": "Aazim Syed",
+    "parentUids": [],
+    "className": "Mont-2",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 208000000
+    }
+  },
+  {
+    "id": "student_abhinav_surya_kamble_1780577323600",
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 340000000
+    },
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [
+      "jaYqYyqGFUUQ9GJA8JijA2WD9xM2"
+    ],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667128,
+      "nanoseconds": 602000000
+    },
+    "name": "Abhinav Surya Kamble"
+  },
+  {
+    "id": "student_advithi_palguna_1780577266764",
+    "name": "Advithi Palguna",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667129,
+      "nanoseconds": 66000000
+    },
+    "className": "Mont-3",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 227000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar"
+  },
+  {
+    "id": "student_agasthya_santhosh_1780577266764",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 194000000
+    },
+    "name": "Agasthya Santhosh",
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 194000000
+    }
+  },
+  {
+    "id": "student_agasthya_shourya_mahesh_1780577266757",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 602000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667129,
+      "nanoseconds": 482000000
+    },
+    "name": "AGASTHYA SHOURYA MAHESH",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_agastya_acharya_1780577409619",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 362000000
+    },
+    "status": "active",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Agastya Acharya",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 362000000
+    },
+    "className": "Mont-1",
+    "parentUids": []
+  },
+  {
+    "id": "student_aira_deepak_1780577441340",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577441,
+      "nanoseconds": 934000000
+    },
+    "name": "Aira Deepak",
+    "parentUids": [],
+    "className": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577441,
+      "nanoseconds": 934000000
+    },
+    "feePaid": 0,
+    "branchId": "rr-nagar",
+    "feeTotal": 0
+  },
+  {
+    "id": "student_aksha_r_h_1780577409617",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577409,
+      "nanoseconds": 815000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "name": "Aksha R H",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577409,
+      "nanoseconds": 815000000
+    },
+    "className": "Mont-1",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_aleena_a_1780577266763",
+    "name": "Aleena A",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 518000000
+    },
+    "className": "Pre-Mont",
+    "parentUids": [],
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Pre-Mont",
+    "dob": "2021-01-01",
+    "active": true,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 518000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar"
+  },
+  {
+    "id": "student_aprameya_p_1780577323601",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 796000000
+    },
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 796000000
+    },
+    "name": "Aprameya P",
+    "parentUids": [],
+    "className": "Mont-1"
+  },
+  {
+    "id": "student_arihant_jain_1780577266764",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 125000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667129,
+      "nanoseconds": 884000000
+    },
+    "name": "ARIHANT JAIN",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_arvi_a_1780577409619",
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 737000000
+    },
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 737000000
+    },
+    "name": "Arvi A"
+  },
+  {
+    "id": "student_atharva.s.k_1780577441340",
+    "name": "Atharva.S.k",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667130,
+      "nanoseconds": 311000000
+    },
+    "className": "Mont-2",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 118000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "rr-nagar"
+  },
+  {
+    "id": "student_atharva_1780577266763",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 115000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667130,
+      "nanoseconds": 800000000
+    },
+    "name": "Atharva",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_avyanraj_ram_1780577441340",
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "AVYANRAJ RAM",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 17000000
+    },
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 17000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "rr-nagar",
+    "feePaid": 0
+  },
+  {
+    "id": "student_b.dakshit_1780577409617",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 189000000
+    },
+    "name": "B.Dakshit",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 189000000
+    },
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_b.s._ruthvika_1780577266764",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 160000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "name": "B.S. Ruthvika",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 160000000
+    },
+    "className": "Pre-Mont",
+    "parentUids": [],
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Pre-Mont",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_baby1_1779973331090",
+    "phone2": "",
+    "branchId": "chikkalsandra",
+    "bloodGroup": "O+",
+    "status": "active",
+    "createdAt": "2026-05-28T13:02:11.090Z",
+    "gender": "Male",
+    "enrollmentDate": "2026-05-28",
+    "archived": false,
+    "active": true,
+    "dob": "2026-05-13",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780590875,
+      "nanoseconds": 188000000
+    },
+    "name": "baby1",
+    "parentUids": [
+      "e7EqeyNkzjcWJLrwRlg59re5lb32",
+      "AkoyQTW4UIMKQXVCILi1PEHIVvF2"
+    ],
+    "medicalNotes": "",
+    "className": ""
+  },
+  {
+    "id": "student_bhanupriya_1779974900000",
+    "archived": false,
+    "enrollmentDate": "2026-05-28",
+    "active": true,
+    "branchId": "padmanabhanagar",
+    "dob": "2021-01-01",
+    "name": "Bhanupriya",
+    "updatedAt": "2026-05-28T14:19:21Z",
+    "createdAt": "2026-05-28T14:19:21Z",
+    "className": "",
+    "gender": "Female",
+    "status": "active",
+    "parentUids": [
+      "e7EqeyNkzjcWJLrwRlg59re5lb32",
+      "AkoyQTW4UIMKQXVCILi1PEHIVvF2"
+    ]
+  },
+  {
+    "id": "student_bhanupriya_1780577266765",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 450000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 450000000
+    },
+    "name": "Bhanupriya",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_bhargava_deshpande_1780577409619",
+    "classId": "Pre-Mont",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Pre-Mont",
+    "parentUids": [],
+    "name": "Bhargava Deshpande",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 884000000
+    },
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 884000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_bhavish_l_1780577323601",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 277000000
+    },
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "updatedBy": "Prathap V",
+    "name": "Bhavish L",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_bhavishka_l_1780577323601",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 219000000
+    },
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "updatedBy": "Prathap V",
+    "name": "Bhavishka L",
+    "parentUids": [],
+    "className": "Mont-3"
+  },
+  {
+    "id": "student_brahmi_h_1780577266761",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 83000000
+    },
+    "status": "active",
+    "classId": "Mont-1",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Brahmi H",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 83000000
+    }
+  },
+  {
+    "id": "student_charvi_gowda_bs_1780577323601",
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 564000000
+    },
+    "status": "active",
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "className": "Mont-3",
+    "parentUids": [],
+    "name": "Charvi Gowda BS",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "updatedBy": "Prathap V"
+  },
+  {
+    "id": "student_deric_v._jerin_1780577266760",
+    "classId": "Pre-Mont",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Pre-Mont",
+    "parentUids": [],
+    "name": "Deric V. Jerin",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 901000000
+    },
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 901000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_dhanvika_.s_m_1780577323601",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 613000000
+    },
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 613000000
+    },
+    "name": "Dhanvika .S M",
+    "parentUids": [],
+    "className": "Mont-1"
+  },
+  {
+    "id": "student_dhanvisri_sai_chatura_moida_1780577409618",
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "Dhanvisri Sai Chatura Moida",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667132,
+      "nanoseconds": 436000000
+    },
+    "classId": "Mont-2",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 294000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "feePaid": 0
+  },
+  {
+    "id": "student_dhanyashree_c_s_1780577266761",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667132,
+      "nanoseconds": 984000000
+    },
+    "name": "Dhanyashree C S",
+    "parentUids": [],
+    "className": "Mont-3",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 29000000
+    }
+  },
+  {
+    "id": "student_dhwani_a_aithal_1780577409618",
+    "className": "Mont-3",
+    "parentUids": [],
+    "name": "Dhwani A Aithal",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667133,
+      "nanoseconds": 401000000
+    },
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 202000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "feePaid": 0
+  },
+  {
+    "id": "student_dimpana.m_1780577266763",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667133,
+      "nanoseconds": 805000000
+    },
+    "name": "Dimpana.M",
+    "parentUids": [],
+    "className": "Mont-3",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 686000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0
+  },
+  {
+    "id": "student_dushyanth._a_1780577323601",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 47000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667134,
+      "nanoseconds": 203000000
+    },
+    "name": "Dushyanth. A",
+    "parentUids": [],
+    "className": "Mont-2"
+  },
+  {
+    "id": "student_e.k.vedhanth_1780577323601",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 138000000
+    },
+    "name": "E.K.Vedhanth",
+    "parentUids": [],
+    "className": "Mont-1",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 138000000
+    }
+  },
+  {
+    "id": "student_eshanth_br_1780577323601",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 648000000
+    },
+    "name": "Eshanth BR",
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 648000000
+    }
+  },
+  {
+    "id": "student_ethan_kp_1780577441340",
+    "feePaid": 0,
+    "branchId": "rr-nagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577441,
+      "nanoseconds": 983000000
+    },
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577441,
+      "nanoseconds": 983000000
+    },
+    "name": "Ethan KP",
+    "parentUids": [],
+    "className": "Pre-Mont"
+  },
+  {
+    "id": "student_ganishka_harinarayanan_1780577409618",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 443000000
+    },
+    "status": "active",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "GANISHKA Harinarayanan",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667134,
+      "nanoseconds": 625000000
+    },
+    "className": "Mont-2",
+    "parentUids": []
+  },
+  {
+    "id": "student_gaurav_1780577323601",
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 372000000
+    },
+    "status": "active",
+    "classId": "Mont-2",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "Gaurav",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667135,
+      "nanoseconds": 154000000
+    }
+  },
+  {
+    "id": "student_gokul.r_1780577409619",
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667135,
+      "nanoseconds": 581000000
+    },
+    "name": "Gokul.R",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 810000000
+    },
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_hafsa_raunaq_1780577266763",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Hafsa Raunaq",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667135,
+      "nanoseconds": 964000000
+    },
+    "className": "Mont-2",
+    "parentUids": [],
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 962000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_hanvitha_y_1780577323601",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 648000000
+    },
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "updatedBy": "Prathap V",
+    "name": "Hanvitha Y",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_hanvithaa_n_1780577266764",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 16000000
+    },
+    "status": "active",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Hanvithaa N",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667136,
+      "nanoseconds": 782000000
+    },
+    "className": "Mont-3",
+    "parentUids": []
+  },
+  {
+    "id": "student_heshika_i_1780577266765",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 690000000
+    },
+    "name": "Heshika I",
+    "parentUids": [],
+    "className": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 690000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0
+  },
+  {
+    "id": "student_heyan_manjunath_1780577409618",
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 261000000
+    },
+    "status": "active",
+    "classId": "Mont-1",
+    "dob": "2021-01-01",
+    "active": true,
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Heyan Manjunath",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 261000000
+    }
+  },
+  {
+    "id": "student_hitha_v_1780577266762",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 879000000
+    },
+    "status": "active",
+    "classId": "Mont-1",
+    "dob": "2021-01-01",
+    "active": true,
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Hitha V",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 879000000
+    }
+  },
+  {
+    "id": "student_iraa_mansi_1780577441340",
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "Iraa Mansi",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667137,
+      "nanoseconds": 175000000
+    },
+    "classId": "Mont-2",
+    "dob": "2021-01-01",
+    "active": true,
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 152000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "rr-nagar",
+    "feePaid": 0
+  },
+  {
+    "id": "student_jaishnav_j_prasad_1780577323601",
+    "className": "Pre-Mont",
+    "parentUids": [],
+    "name": "Jaishnav J Prasad",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 731000000
+    },
+    "classId": "Pre-Mont",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 731000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "feePaid": 0
+  },
+  {
+    "id": "student_jaisvi_ramidi_1780577323599",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577323,
+      "nanoseconds": 784000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "feePaid": 0,
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "Jaisvi Ramidi",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667137,
+      "nanoseconds": 622000000
+    },
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_jashvik_u_1780577266763",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 70000000
+    },
+    "status": "active",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Jashvik U",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667138,
+      "nanoseconds": 197000000
+    },
+    "className": "Mont-3",
+    "parentUids": []
+  },
+  {
+    "id": "student_jathin_1780577441340",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 201000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "rr-nagar",
+    "name": "Jathin",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 201000000
+    },
+    "className": "Mont-1",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_jayadev_yeshwanth_1780577266762",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667138,
+      "nanoseconds": 675000000
+    },
+    "name": "Jayadev Yeshwanth",
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 539000000
+    }
+  },
+  {
+    "id": "student_jeevan_gv_1780577266764",
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667139,
+      "nanoseconds": 164000000
+    },
+    "name": "Jeevan GV",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 69000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_jeshwanth_kumar.k_1780577266765",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 811000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667139,
+      "nanoseconds": 598000000
+    },
+    "name": "Jeshwanth Kumar.K",
+    "parentUids": [],
+    "className": "Mont-3"
+  },
+  {
+    "id": "student_jhaswitha_.a_1780577266765",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 514000000
+    },
+    "status": "active",
+    "classId": "Mont-2",
+    "dob": "2021-01-01",
+    "active": true,
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "Jhaswitha .A",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667140,
+      "nanoseconds": 78000000
+    }
+  },
+  {
+    "id": "student_joshvin_suriy_1780577266764",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 849000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 849000000
+    },
+    "name": "Joshvin Suriy",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_karnika_heranjal_1780577409618",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 588000000
+    },
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667140,
+      "nanoseconds": 590000000
+    },
+    "name": "KARNIKA HERANJAL",
+    "parentUids": [],
+    "className": "Mont-2",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2"
+  },
+  {
+    "id": "student_karunya_ashok_1780577409619",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Karunya Ashok",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667141,
+      "nanoseconds": 182000000
+    },
+    "className": "Mont-2",
+    "parentUids": [],
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 194000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_kiashvi_k_1780577266761",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-3",
+    "dob": "2021-01-01",
+    "active": true,
+    "name": "Kiashvi K",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667141,
+      "nanoseconds": 551000000
+    },
+    "className": "Mont-3",
+    "parentUids": [],
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 975000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_kirthan_raj_c_1780577409619",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 352000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "name": "Kirthan Raj C",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667141,
+      "nanoseconds": 947000000
+    },
+    "className": "Mont-2",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_kritarth._k.h_1780577409619",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 510000000
+    },
+    "name": "Kritarth. K.H",
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 510000000
+    }
+  },
+  {
+    "id": "student_kruthi_i_1780577409619",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667142,
+      "nanoseconds": 378000000
+    },
+    "name": "Kruthi I",
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 116000000
+    }
+  },
+  {
+    "id": "student_kshama_nayak_1780577323601",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 975000000
+    },
+    "name": "Kshama Nayak",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 975000000
+    },
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_kushi.s_1780577409618",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 945000000
+    },
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667142,
+      "nanoseconds": 795000000
+    },
+    "name": "Kushi.S",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "archived": false,
+    "enrollmentDate": "2026-06-04"
+  },
+  {
+    "id": "student_lenisha_sahoo_1780577323601",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 428000000
+    },
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 428000000
+    },
+    "name": "Lenisha Sahoo",
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont"
+  },
+  {
+    "id": "student_maanya._c_1780577266765",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577272,
+      "nanoseconds": 18000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577272,
+      "nanoseconds": 18000000
+    },
+    "name": "Maanya. C",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Pre-Mont",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_mitiksha_pr_1780577409618",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667143,
+      "nanoseconds": 188000000
+    },
+    "name": "Mitiksha PR",
+    "parentUids": [],
+    "className": "Mont-3",
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 524000000
+    }
+  },
+  {
+    "id": "student_mukalla_ranvit_kumar_1780577266763",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 364000000
+    },
+    "name": "Mukalla Ranvit Kumar",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 364000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_naivedya_parhi_1780577266762",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 439000000
+    },
+    "status": "active",
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "NAIVEDYA PARHI",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 439000000
+    }
+  },
+  {
+    "id": "student_naksh_karpoor_1780577409619",
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 494000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667143,
+      "nanoseconds": 578000000
+    },
+    "name": "Naksh Karpoor",
+    "parentUids": [],
+    "className": "Mont-3"
+  },
+  {
+    "id": "student_nayonila_1780577441340",
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Nayonila",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 319000000
+    },
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 319000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "rr-nagar",
+    "feePaid": 0
+  },
+  {
+    "id": "student_neel_hari_1780577266763",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 453000000
+    },
+    "name": "Neel Hari",
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 453000000
+    }
+  },
+  {
+    "id": "student_nimish_virat_1780577409618",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 620000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "feePaid": 0,
+    "className": "Mont-3",
+    "parentUids": [],
+    "name": "Nimish Virat",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667143,
+      "nanoseconds": 970000000
+    },
+    "classId": "Mont-3",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_nishika_g_1780577323601",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 189000000
+    },
+    "name": "Nishika G",
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 189000000
+    }
+  },
+  {
+    "id": "student_nishit_surya_.g_1780577266760",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 694000000
+    },
+    "status": "active",
+    "classId": "Mont-3",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-3",
+    "parentUids": [],
+    "name": "Nishit Surya .G",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667144,
+      "nanoseconds": 434000000
+    }
+  },
+  {
+    "id": "student_nishvika_p_n_1780577323601",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 551000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "name": "Nishvika P N",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "updatedBy": "Prathap V",
+    "className": "Mont-3",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_parineetha_p_bhavimane_1780577266760",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 818000000
+    },
+    "status": "active",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Parineetha P Bhavimane",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667145,
+      "nanoseconds": 330000000
+    },
+    "className": "Mont-3",
+    "parentUids": []
+  },
+  {
+    "id": "student_parthishwari_shivani_b_1780577323600",
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "PARTHISHWARI SHIVANI B",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667145,
+      "nanoseconds": 739000000
+    },
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 283000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_pooja_1779984167925",
+    "enrollmentDate": "2026-05-28",
+    "archived": false,
+    "classId": "Mont-3",
+    "dob": "2021-01-01",
+    "active": true,
+    "name": "Pooja",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667146,
+      "nanoseconds": 136000000
+    },
+    "className": "Mont-3",
+    "parentUids": [
+      "OpKFmBu9t8XvGR9WaUWKwcK0Nuk2"
+    ],
+    "branchId": "padmanabhanagar",
+    "gender": "Male",
+    "createdAt": "2026-05-28T16:02:47.925Z",
+    "status": "active"
+  },
+  {
+    "id": "student_prajwal_m_1780577266760",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577268,
+      "nanoseconds": 729000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667146,
+      "nanoseconds": 548000000
+    },
+    "name": "Prajwal M",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_pramati_u._k_1780577323602",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Pramati U. K",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667146,
+      "nanoseconds": 953000000
+    },
+    "className": "Mont-2",
+    "parentUids": [],
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577326,
+      "nanoseconds": 25000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_prathap_1779981275378",
+    "dob": "2021-01-01",
+    "branchId": "outer-ring-road",
+    "active": true,
+    "enrollmentDate": "2026-05-28",
+    "archived": false,
+    "gender": "Male",
+    "createdAt": "2026-05-28T15:14:35.378Z",
+    "className": "",
+    "parentUids": [
+      "AkoyQTW4UIMKQXVCILi1PEHIVvF2",
+      "e7EqeyNkzjcWJLrwRlg59re5lb32"
+    ],
+    "status": "active",
+    "name": "Prathap",
+    "updatedAt": "2026-05-28T15:14:35.378Z"
+  },
+  {
+    "id": "student_preksha_mk_1780577266761",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667147,
+      "nanoseconds": 348000000
+    },
+    "name": "Preksha Mk",
+    "parentUids": [],
+    "className": "Mont-2",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 147000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0
+  },
+  {
+    "id": "student_r_venkata_mokshith_1780577266765",
+    "name": "R Venkata Mokshith",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667147,
+      "nanoseconds": 745000000
+    },
+    "className": "Mont-3",
+    "parentUids": [],
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 842000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar"
+  },
+  {
+    "id": "student_reegan_george.t_1780577409618",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667148,
+      "nanoseconds": 233000000
+    },
+    "name": "Reegan George.T",
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 10000000
+    }
+  },
+  {
+    "id": "student_reyansh_1780577409619",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 247000000
+    },
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 247000000
+    },
+    "name": "Reyansh",
+    "parentUids": [],
+    "className": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1"
+  },
+  {
+    "id": "student_ridhi_m_1780577323601",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 697000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "name": "Ridhi M",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 697000000
+    },
+    "className": "Mont-1",
+    "parentUids": [],
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_rishank_samarth_1780577323601",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 825000000
+    },
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 825000000
+    },
+    "name": "Rishank Samarth",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04"
+  },
+  {
+    "id": "student_s._dheeraj_1780577323600",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 495000000
+    },
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 495000000
+    },
+    "name": "S. Dheeraj",
+    "parentUids": [],
+    "className": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1"
+  },
+  {
+    "id": "student_saanvi._s_1780577266763",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 743000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667148,
+      "nanoseconds": 665000000
+    },
+    "name": "Saanvi. S",
+    "parentUids": [],
+    "className": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2"
+  },
+  {
+    "id": "student_shanwik_m_1780577266763",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 177000000
+    },
+    "status": "active",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-2",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Shanwik M",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667149,
+      "nanoseconds": 157000000
+    },
+    "className": "Mont-2",
+    "parentUids": []
+  },
+  {
+    "id": "student_shivani_r_1780577266763",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 39000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "name": "Shivani R",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 39000000
+    },
+    "className": "Mont-1",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_shree_bhagya_patil_1780577323600",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 450000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "name": "Shree Bhagya Patil",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "updatedBy": "Prathap V",
+    "className": "Mont-3",
+    "parentUids": [],
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01"
+  },
+  {
+    "id": "student_shriijaa_shrinivas_1780577266763",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 421000000
+    },
+    "status": "active",
+    "classId": "Mont-2",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-2",
+    "parentUids": [],
+    "name": "Shriijaa Shrinivas",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667150,
+      "nanoseconds": 172000000
+    }
+  },
+  {
+    "id": "student_shrinika_c_1780577266761",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667150,
+      "nanoseconds": 607000000
+    },
+    "name": "Shrinika C",
+    "parentUids": [],
+    "className": "Mont-2",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 178000000
+    }
+  },
+  {
+    "id": "student_shrita_s_miraskar_1780577409618",
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 883000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667151,
+      "nanoseconds": 156000000
+    },
+    "name": "Shrita S Miraskar",
+    "parentUids": [],
+    "className": "Mont-2"
+  },
+  {
+    "id": "student_shriyan_pavan_kagalkar_1780577441340",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 366000000
+    },
+    "feePaid": 0,
+    "branchId": "rr-nagar",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667151,
+      "nanoseconds": 577000000
+    },
+    "name": "Shriyan  Pavan Kagalkar",
+    "parentUids": [],
+    "className": "Mont-3",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3"
+  },
+  {
+    "id": "student_spatika_n_1780577266765",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667152,
+      "nanoseconds": 114000000
+    },
+    "name": "Spatika N",
+    "parentUids": [],
+    "className": "Mont-3",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-3",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 883000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0
+  },
+  {
+    "id": "student_suhrit_krishna_1780577323601",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 325000000
+    },
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 325000000
+    },
+    "name": "Suhrit Krishna",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Pre-Mont",
+    "archived": false,
+    "enrollmentDate": "2026-06-04"
+  },
+  {
+    "id": "student_tanish_s_gowda_1780577266765",
+    "classId": "Mont-3",
+    "dob": "2021-01-01",
+    "active": true,
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "className": "Mont-3",
+    "parentUids": [],
+    "name": "TANISH S GOWDA",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667152,
+      "nanoseconds": 559000000
+    },
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 976000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_tannistha_kumar_1780577266763",
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Tannistha Kumar",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 486000000
+    },
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 486000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0
+  },
+  {
+    "id": "student_tanvik_yr_1780577409619",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 553000000
+    },
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667152,
+      "nanoseconds": 958000000
+    },
+    "name": "Tanvik YR",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3",
+    "archived": false,
+    "enrollmentDate": "2026-06-04"
+  },
+  {
+    "id": "student_tarak_agastya_1780577441340",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Pre-Mont",
+    "dob": "2021-01-01",
+    "active": true,
+    "name": "Tarak Agastya",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 64000000
+    },
+    "className": "Pre-Mont",
+    "parentUids": [],
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "rr-nagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 64000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_test2_1779973329681",
+    "feeTotal": 35000,
+    "branchId": "padmanabhanagar",
+    "feePaid": 7300,
+    "gender": "Male",
+    "createdAt": "2026-05-28T13:02:09.681Z",
+    "status": "active",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-05-28",
+    "archived": false,
+    "className": "",
+    "parentUids": [
+      "e7EqeyNkzjcWJLrwRlg59re5lb32"
+    ],
+    "name": "test2",
+    "updatedAt": "2026-05-28T13:02:09.681Z"
+  },
+  {
+    "id": "student_test_1",
+    "dob": "2021-05-15",
+    "branchId": "padmanabhanagar",
+    "active": true,
+    "archived": false,
+    "enrollmentDate": "2025-06-01",
+    "gender": "Male",
+    "createdAt": "2026-05-28T11:07:07.945Z",
+    "className": "",
+    "parentUids": [],
+    "status": "active",
+    "name": "Aarav Kumar"
+  },
+  {
+    "id": "student_thaanya_h_r_1780577266762",
+    "name": "Thaanya H R",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 383000000
+    },
+    "className": "Mont-1",
+    "parentUids": [],
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 383000000
+    },
+    "status": "active",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar"
+  },
+  {
+    "id": "student_thananya_prabhakaran_1780577266764",
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 334000000
+    },
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-2",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "parentUids": [],
+    "className": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667153,
+      "nanoseconds": 436000000
+    },
+    "name": "Thananya Prabhakaran"
+  },
+  {
+    "id": "student_tharun_vinod_1780577409618",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 678000000
+    },
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577410,
+      "nanoseconds": 678000000
+    },
+    "name": "Tharun Vinod",
+    "parentUids": [],
+    "className": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1"
+  },
+  {
+    "id": "student_tharushi_manjunath_1780577409619",
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 317000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 317000000
+    },
+    "name": "Tharushi Manjunath",
+    "parentUids": [],
+    "className": "Mont-1"
+  },
+  {
+    "id": "student_tridha_k_1780577441339",
+    "branchId": "rr-nagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577441,
+      "nanoseconds": 539000000
+    },
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577441,
+      "nanoseconds": 539000000
+    },
+    "name": "TRIDHA K"
+  },
+  {
+    "id": "student_unnathi_a_1780577409619",
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 295000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 295000000
+    },
+    "name": "Unnathi A",
+    "parentUids": [],
+    "className": "Mont-1"
+  },
+  {
+    "id": "student_v_k_eekshith_1780577409619",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 845000000
+    },
+    "name": "V K Eekshith",
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 845000000
+    }
+  },
+  {
+    "id": "student_vainavi_nv_1780577323602",
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577326,
+      "nanoseconds": 56000000
+    },
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577326,
+      "nanoseconds": 56000000
+    },
+    "name": "VAINAVI NV"
+  },
+  {
+    "id": "student_vardhan_s_v_1780577266762",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 821000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667153,
+      "nanoseconds": 892000000
+    },
+    "name": "Vardhan S V",
+    "parentUids": [],
+    "className": "Mont-3",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3"
+  },
+  {
+    "id": "student_varshith_1780577323600",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 389000000
+    },
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667154,
+      "nanoseconds": 352000000
+    },
+    "name": "Varshith",
+    "parentUids": [],
+    "className": "Mont-2"
+  },
+  {
+    "id": "student_vasuki_p_1780577323601",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 745000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "outer-ring-road",
+    "feePaid": 0,
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Vasuki P",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 745000000
+    },
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false
+  },
+  {
+    "id": "student_vedanth_basavaraja_gowdru_1780577323601",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 701000000
+    },
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667155,
+      "nanoseconds": 317000000
+    },
+    "name": "Vedanth Basavaraja Gowdru",
+    "parentUids": [],
+    "className": "Mont-2"
+  },
+  {
+    "id": "student_vedanth_k_1780577441340",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "rr-nagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 256000000
+    },
+    "status": "active",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "classId": "Mont-1",
+    "dob": "2021-01-01",
+    "active": true,
+    "name": "Vedanth K",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577442,
+      "nanoseconds": 256000000
+    },
+    "className": "Mont-1",
+    "parentUids": []
+  },
+  {
+    "id": "student_vedika_mallya_k_1780577409619",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-2",
+    "dob": "2021-01-01",
+    "active": true,
+    "name": "Vedika Mallya K",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667155,
+      "nanoseconds": 736000000
+    },
+    "className": "Mont-2",
+    "parentUids": [],
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 388000000
+    },
+    "status": "active"
+  },
+  {
+    "id": "student_veditha_c_r_1780577266765",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-2",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667156,
+      "nanoseconds": 126000000
+    },
+    "name": "Veditha C R",
+    "parentUids": [],
+    "className": "Mont-2",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 724000000
+    }
+  },
+  {
+    "id": "student_vihaan_chandrushekar_1780577409619",
+    "feeTotal": 0,
+    "branchId": "chikkalsandra",
+    "feePaid": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 476000000
+    },
+    "status": "active",
+    "classId": "Mont-1",
+    "dob": "2021-01-01",
+    "active": true,
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Vihaan Chandrushekar",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 476000000
+    }
+  },
+  {
+    "id": "student_vihaan_r_rao_1780577266763",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 571000000
+    },
+    "name": "Vihaan R Rao",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 571000000
+    },
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0
+  },
+  {
+    "id": "student_vishruth_vasishta_v_1780577409619",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "parentUids": [],
+    "className": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 263000000
+    },
+    "name": "Vishruth Vasishta V",
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577412,
+      "nanoseconds": 263000000
+    }
+  },
+  {
+    "id": "student_vismayi_.s.hunnur_1780577323601",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577325,
+      "nanoseconds": 0
+    },
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "updatedBy": "Prathap V",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 279000000
+    },
+    "name": "Vismayi .S.Hunnur",
+    "parentUids": [],
+    "className": "Mont-3",
+    "updatedByUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Mont-3"
+  },
+  {
+    "id": "student_viviktha_v_kalkur_1780577409618",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 44000000
+    },
+    "feePaid": 0,
+    "branchId": "chikkalsandra",
+    "feeTotal": 0,
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577411,
+      "nanoseconds": 44000000
+    },
+    "name": "Viviktha V Kalkur",
+    "parentUids": [],
+    "className": "Mont-1",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1"
+  },
+  {
+    "id": "student_y_shiv_nikhil_1780577266762",
+    "className": "Mont-1",
+    "parentUids": [],
+    "name": "Y Shiv Nikhil",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 931000000
+    },
+    "classId": "Mont-1",
+    "active": true,
+    "dob": "2021-01-01",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 931000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0
+  },
+  {
+    "id": "student_yakshit_s_1780577323600",
+    "feePaid": 0,
+    "branchId": "outer-ring-road",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 419000000
+    },
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577324,
+      "nanoseconds": 419000000
+    },
+    "name": "Yakshit S",
+    "parentUids": [],
+    "className": "Pre-Mont"
+  },
+  {
+    "id": "student_yoshna_j_1780577266762",
+    "feePaid": 0,
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 710000000
+    },
+    "status": "active",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "name": "Yoshna J",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667157,
+      "nanoseconds": 26000000
+    },
+    "className": "Mont-3",
+    "parentUids": []
+  },
+  {
+    "id": "student_yoshna_j_1780577266765",
+    "className": "Mont-3",
+    "parentUids": [],
+    "name": "Yoshna J",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780667157,
+      "nanoseconds": 425000000
+    },
+    "classId": "Mont-3",
+    "active": true,
+    "dob": "2021-01-01",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 657000000
+    },
+    "status": "active",
+    "feeTotal": 0,
+    "branchId": "padmanabhanagar",
+    "feePaid": 0
+  },
+  {
+    "id": "student_yukthashree_e_1780577266765",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 564000000
+    },
+    "name": "Yukthashree E",
+    "parentUids": [],
+    "className": "Mont-1",
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577271,
+      "nanoseconds": 564000000
+    }
+  },
+  {
+    "id": "student_yunay_r_1780577266764",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 786000000
+    },
+    "name": "Yunay R",
+    "parentUids": [],
+    "className": "Mont-1",
+    "archived": false,
+    "enrollmentDate": "2026-06-04",
+    "active": true,
+    "dob": "2021-01-01",
+    "classId": "Mont-1",
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577270,
+      "nanoseconds": 786000000
+    },
+    "feePaid": 0,
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0
+  },
+  {
+    "id": "student_yuvaan_thejesh_1780577266762",
+    "dob": "2021-01-01",
+    "active": true,
+    "classId": "Pre-Mont",
+    "enrollmentDate": "2026-06-04",
+    "archived": false,
+    "parentUids": [],
+    "className": "Pre-Mont",
+    "updatedAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 474000000
+    },
+    "name": "Yuvaan Thejesh",
+    "branchId": "padmanabhanagar",
+    "feeTotal": 0,
+    "feePaid": 0,
+    "status": "active",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780577269,
+      "nanoseconds": 474000000
+    }
+  }
+]

@@ -1,0 +1,209 @@
+[
+  {
+    "id": "1wRaaju6Usdh1FUxuBdN",
+    "title": "Test Class Notification",
+    "className": "",
+    "body": "This is a test to check if Cloud Functions pick up the class token.",
+    "branchId": "padmanabhanagar",
+    "category": "General",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587445,
+      "nanoseconds": 757000000
+    },
+    "classId": "Mont-3",
+    "authorUid": "ONxkwqnu8wapM7zhuhuQrWVDNXf1",
+    "scope": "class",
+    "authorName": "Admin Test"
+  },
+  {
+    "id": "3yKVrtR60056SGNoWyXP",
+    "body": "This is a test to check if Cloud Functions pick up the parent token.",
+    "title": "Test Notification Trigger",
+    "scope": "all",
+    "authorName": "Admin Test",
+    "authorUid": "ONxkwqnu8wapM7zhuhuQrWVDNXf1",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587123,
+      "nanoseconds": 118000000
+    },
+    "classId": null,
+    "branchId": null,
+    "category": "General"
+  },
+  {
+    "id": "AywgQfPluQLcEFG5meWH",
+    "authorName": "Prathap V",
+    "scope": "branch",
+    "authorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "classId": null,
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780724336,
+      "nanoseconds": 997000000
+    },
+    "branchId": "chikkalsandra",
+    "category": "Circular",
+    "body": "awdsaeagwsdwad",
+    "title": "awdsadw",
+    "className": null,
+    "imageUrls": []
+  },
+  {
+    "id": "RClD3YtPoAnjC2bGsGeU",
+    "authorUid": "ONxkwqnu8wapM7zhuhuQrWVDNXf1",
+    "scope": "class",
+    "authorName": "Admin Test",
+    "branchId": "padmanabhanagar",
+    "category": "General",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587653,
+      "nanoseconds": 116000000
+    },
+    "classId": "Mont-3",
+    "body": "This is a test to check if Cloud Functions pick up the token from the user document.",
+    "title": "Test User Doc Fields Notification",
+    "className": ""
+  },
+  {
+    "id": "bkBBtptSC60AXZQp7IOi",
+    "body": "This is a test to check if Cloud Functions pick up the branch token.",
+    "title": "Test Branch Notification",
+    "authorUid": "ONxkwqnu8wapM7zhuhuQrWVDNXf1",
+    "authorName": "Admin Test",
+    "scope": "branch",
+    "category": "General",
+    "branchId": "padmanabhanagar",
+    "classId": null,
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587445,
+      "nanoseconds": 333000000
+    }
+  },
+  {
+    "id": "d7rNsyejKLxgba0H87cP",
+    "body": "Dead body ",
+    "title": "Keerthana is sick",
+    "className": "Mont-3",
+    "imageUrls": [],
+    "authorUid": "4xQ2dBGZr5TWpDaECVPGq1U2kih2",
+    "authorName": "Jesima Sulaika",
+    "scope": "class",
+    "branchId": "outer-ring-road",
+    "category": "Holiday",
+    "classId": "Mont-3",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780632087,
+      "nanoseconds": 897000000
+    }
+  },
+  {
+    "id": "dKQdDfjeDbx7nJKl6QB1",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780588925,
+      "nanoseconds": 761000000
+    },
+    "classId": "Mont-3",
+    "branchId": "padmanabhanagar",
+    "category": "announcement",
+    "scope": "class",
+    "authorName": "Admin Test",
+    "authorUid": "ONxkwqnu8wapM7zhuhuQrWVDNXf1",
+    "imageUrls": [],
+    "title": "Verification Announcement Class",
+    "className": "Mont-3",
+    "body": "This announcement verifies the new className post filtering logic works."
+  },
+  {
+    "id": "ic5Gyum3ZcAdazM4Nptf",
+    "body": "recived???",
+    "title": "test",
+    "imageUrls": [],
+    "authorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "authorName": "Prathap V",
+    "scope": "branch",
+    "branchId": "chikkalsandra",
+    "category": "General",
+    "classId": null,
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780590352,
+      "nanoseconds": 497000000
+    }
+  },
+  {
+    "id": "icjPCF5URWx7i8dqJPTg",
+    "authorName": "Prathap V",
+    "scope": "branch",
+    "authorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "classId": "Mont-1",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587592,
+      "nanoseconds": 540000000
+    },
+    "branchId": "chikkalsandra",
+    "category": "General",
+    "body": "working?",
+    "title": "notification test message",
+    "className": "",
+    "imageUrls": []
+  },
+  {
+    "id": "kqG1dFwp0wmHwS9Zvgll",
+    "authorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "authorName": "Prathap V",
+    "scope": "all",
+    "branchId": null,
+    "category": "General",
+    "classId": null,
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780503292,
+      "nanoseconds": 288000000
+    },
+    "body": "bring bag to school",
+    "title": "test message",
+    "imageUrls": []
+  },
+  {
+    "id": "nkRFUYqDmcv6ngj55SuQ",
+    "branchId": "padmanabhanagar",
+    "category": "General",
+    "classId": "Mont-3",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587521,
+      "nanoseconds": 628000000
+    },
+    "authorUid": "ONxkwqnu8wapM7zhuhuQrWVDNXf1",
+    "authorName": "Admin Test",
+    "scope": "class",
+    "title": "Test Fields Notification",
+    "className": "",
+    "body": "This is a test to check if Cloud Functions pick up the token with fields."
+  },
+  {
+    "id": "wgFFYxPdATJKGQRV5d9i",
+    "body": "Everyone wear an green outfit on 5th June 2026.",
+    "imageUrls": [
+      "https://firebasestorage.googleapis.com/v0/b/happytimes-preschool-pwa.firebasestorage.app/o/posts%2F1780204382780_1000050115.jpg?alt=media&token=4727469a-abf9-469e-92e6-9a774220bb2b"
+    ],
+    "title": "Green day",
+    "className": null,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780204388,
+      "nanoseconds": 843000000
+    },
+    "authorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "authorName": "Prathap Admin",
+    "category": "announcement",
+    "branchId": "all"
+  }
+]

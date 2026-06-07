@@ -42,13 +42,13 @@ async function seedAttendance() {
     {
       studentId: 'student_test2_1779973329681',
       branchId: 'padmanabhanagar',
-      className: 'LKG',
+      className: 'Mont-1',
       status: 'present'
     },
     {
       studentId: 'student_baby1_1779973331090',
       branchId: 'chikkalsandra',
-      className: 'Playgroup',
+      className: 'Pre-Mont',
       status: 'late'
     }
   ];

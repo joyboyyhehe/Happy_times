@@ -1,0 +1,842 @@
+[
+  {
+    "id": "1LwG644jdQeo5YTFNg3T",
+    "action": "student_add",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "targetId": "ZvhXAqYoxuhdFMMxlTgb",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780631490,
+      "nanoseconds": 456000000
+    },
+    "details": "Added new student \"Keerthana\"",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "student_add",
+    "actorName": "Prathap V",
+    "target": {
+      "name": "Keerthana",
+      "studentId": "ZvhXAqYoxuhdFMMxlTgb"
+    },
+    "targetType": "student"
+  },
+  {
+    "id": "3TRuhW8lM8bdJnALJQ9y",
+    "details": "Published announcement \"test message\"",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "post_create",
+    "actorName": "Prathap V",
+    "target": {
+      "title": "test message",
+      "postId": "kqG1dFwp0wmHwS9Zvgll"
+    },
+    "targetType": "post",
+    "action": "post_create",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "branchId": null,
+    "targetId": "kqG1dFwp0wmHwS9Zvgll",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780503293,
+      "nanoseconds": 110000000
+    }
+  },
+  {
+    "id": "4H2x9GaEdy3zZyNBr9XX",
+    "details": "Marked attendance for chikkalsandra - Playgroup. Present: 1, Absent: 0, Late: 0",
+    "actorName": "Prathap Admin",
+    "targetType": "attendance",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "attendance_marked",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780206096,
+      "nanoseconds": 964000000
+    },
+    "targetId": "chikkalsandra_Playgroup_2026-05-31",
+    "branchId": "chikkalsandra",
+    "actorRole": "superadmin"
+  },
+  {
+    "id": "7tDEolJyKK6wuRpst8hV",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "post_deleted",
+    "branchId": "padmanabhanagar",
+    "targetId": "BvtZY7lxM5mqIL1dzvQ5",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779979394,
+      "nanoseconds": 203000000
+    },
+    "details": "Deleted announcement \"Hsysh\"",
+    "actorName": "Prathap Admin",
+    "targetType": "post"
+  },
+  {
+    "id": "9YT0OVdtdYqKNNQTbeYN",
+    "details": "Updated profile details for student (ID: student_baby1_1779973331090)",
+    "actionType": "student_update",
+    "actorEmail": null,
+    "actorName": "Prathap V",
+    "target": {
+      "studentId": "student_baby1_1779973331090"
+    },
+    "targetType": "student",
+    "action": "student_update",
+    "actorUid": "AkoyQTW4UIMKQXVCILi1PEHIVvF2",
+    "branchId": null,
+    "targetId": "student_baby1_1779973331090",
+    "actorRole": "parent",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780590876,
+      "nanoseconds": 381000000
+    }
+  },
+  {
+    "id": "A7Yv42JjHEPpYndY115z",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "fee_total_set",
+    "details": "Updated total fee for student (ID: student_test2_1779973329681) to ₹35,000",
+    "actorName": "Prathap V",
+    "targetType": "fee",
+    "target": {
+      "total": 35000,
+      "studentId": "student_test2_1779973329681"
+    },
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "fee_total_set",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780502309,
+      "nanoseconds": 463000000
+    },
+    "actorRole": "superadmin",
+    "targetId": "student_test2_1779973329681",
+    "branchId": null
+  },
+  {
+    "id": "CJQUruBtOr501m87vkq4",
+    "action": "settings_updated",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "targetId": "global",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978145,
+      "nanoseconds": 448000000
+    },
+    "details": "Changed global attendance lock time limit to 05:00 via Settings Panel",
+    "targetType": "settings",
+    "actorName": "Prathap Admin"
+  },
+  {
+    "id": "CVckzZJXG6B3WlKHazix",
+    "actorName": "Prathap Admin",
+    "targetType": "fee",
+    "details": "Updated total fee for Bhanupriya to ₹35,000",
+    "targetId": "fee_student_bhanupriya_1779974900000",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780218417,
+      "nanoseconds": 315000000
+    },
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "fee_total_updated"
+  },
+  {
+    "id": "D7IQZfr1XawxDhlrLnzc",
+    "actorName": "Prathap Admin",
+    "targetType": "attendance",
+    "details": "Marked attendance for padmanabhanagar - Nursery. Present: 1, Absent: 0, Late: 0",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978256,
+      "nanoseconds": 800000000
+    },
+    "targetId": "padmanabhanagar_Nursery_2026-05-28",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "attendance_marked"
+  },
+  {
+    "id": "FHSzVRPrHdrV1EuzZENj",
+    "actorName": "Prathap V",
+    "target": {
+      "dueDate": null,
+      "classId": "Mont-3",
+      "feeAmount": 48000,
+      "branchId": "outer-ring-road",
+      "affectedCount": 9
+    },
+    "targetType": "fee",
+    "details": "Bulk updated fee configuration for 9 students in Mont-3 (Outer Ring Road). Fee: ₹48,000, Due Date: unchanged",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "fee_bulk_set",
+    "actorRole": "superadmin",
+    "targetId": "global",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671853,
+      "nanoseconds": 371000000
+    },
+    "action": "fee_bulk_set",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13"
+  },
+  {
+    "id": "FRhqVPZ1m3M2xUamIxwk",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "user_role_update",
+    "details": "Updated role for user (ID: pv561837@gmail.com) to branchadmin for branch chikkalsandra",
+    "targetType": "users",
+    "target": {
+      "role": "branchadmin",
+      "branchId": "chikkalsandra",
+      "userId": "pv561837@gmail.com"
+    },
+    "actorName": "Prathap V",
+    "action": "user_role_update",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780659899,
+      "nanoseconds": 231000000
+    },
+    "actorRole": "superadmin",
+    "branchId": "chikkalsandra",
+    "targetId": "pv561837@gmail.com"
+  },
+  {
+    "id": "G2Np2PUjAECdxaC8a4Oy",
+    "actorName": "Prathap Admin",
+    "targetType": "users",
+    "details": "Revoked whitelisted staff access for \"Happy Times Super Admin\"",
+    "targetId": "super_admin_seed",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978174,
+      "nanoseconds": 36000000
+    },
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "user_deleted"
+  },
+  {
+    "id": "G7jjc4rVU1sXeLjww54b",
+    "details": "Bulk updated fee configuration for 9 students in Mont-3 (Outer Ring Road). Fee: ₹0, Due Date: unchanged",
+    "actionType": "fee_bulk_set",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actorName": "Prathap V",
+    "target": {
+      "branchId": "outer-ring-road",
+      "dueDate": null,
+      "classId": "Mont-3",
+      "feeAmount": 0,
+      "affectedCount": 9
+    },
+    "targetType": "fee",
+    "action": "fee_bulk_set",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "targetId": "global",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671864,
+      "nanoseconds": 697000000
+    }
+  },
+  {
+    "id": "GlyfvXwOMFZKZoZHes7o",
+    "details": "Updated total fee for baby1 to ₹35,000",
+    "targetType": "fee",
+    "actorName": "Prathap Admin",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "fee_total_updated",
+    "actorRole": "superadmin",
+    "branchId": "chikkalsandra",
+    "targetId": "fee_student_baby1_1779973331090",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978213,
+      "nanoseconds": 662000000
+    }
+  },
+  {
+    "id": "HFfkkULRbwxyFLRkftGm",
+    "action": "user_role_update",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780660111,
+      "nanoseconds": 665000000
+    },
+    "actorRole": "superadmin",
+    "branchId": null,
+    "targetId": "littlejuniordpspreschool@gmail.com",
+    "actionType": "user_role_update",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "details": "Updated role for user (ID: littlejuniordpspreschool@gmail.com) to branchadmin for branch all",
+    "targetType": "users",
+    "target": {
+      "role": "branchadmin",
+      "branchId": null,
+      "userId": "littlejuniordpspreschool@gmail.com"
+    },
+    "actorName": "Prathap V"
+  },
+  {
+    "id": "HmH6hXwHm1o01s73pACU",
+    "temp": true,
+    "targetType": "system",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780670479,
+      "nanoseconds": 929000000
+    },
+    "details": "Temporary pre-deployment verification check",
+    "actionType": "temp_deploy_check"
+  },
+  {
+    "id": "IbGnIMB4phm0tHCMyQL1",
+    "action": "post_create",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780587593,
+      "nanoseconds": 836000000
+    },
+    "actorRole": "superadmin",
+    "branchId": null,
+    "targetId": "icjPCF5URWx7i8dqJPTg",
+    "actionType": "post_create",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "details": "Published announcement \"notification test message\"",
+    "targetType": "post",
+    "target": {
+      "title": "notification test message",
+      "postId": "icjPCF5URWx7i8dqJPTg"
+    },
+    "actorName": "Prathap V"
+  },
+  {
+    "id": "LUzh6z9timZwZpHjZPIp",
+    "actorRole": "superadmin",
+    "targetId": "student_test2_1779973329681",
+    "branchId": null,
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780503113,
+      "nanoseconds": 800000000
+    },
+    "action": "fee_payment_added",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "actorName": "Prathap V",
+    "targetType": "fee",
+    "target": {
+      "amount": "2300",
+      "method": "UPI",
+      "studentId": "student_test2_1779973329681"
+    },
+    "details": "Recorded payment of ₹2,300 via UPI for student (ID: student_test2_1779973329681)",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "fee_payment_added"
+  },
+  {
+    "id": "MUL66A7kYshx3XLhwkz3",
+    "actorName": "Prathap V",
+    "targetType": "fee",
+    "target": {
+      "affectedCount": 9,
+      "dueDate": null,
+      "classId": "Mont-3",
+      "feeAmount": 0,
+      "branchId": "outer-ring-road"
+    },
+    "details": "Bulk updated fee configuration for 9 students in Mont-3 (Outer Ring Road). Fee: ₹0, Due Date: unchanged",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "fee_bulk_set",
+    "targetId": "global",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671839,
+      "nanoseconds": 991000000
+    },
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "fee_bulk_set"
+  },
+  {
+    "id": "O9OEuHBBWpCbvcOkNf9T",
+    "actorName": "Prathap Admin",
+    "targetType": "settings",
+    "details": "Changed global attendance lock time limit to 17:00 via Settings Panel",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978608,
+      "nanoseconds": 846000000
+    },
+    "targetId": "global",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "settings_updated"
+  },
+  {
+    "id": "PuZ71pMgGhyl5QaxqSBs",
+    "targetType": "attendance",
+    "actorName": "Prathap Admin",
+    "details": "Marked attendance for outer-ring-road - LKG. Present: 0, Absent: 1, Late: 0",
+    "actorRole": "superadmin",
+    "targetId": "outer-ring-road_LKG_2026-05-31",
+    "branchId": "outer-ring-road",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780206137,
+      "nanoseconds": 221000000
+    },
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "attendance_marked"
+  },
+  {
+    "id": "RMZLYdB9xvKnJo2TIYeF",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "fee_payment_added",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780502336,
+      "nanoseconds": 842000000
+    },
+    "actorRole": "superadmin",
+    "branchId": null,
+    "targetId": "student_test2_1779973329681",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "fee_payment_added",
+    "details": "Recorded payment of ₹5,000 via UPI for student (ID: student_test2_1779973329681)",
+    "actorName": "Prathap V",
+    "targetType": "fee",
+    "target": {
+      "studentId": "student_test2_1779973329681",
+      "amount": "5000",
+      "method": "UPI"
+    }
+  },
+  {
+    "id": "VzWsPA6eF7lgA1VDmjol",
+    "actionType": "attendance_lock_set",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "details": "Changed global attendance lock time limit to 18:00 via Settings Panel",
+    "actorName": "Prathap V",
+    "target": {
+      "lockTime": "18:00"
+    },
+    "targetType": "attendance",
+    "action": "attendance_lock_set",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780660201,
+      "nanoseconds": 442000000
+    },
+    "targetId": "unknown",
+    "branchId": null,
+    "actorRole": "superadmin"
+  },
+  {
+    "id": "YE975KtkUva7oQ9qD02v",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "post_created",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780204389,
+      "nanoseconds": 342000000
+    },
+    "branchId": null,
+    "targetId": "wgFFYxPdATJKGQRV5d9i",
+    "actorRole": "superadmin",
+    "details": "Published announcement \"Green day\" (Category: announcement)",
+    "actorName": "Prathap Admin",
+    "targetType": "post"
+  },
+  {
+    "id": "YGmn3tnlEkOj15SDoVFB",
+    "action": "user_role_update",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780631660,
+      "nanoseconds": 222000000
+    },
+    "targetId": "jesimasulaika67@gmail.com",
+    "branchId": "outer-ring-road",
+    "actorRole": "superadmin",
+    "actionType": "user_role_update",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "details": "Updated role for user (ID: jesimasulaika67@gmail.com) to branchadmin for branch outer-ring-road",
+    "actorName": "Prathap V",
+    "target": {
+      "branchId": "outer-ring-road",
+      "userId": "jesimasulaika67@gmail.com",
+      "role": "branchadmin"
+    },
+    "targetType": "users"
+  },
+  {
+    "id": "ZfE8dL6stb27uOpaXMIc",
+    "action": "post_create",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "targetId": "AywgQfPluQLcEFG5meWH",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780724337,
+      "nanoseconds": 798000000
+    },
+    "details": "Published announcement \"awdsadw\"",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actionType": "post_create",
+    "actorName": "Prathap V",
+    "target": {
+      "title": "awdsadw",
+      "postId": "AywgQfPluQLcEFG5meWH"
+    },
+    "targetType": "post"
+  },
+  {
+    "id": "af3wJfWvFbZ5hX7Wp4Fa",
+    "details": "Deleted announcement \"Hsysh\"",
+    "actorName": "Prathap Admin",
+    "targetType": "post",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "post_deleted",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779979397,
+      "nanoseconds": 95000000
+    },
+    "targetId": "BvtZY7lxM5mqIL1dzvQ5",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin"
+  },
+  {
+    "id": "bhxkigLXVHoTqDzBOlsA",
+    "actorName": "Prathap Admin",
+    "targetType": "registrations",
+    "details": "Approved registration for student \"Prathap\" and linked parent \"Prathap V\"",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779981278,
+      "nanoseconds": 177000000
+    },
+    "targetId": "3LXmUVcDoqAQEq7gtb5V",
+    "branchId": "outer-ring-road",
+    "actorRole": "superadmin",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "registration_approved"
+  },
+  {
+    "id": "dFNYKjj4HC5knTMF8leI",
+    "action": "attendance_marked",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779979560,
+      "nanoseconds": 241000000
+    },
+    "targetId": "padmanabhanagar_Nursery_2026-05-28",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin",
+    "details": "Marked attendance for padmanabhanagar - Nursery. Present: 1, Absent: 0, Late: 0",
+    "targetType": "attendance",
+    "actorName": "Prathap Admin"
+  },
+  {
+    "id": "dWGONSjsmj2qxXFhXAxT",
+    "actorRole": "superadmin",
+    "branchId": null,
+    "targetId": "ic5Gyum3ZcAdazM4Nptf",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780590353,
+      "nanoseconds": 631000000
+    },
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "post_create",
+    "actorName": "Prathap V",
+    "targetType": "post",
+    "target": {
+      "title": "test",
+      "postId": "ic5Gyum3ZcAdazM4Nptf"
+    },
+    "details": "Published announcement \"test\"",
+    "actionType": "post_create",
+    "actorEmail": "prathap.v5214@gmail.com"
+  },
+  {
+    "id": "e1Jan3ZB4vgMHG4FvjBh",
+    "action": "user_deleted",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "targetId": "branch_admin_seed",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978158,
+      "nanoseconds": 714000000
+    },
+    "details": "Revoked whitelisted staff access for \"Padmanabhanagar Admin\"",
+    "targetType": "users",
+    "actorName": "Prathap Admin"
+  },
+  {
+    "id": "e6X5jMY9OLy68xfV2AUx",
+    "actionType": "user_role_update",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "details": "Updated role for user (ID: jesimasulaika67@gmail.com) to none for branch all",
+    "actorName": "Prathap V",
+    "targetType": "users",
+    "target": {
+      "userId": "jesimasulaika67@gmail.com",
+      "branchId": null,
+      "role": "none"
+    },
+    "action": "user_role_update",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780659885,
+      "nanoseconds": 896000000
+    },
+    "actorRole": "superadmin",
+    "branchId": null,
+    "targetId": "jesimasulaika67@gmail.com"
+  },
+  {
+    "id": "gHmg0nctaOkx9gwAzfVp",
+    "targetType": "registrations",
+    "actorName": "Prathap Admin",
+    "details": "Rejected registration request for student \"v prathap\"",
+    "targetId": "ZEfPx68W5Y75nKyiBxlt",
+    "branchId": "outer-ring-road",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779983831,
+      "nanoseconds": 756000000
+    },
+    "action": "registration_rejected",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13"
+  },
+  {
+    "id": "gKvdgjSa6PV3EjTq3RE0",
+    "details": "Rejected registration request for student \"hihihi\"",
+    "actorName": "Prathap Admin",
+    "targetType": "registrations",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "registration_rejected",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779982448,
+      "nanoseconds": 571000000
+    },
+    "targetId": "DxZbz5IQX8AbO5iF1c2v",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin"
+  },
+  {
+    "id": "kye0V8uK0A1NE9slfVGj",
+    "actionType": "fee_individual_override",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "details": "Override individual total fee from ₹0 to ₹50,000 for Keerthana",
+    "targetType": "fee",
+    "target": {
+      "newFee": 50000,
+      "studentName": "Keerthana",
+      "previousFee": 0,
+      "studentId": "ZvhXAqYoxuhdFMMxlTgb"
+    },
+    "actorName": "Prathap V",
+    "action": "fee_individual_override",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780671802,
+      "nanoseconds": 78000000
+    },
+    "actorRole": "superadmin",
+    "targetId": "ZvhXAqYoxuhdFMMxlTgb"
+  },
+  {
+    "id": "pEN7WhOZSYHrCYj7zo4o",
+    "details": "Recorded ₹8,000 payment (UPI) for baby1",
+    "targetType": "fee",
+    "actorName": "Prathap Admin",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "fee_payment_recorded",
+    "actorRole": "superadmin",
+    "targetId": "fee_student_baby1_1779973331090",
+    "branchId": "chikkalsandra",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779978231,
+      "nanoseconds": 817000000
+    }
+  },
+  {
+    "id": "pjOi7lVFJtYIBqQ4YE0I",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779979323,
+      "nanoseconds": 559000000
+    },
+    "targetId": "global",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "settings_updated",
+    "actorName": "Prathap Admin",
+    "targetType": "settings",
+    "details": "Changed global attendance lock time limit to 17:00 via Settings Panel"
+  },
+  {
+    "id": "pplNBb5HU4ki5cfSZhYd",
+    "targetType": "post",
+    "actorName": "Prathap Admin",
+    "details": "Published announcement \"Hsysh\" (Category: homework)",
+    "targetId": "BvtZY7lxM5mqIL1dzvQ5",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779979375,
+      "nanoseconds": 199000000
+    },
+    "action": "post_created",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13"
+  },
+  {
+    "id": "rED0VcOkL02DCoObJS9U",
+    "action": "user_role_update",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "actorRole": "superadmin",
+    "branchId": null,
+    "targetId": "littlejuniordpspreschool@gmail.com",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780660129,
+      "nanoseconds": 269000000
+    },
+    "details": "Updated role for user (ID: littlejuniordpspreschool@gmail.com) to none for branch all",
+    "actionType": "user_role_update",
+    "actorEmail": "prathap.v5214@gmail.com",
+    "actorName": "Prathap V",
+    "targetType": "users",
+    "target": {
+      "userId": "littlejuniordpspreschool@gmail.com",
+      "branchId": null,
+      "role": "none"
+    }
+  },
+  {
+    "id": "rJGxcFiPJbAbx2aKgJd3",
+    "actionType": "leave_created",
+    "actorEmail": null,
+    "details": "Leave Created",
+    "targetType": "system",
+    "target": {
+      "parentUid": "AkoyQTW4UIMKQXVCILi1PEHIVvF2",
+      "fromDate": "2026-06-07",
+      "studentId": "student_baby1_1779973331090",
+      "toDate": "2026-06-09"
+    },
+    "actorName": "Prathap V",
+    "action": "leave_created",
+    "actorUid": "AkoyQTW4UIMKQXVCILi1PEHIVvF2",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780724235,
+      "nanoseconds": 939000000
+    },
+    "actorRole": "parent",
+    "branchId": null,
+    "targetId": "global"
+  },
+  {
+    "id": "tpEslnVbjSzLbm3spXbW",
+    "details": "Changed global attendance lock time limit to 16:00 via Settings Panel",
+    "targetType": "settings",
+    "actorName": "Prathap Admin",
+    "action": "settings_updated",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "targetId": "global",
+    "branchId": null,
+    "actorRole": "superadmin",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780218516,
+      "nanoseconds": 313000000
+    }
+  },
+  {
+    "id": "v08iXo6amxIMoZcr7WDU",
+    "actionType": "post_create",
+    "actorEmail": "jesimasulaika67@gmail.com",
+    "details": "Published announcement \"Keerthana is sick\"",
+    "targetType": "post",
+    "target": {
+      "title": "Keerthana is sick",
+      "postId": "d7rNsyejKLxgba0H87cP"
+    },
+    "actorName": "Jesima Sulaika",
+    "action": "post_create",
+    "actorUid": "4xQ2dBGZr5TWpDaECVPGq1U2kih2",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780632089,
+      "nanoseconds": 128000000
+    },
+    "actorRole": "branchadmin",
+    "branchId": "outer-ring-road",
+    "targetId": "d7rNsyejKLxgba0H87cP"
+  },
+  {
+    "id": "vo3TdBvqqj9K7xFkTAEn",
+    "targetType": "registrations",
+    "actorName": "Prathap Admin",
+    "details": "Approved registration for student \"Pooja\" and linked parent \"Bhavana Prasad\"",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1779984171,
+      "nanoseconds": 40000000
+    },
+    "actorRole": "superadmin",
+    "targetId": "e0EQ6xw6SONLRuA2kuKI",
+    "branchId": "padmanabhanagar",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "action": "registration_approved"
+  },
+  {
+    "id": "yRApvmCq7nOioJfWYaAu",
+    "details": "Recorded ₹5,000 payment (Cash) for Bhanupriya",
+    "targetType": "fee",
+    "actorName": "Prathap Admin",
+    "action": "fee_payment_recorded",
+    "actorUid": "a4Q0Oqs9mpSZ3NQ7SZbPS4B9cJ13",
+    "timestamp": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1780218452,
+      "nanoseconds": 463000000
+    },
+    "targetId": "fee_student_bhanupriya_1779974900000",
+    "branchId": "padmanabhanagar",
+    "actorRole": "superadmin"
+  }
+]

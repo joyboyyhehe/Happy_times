@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon-192.png', 'icon-512.png', 'apple-touch-icon.png'],
+      includeAssets: ['icon-192.png', 'icon-512.png', 'pwa-192x192.png', 'pwa-512x512.png', 'apple-touch-icon.png'],
       manifest: {
         name: 'Happy Times Preschool',
         short_name: 'Happy Times',
@@ -20,13 +20,17 @@ export default defineConfig({
         start_url: '/portal',
         icons: [
           { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
           { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
           { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
         importScripts: ['/firebase-messaging-sw.js'],
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        navigateFallbackDenylist: [/^\/__/],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
