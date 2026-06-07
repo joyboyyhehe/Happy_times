@@ -39,6 +39,14 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
+    if (user && profile) {
+      import('../services/notifications.js')
+        .then(({ initNotifications }) => initNotifications())
+        .catch(err => console.error('[AuthContext] Failed to initialize notifications:', err));
+    }
+  }, [user, profile]);
+
+  useEffect(() => {
     if (!user || !profile) return;
 
     // session inactivity timeouts
