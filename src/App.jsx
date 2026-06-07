@@ -278,14 +278,16 @@ function OfflineBanner() {
 
 export default function App() {
   return (
-    <Suspense fallback={
-      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <div className="loading-container">
-          <div className="spinner" />
+    <>
+      <div className="ios-status-bar-bg" />
+      <Suspense fallback={
+        <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <div className="loading-container">
+            <div className="spinner" />
+          </div>
         </div>
-      </div>
-    }>
-      <OfflineBanner />
+      }>
+        <OfflineBanner />
       <Routes>
         {/* Main Entry point: renders LandingPage in browser or redirects to portal in standalone */}
         <Route path="/" element={<MainRouter />} />
@@ -336,5 +338,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
+    </>
   );
 }
