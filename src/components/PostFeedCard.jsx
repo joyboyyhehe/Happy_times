@@ -32,7 +32,7 @@ function relativeTime(ts) {
 }
 
 function scopeLabel(post) {
-  if (post.scope === 'all' || post.scope === 'all_branches') return 'All Branches';
+  if (post.scope === 'all' || post.scope === 'all_branches' || post.scope === 'global') return 'All Branches';
   if (post.scope === 'branch') return post.branchId || 'Branch';
   if (post.scope === 'class') return post.classId || post.className || 'Class';
   return post.scope || '—';

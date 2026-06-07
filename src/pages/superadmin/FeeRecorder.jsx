@@ -512,7 +512,7 @@ export default function FeeRecorder() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
-              onClick={() => navigate('/super-admin')}
+              onClick={() => setView('browse')}
               style={{
                 width: 36, height: 36, borderRadius: '50%',
                 background: 'rgba(255,255,255,0.15)', border: 'none',

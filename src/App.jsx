@@ -18,7 +18,8 @@ const FeeRecorder = lazy(() => import('./pages/superadmin/FeeRecorder.jsx'));
 function isBypassed() {
   const disableInstallGate = import.meta.env.VITE_DISABLE_INSTALL_GATE === 'true';
   const emergencyBypass = sessionStorage.getItem('emergency_bypass') === 'true';
-  return isInstalledApp() || disableInstallGate || emergencyBypass;
+  const browserLoginAllowed = sessionStorage.getItem('browser_login_allowed') === 'true';
+  return isInstalledApp() || disableInstallGate || emergencyBypass || browserLoginAllowed;
 }
 
 function ProtectedRoute({ children, allowedRoles }) {
@@ -168,16 +169,37 @@ function LoginRoute() {
 function EmergencyLoginRoute() {
   useEffect(() => {
     sessionStorage.setItem('emergency_bypass', 'true');
+    sessionStorage.setItem('browser_login_allowed', 'true');
     logTelemetryEvent('emergency_bypass_triggered');
-    // Log directly to firestore logs collection
+    
+    // Generate browser fingerprint safely
+    const parts = [
+      navigator.userAgent || '',
+      navigator.language || '',
+      (window.screen?.width || 0) + 'x' + (window.screen?.height || 0),
+      new Date().getTimezoneOffset()
+    ];
+    const str = parts.join('|');
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    }
+    const fingerprint = 'fp_' + (hash >>> 0).toString(16);
+    
+    const browser = navigator.userAgent.includes('Chrome') ? 'Chrome' :
+                    navigator.userAgent.includes('Safari') ? 'Safari' :
+                    navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Other';
+
+    // Log directly to firestore install_telemetry collection
     import('./config/firebase.js').then(({ db }) => {
       import('firebase/firestore').then(({ collection, addDoc, serverTimestamp }) => {
-        addDoc(collection(db, 'logs'), {
-          actionType: 'install_gate_event',
+        addDoc(collection(db, 'install_telemetry'), {
           event: 'emergency_login_used',
-          details: 'Emergency login bypass requested via /emergency-login URL',
-          timestamp: serverTimestamp(),
-          userAgent: navigator.userAgent
+          browser: browser.substring(0, 50),
+          userAgent: navigator.userAgent.substring(0, 300),
+          standalone: false,
+          fingerprint,
+          timestamp: serverTimestamp()
         }).catch(err => console.warn('Failed to write emergency bypass log:', err));
       });
     });

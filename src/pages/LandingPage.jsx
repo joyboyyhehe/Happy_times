@@ -4,19 +4,38 @@ import AppLogo from '../components/AppLogo.jsx';
 import { isInstalledApp, isStandalone } from '../utils/appMode.js';
 import { logTelemetryEvent } from '../services/telemetry.js';
 
-// Telemetry helper to log events directly to the logs collection in Firestore
-async function logInstallGateEvent(event, details = '') {
+// Telemetry helper to log events directly to the install_telemetry collection in Firestore
+async function logInstallGateEvent(event) {
   try {
+    // Generate browser fingerprint safely
+    const parts = [
+      navigator.userAgent || '',
+      navigator.language || '',
+      (window.screen?.width || 0) + 'x' + (window.screen?.height || 0),
+      new Date().getTimezoneOffset()
+    ];
+    const str = parts.join('|');
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    }
+    const fingerprint = 'fp_' + (hash >>> 0).toString(16);
+
+    const browser = navigator.userAgent.includes('Chrome') ? 'Chrome' :
+                    navigator.userAgent.includes('Safari') ? 'Safari' :
+                    navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Other';
+
     const { db } = await import('../config/firebase.js');
     const { collection, addDoc, serverTimestamp } = await import('firebase/firestore');
-    await addDoc(collection(db, 'logs'), {
-      actionType: 'install_gate_event',
+    await addDoc(collection(db, 'install_telemetry'), {
       event,
-      details,
+      browser: browser.substring(0, 50),
+      userAgent: navigator.userAgent.substring(0, 300),
+      standalone: isStandalone(),
+      fingerprint,
       timestamp: serverTimestamp(),
-      userAgent: navigator.userAgent,
     });
-    console.log(`[Install Telemetry]: ${event} - ${details}`);
+    console.log(`[Install Telemetry]: ${event}`);
   } catch (err) {
     console.warn('Failed to log install telemetry:', err);
   }
@@ -94,6 +113,7 @@ export default function LandingPage() {
 
   function proceedToLogin() {
     sessionStorage.setItem('browser_login_allowed', 'true');
+    sessionStorage.setItem('emergency_bypass', 'true');
     navigate('/login', { replace: true });
   }
 

@@ -174,8 +174,24 @@ service cloud.firestore {
     match /logs/{logId} {
       allow read: if isSuperAdmin();
       allow read: if isBranchAdmin() && resource.data.actorUid == request.auth.uid;
-      allow create: if isAuthenticated() || request.resource.data.actionType == "install_gate_event";
+      allow create: if isAuthenticated();
       allow update, delete: if false; // Logs are write-once, immutable
+    }
+
+    // --- /install_telemetry ---
+    match /install_telemetry/{logId} {
+      allow create: if
+        request.resource.data.keys().hasOnly(['event', 'browser', 'userAgent', 'standalone', 'timestamp', 'fingerprint'])
+        && request.resource.data.event is string && request.resource.data.event.size() <= 50
+        && request.resource.data.browser is string && request.resource.data.browser.size() <= 50
+        && request.resource.data.userAgent is string && request.resource.data.userAgent.size() <= 300
+        && request.resource.data.standalone is bool
+        && request.resource.data.fingerprint is string && request.resource.data.fingerprint.size() <= 120
+        && request.resource.data.timestamp is timestamp
+        && request.time < timestamp.date(2100, 1, 1)
+        && request.resource.data.timestamp <= request.time;
+      allow read: if isSuperAdmin();
+      allow update, delete: if false;
     }
 
     // --- /critical_logs ---

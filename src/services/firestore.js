@@ -635,12 +635,19 @@ export async function getPostsForParent(branchId, classId) {
   const [classPosts, branchPosts, allPosts] = await Promise.all([
     getDocs(query(collection(db, 'posts'), where('scope', '==', 'class'), where('classId', '==', classId), orderBy('timestamp', 'desc'), limit(30))),
     getDocs(query(collection(db, 'posts'), where('scope', '==', 'branch'), where('branchId', '==', branchId), orderBy('timestamp', 'desc'), limit(30))),
-    getDocs(query(collection(db, 'posts'), where('scope', '==', 'all'), orderBy('timestamp', 'desc'), limit(20))),
+    getDocs(query(collection(db, 'posts'), where('scope', 'in', ['all', 'all_branches']), orderBy('timestamp', 'desc'), limit(20))),
   ]);
   const seen = new Set();
   const merged = [];
   [...classPosts.docs, ...branchPosts.docs, ...allPosts.docs].forEach(d => {
-    if (!seen.has(d.id)) { seen.add(d.id); merged.push({ id: d.id, ...d.data() }); }
+    if (!seen.has(d.id)) {
+      seen.add(d.id);
+      const data = d.data();
+      let normalizedScope = 'global';
+      if (data.scope === 'branch') normalizedScope = 'branch';
+      else if (data.scope === 'class') normalizedScope = 'class';
+      merged.push({ id: d.id, ...data, scope: normalizedScope });
+    }
   });
   return merged.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
 }

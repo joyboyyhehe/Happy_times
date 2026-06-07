@@ -231,6 +231,23 @@ async function click(selector) {
   await new Promise(r => setTimeout(r, 500));
 }
 
+async function clickTopBack() {
+  await evaluate(`(() => {
+    const panels = Array.from(document.querySelectorAll('.overlay-panel.open'));
+    if (panels.length > 0) {
+      const btn = panels[panels.length - 1].querySelector('.overlay-panel-back');
+      if (btn) {
+        btn.click();
+      } else {
+        console.error('No back button found in top-most panel');
+      }
+    } else {
+      console.error('No open overlay panels found');
+    }
+  })()`);
+  await new Promise(r => setTimeout(r, 500));
+}
+
 async function waitForText(text, timeout = 10000) {
   const start = Date.now();
   while (Date.now() - start < timeout) {
@@ -386,7 +403,7 @@ async function runTests() {
       results.push({ test: 'SA Pending Leaves opens', status: 'PASS' });
       await takeScreenshot('sa_pending_leaves_open');
       // Close it
-      await click('.overlay-panel.open .overlay-panel-back');
+      await clickTopBack();
       await new Promise(r => setTimeout(r, 600));
       const closed = await evaluate('!document.querySelector(".overlay-panel.open")');
       if (closed) {
@@ -551,15 +568,15 @@ async function runTests() {
       await new Promise(r => setTimeout(r, 600));
 
       // Back 1: go back to Class list inside Student Management
-      await click('.overlay-panel.open .overlay-panel-back');
+      await clickTopBack();
       await waitForText('Student Management');
 
       // Back 2: go back to Class Management overlay
-      await click('.overlay-panel.open .overlay-panel-back');
+      await clickTopBack();
       await waitForText('Class Management');
 
       // Back 3: go back to Dashboard
-      await click('.overlay-panel.open .overlay-panel-back');
+      await clickTopBack();
       await new Promise(r => setTimeout(r, 1000));
 
       // Verify dashboard visible

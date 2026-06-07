@@ -75,20 +75,36 @@ async function runSweep() {
     logTest(6, 'Unauthenticated read students', 'PASS', `Read blocked (Error: ${err.code})`);
   }
 
-  // Set up temporary parent account
+  // Set up temporary parent and branch admin accounts
   const timestamp = Date.now();
   const tempParentEmail = `qa_parent_${timestamp}@happytimes.com`;
   const tempParentPassword = 'happytimes_parent_6754';
   let tempParentUid = '';
+  let branchAdminUid = '';
 
   try {
     // 1. Create parent user in auth
     const parentCred = await createUserWithEmailAndPassword(auth, tempParentEmail, tempParentPassword);
     tempParentUid = parentCred.user.uid;
     
-    // 2. Sign out parent and sign in as superadmin to write the parent document and link student
+    // Get branch admin UID
+    await auth.signOut();
+    const baCred = await signInWithEmailAndPassword(auth, BRANCHADMIN_EMAIL, BRANCHADMIN_PW);
+    branchAdminUid = baCred.user.uid;
+    
+    // 2. Sign out parent and sign in as superadmin to write documents
     await auth.signOut();
     await signInWithEmailAndPassword(auth, SUPERADMIN_EMAIL, SUPERADMIN_PW);
+    
+    // Create temporary branch admin document
+    await setDoc(doc(db, 'users', branchAdminUid), {
+      name: 'Test Branch Admin (Outer Ring Road)',
+      role: 'branchadmin',
+      email: BRANCHADMIN_EMAIL,
+      branchId: BRANCH_ID,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
     
     await setDoc(doc(db, 'users', tempParentUid), {
       name: `QA Temporary Parent ${timestamp}`,
@@ -412,12 +428,28 @@ async function runSweep() {
   // Sign in as SA to clean up Firestore documents and restore backups
   await signInWithEmailAndPassword(auth, SUPERADMIN_EMAIL, SUPERADMIN_PW);
   
-  // 7.1 Delete temporary parent profile document
+  // 7.1 Delete temporary parent profile document and branch admin profile document
   try {
     await deleteDoc(doc(db, 'users', tempParentUid));
     logTest(7, 'Cleanup - Temporary Parent Document', 'PASS', `Deleted temporary parent profile: ${tempParentUid}`);
   } catch (err) {
     logTest(7, 'Cleanup - Temporary Parent Document', 'FAIL', `Failed: ${err.message}`);
+  }
+  try {
+    if (branchAdminUid) {
+      await deleteDoc(doc(db, 'users', branchAdminUid));
+      logTest(7, 'Cleanup - Temporary Branch Admin Document', 'PASS', `Deleted temporary branch admin profile: ${branchAdminUid}`);
+    }
+  } catch (err) {
+    logTest(7, 'Cleanup - Temporary Branch Admin Document', 'FAIL', `Failed: ${err.message}`);
+  }
+  try {
+    if (branchAdminUid) {
+      await deleteDoc(doc(db, 'fcm_tokens', branchAdminUid));
+      logTest(7, 'Cleanup - Temporary Branch Admin FCM Token', 'PASS', `Deleted temporary branch admin FCM token document: ${branchAdminUid}`);
+    }
+  } catch (err) {
+    logTest(7, 'Cleanup - Temporary Branch Admin FCM Token', 'FAIL', `Failed: ${err.message}`);
   }
 
   // 7.2 Delete temporary posts
