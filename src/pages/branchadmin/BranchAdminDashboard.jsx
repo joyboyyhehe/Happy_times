@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useToast } from '../../components/Toast.jsx';
 import { auth } from '../../config/firebase.js';
+import { logout } from '../../services/authService.js';
 import { getBranch, getStaffWhitelist, addToStaffWhitelist, removeFromStaffWhitelist, getLogs } from '../../services/firestore.js';
 
 // Shared Components & Hooks
@@ -9,7 +10,6 @@ import { useOverlayStack } from '../../hooks/useOverlayStack.js';
 import { useLeaves } from '../../hooks/useLeaves.js';
 import { useDashboardStats } from '../../hooks/useDashboardStats.js';
 import { useAttendance } from '../../hooks/useAttendance.js';
-import { usePosts } from '../../hooks/usePosts.js';
 import { useStudents } from '../../hooks/useStudents.js';
 
 import BottomNav from '../../components/BottomNav.jsx';
@@ -22,15 +22,11 @@ import TabBar from '../../components/TabBar.jsx';
 
 import { CLASSES } from '../../constants/classes.js';
 
-import PostFeedCard from '../../components/PostFeedCard.jsx';
-
 // Modular Components (Lazy loaded or imported directly)
 import ActionGrid from './ActionGrid.jsx';
 const LeaveManagement = lazy(() => import('./LeaveManagement.jsx'));
 const ClassStudentsPanel = lazy(() => import('./ClassStudentsPanel.jsx'));
 const StudentProfileSheet = lazy(() => import('./StudentProfileSheet.jsx'));
-const BroadcastSheet = lazy(() => import('./BroadcastSheet.jsx'));
-const BranchAdminCreatePost = lazy(() => import('./BranchAdminCreatePost.jsx'));
 
 export default function BranchAdminDashboard() {
   const { profile } = useAuth();
@@ -63,9 +59,6 @@ export default function BranchAdminDashboard() {
     loading: attLoading, attSaving, attRecords, pendingAttRecords, attHasUnsaved, lockTime, locked,
     loadAttendance, handleAttToggle, handleMarkAllPresent, handleSaveAttendance, clearPending
   } = useAttendance();
-  const {
-    loading: postsLoading, posts, hasMorePosts, loadPosts, loadMorePosts, handleDeletePost
-  } = usePosts();
   const { students, loadStudents } = useStudents();
   const { leaves, loading: leavesLoading, pendingCount: leavesPendingCount, reload: reloadLeaves } = useLeaves({
     mode: 'branch',
@@ -118,7 +111,6 @@ export default function BranchAdminDashboard() {
       await loadLogsData();
     }
     else if (tab === 'attendance' && selectedClass) await loadAttendance(branchId, selectedClass, attDate);
-    else if (tab === 'posts' && branchId) await loadPosts(branchId);
     else if (tab === 'activity') await loadLogsData();
   };
 
@@ -127,7 +119,6 @@ export default function BranchAdminDashboard() {
       loadDashboard(branchId);
       loadLogsData();
     }
-    if (tab === 'posts' && branchId) loadPosts(branchId);
     if (tab === 'activity') loadLogsData();
   }, [tab, branchId]);
 
@@ -198,7 +189,7 @@ export default function BranchAdminDashboard() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ fontSize: 10, background: 'rgba(255,255,255,0.2)', padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase', fontWeight: 600, letterSpacing: 0.5 }}>
-                  Branch Admin
+                  Staff Portal
                 </span>
                 {branch?.name && (
                   <span className="badge" style={{ fontSize: 9, background: 'var(--primary-light)', color: 'white', fontWeight: 600, padding: '1px 6px', borderRadius: 4 }}>
@@ -302,7 +293,7 @@ export default function BranchAdminDashboard() {
                     <div className="log-details">
                       <div className="log-title">{l.details}</div>
                       <div className="log-meta">
-                        <span className="log-role-badge">Branch Admin</span>
+                        <span className="log-role-badge">Staff</span>
                         <span className="log-time">by {l.actorName}</span>
                       </div>
                     </div>
@@ -387,36 +378,6 @@ export default function BranchAdminDashboard() {
           </div>
         )}
 
-        {/* ══════════════ POSTS TAB ══════════════ */}
-        {tab === 'posts' && (
-          <div className="fade-in">
-            <div className="section-header">
-              <h2 style={{ fontSize: 20, fontWeight: 700 }}>Posts</h2>
-              <button className="btn btn-primary btn-sm" onClick={() => push('create_post')} style={{ width: 'auto' }}>+ New</button>
-            </div>
-
-            <div className="flex flex-col gap-10">
-              {postsLoading && posts.length === 0 && <Skeleton type="card" count={3} />}
-              {posts.map(p => (
-                <PostFeedCard
-                  key={p.id}
-                  post={p}
-                  showDelete={true}
-                  onDelete={(id) => handleDeletePost(id, 'branchadmin', branchId)}
-                />
-              ))}
-              {hasMorePosts && posts.length > 0 && (
-                <button className="btn btn-outline" onClick={() => loadMorePosts(branchId)} style={{ width: '100%', marginTop: 8 }} disabled={postsLoading}>
-                  {postsLoading ? 'Loading...' : 'Load More ↓'}
-                </button>
-              )}
-              {posts.length === 0 && !postsLoading && (
-                <div className="empty-state"><div className="empty-state-icon">📢</div><div className="empty-state-title">No posts yet</div><div className="empty-state-text">Tap "+ New" to create your first post</div></div>
-              )}
-            </div>
-          </div>
-        )}
-
         {/* ══════════════ ACTIVITY TAB ══════════════ */}
         {tab === 'activity' && (
           <div className="fade-in">
@@ -451,12 +412,6 @@ export default function BranchAdminDashboard() {
         {isOpen('leaves') && (
           <LeaveManagement branchId={branchId} profileId={profile?.id} profileName={profile?.name} pop={pop} />
         )}
-        {isOpen('broadcast') && (
-          <BroadcastSheet branchId={branchId} profileName={profile?.name} pop={pop} />
-        )}
-        {isOpen('create_post') && (
-          <BranchAdminCreatePost pop={pop} branchId={branchId} onCreated={() => loadPosts(branchId)} />
-        )}
         {isOpen('classes') && (
           <div className="overlay-panel open">
             <div className="overlay-panel-header"><button className="overlay-panel-back" onClick={pop}>←</button><h2>Class Management</h2></div>
@@ -490,34 +445,13 @@ export default function BranchAdminDashboard() {
         )}
         {isOpen('admins') && (
           <div className="overlay-panel open">
-            <div className="overlay-panel-header"><button className="overlay-panel-back" onClick={pop}>←</button><h2>Whitelisted Branch Admins</h2></div>
+            <div className="overlay-panel-header"><button className="overlay-panel-back" onClick={pop}>←</button><h2>Branch Admin Access</h2></div>
             <div className="overlay-panel-content" style={{ padding: 16 }}>
-              <form onSubmit={handleAddAdmin} style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-                <input type="email" placeholder="Enter email to whitelist..." className="input" value={whitelistingEmail} onChange={e => setWhitelistingEmail(e.target.value)} required />
-                <button type="submit" className="btn btn-primary" style={{ width: 'auto', padding: '0 16px' }}>Whitelist</button>
-              </form>
-              {loadingWhitelist ? (
-                <Skeleton type="list" count={3} />
-              ) : (
-                <div className="flex flex-col gap-10">
-                  {whitelistedAdmins.map(admin => (
-                    <div key={admin.email} className="list-item" style={{ padding: '12px 16px' }}>
-                      <div className="avatar" style={{ background: '#ECEFF1', color: '#455A64', fontWeight: 'bold' }}>🔑</div>
-                      <div className="list-item-content">
-                        <div className="list-item-title" style={{ fontWeight: 600 }}>{admin.email}</div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
-                          <span className="badge" style={{ background: 'var(--success-light)', color: 'var(--success)', fontSize: 10, fontWeight: 600 }}>Active Whitelist</span>
-                        </div>
-                      </div>
-                      <button onClick={() => handleRemoveAdmin(admin.email)} style={{ background: 'none', border: 'none', color: 'var(--error)', fontSize: 18, cursor: 'pointer', padding: 4 }} title="Remove Admin">🗑️</button>
-                    </div>
-                  ))}
-                  {whitelistedAdmins.length === 0 && <EmptyState emoji="🔑" title="No Whitelisted Admins" subtitle="Add branch admin emails to allow them to log in to this branch." />}
-                </div>
-              )}
+              <p style={{ padding: '10px 14px', background: '#FFF7ED', borderRadius: 10, border: '1px solid #FED7AA', fontSize: 13, color: '#92400E', marginBottom: 16 }}>⚠️ Admin management has been moved to the Super Admin portal. Please contact your Super Admin to add or remove branch admins.</p>
             </div>
           </div>
         )}
+
       </Suspense>
 
       {/* Student Profile sheet drawer — wrapped in Suspense because it is a lazy import */}
@@ -525,7 +459,7 @@ export default function BranchAdminDashboard() {
         <StudentProfileSheet student={activeStudentDetail} onClose={() => setActiveStudentDetail(null)} onRefresh={() => loadStudents(branchId, activeDrillClass)} drillClass={activeDrillClass} />
       </Suspense>
 
-      <ProfileSheet open={showProfileSheet} onClose={() => setShowProfileSheet(false)} name={profile?.name || 'Branch Admin'} role="Branch Admin" email={profile?.email || auth.currentUser?.email || ''} />
+      <ProfileSheet open={showProfileSheet} onClose={() => setShowProfileSheet(false)} name={profile?.name || 'Staff'} role="Staff" email={profile?.email || auth.currentUser?.email || ''} />
 
       {/* Logout Confirmation Modal */}
       <Modal open={showLogoutConfirm} onClose={() => setShowLogoutConfirm(false)} title="Confirm Logout">
@@ -534,7 +468,21 @@ export default function BranchAdminDashboard() {
           <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-dark)' }}>Are you sure you want to logout?</div>
           <div style={{ display: 'flex', gap: 12, width: '100%', marginTop: 4 }}>
             <button className="btn btn-outline" style={{ flex: 1 }} onClick={() => setShowLogoutConfirm(false)}>Cancel</button>
-            <button className="btn btn-primary" style={{ flex: 1, background: 'var(--error)' }} onClick={() => { setShowLogoutConfirm(false); auth.signOut(); }}>Logout</button>
+            <button
+              className="btn btn-primary"
+              style={{ flex: 1, background: 'var(--error)' }}
+              onClick={async () => {
+                setShowLogoutConfirm(false);
+                try {
+                  await logout();
+                  window.location.href = '/';
+                } catch (e) {
+                  console.error('Logout error:', e);
+                }
+              }}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </Modal>
@@ -542,7 +490,6 @@ export default function BranchAdminDashboard() {
       <BottomNav items={[
         { key: 'home', icon: '🏠', label: 'Home' },
         { key: 'attendance', icon: '📋', label: 'Attendance' },
-        { key: 'posts', icon: '📢', label: 'Posts' },
         { key: 'activity', icon: '📝', label: 'My Activity' },
       ]} active={stack.length > 0 ? '' : tab} onNavigate={handleTabChange} />
     </div>

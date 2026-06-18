@@ -11,10 +11,6 @@ export default function ActionGrid({ push, setTab, leavesPendingCount }) {
         <div className="action-btn-icon" style={{ background: 'var(--info-light)', color: 'var(--info)' }}>👥</div>
         <span className="action-btn-label">Students</span>
       </button>
-      <button className="action-btn" onClick={() => push('admins')}>
-        <div className="action-btn-icon" style={{ background: '#ECEFF1', color: '#455A64' }}>🔑</div>
-        <span className="action-btn-label">Admins</span>
-      </button>
       <button className="action-btn" onClick={() => push('leaves')}>
         <div className="action-btn-icon" style={{ background: 'var(--warning-light)', color: 'var(--warning)' }}>📝</div>
         <span className="action-btn-label">Leaves</span>
@@ -27,14 +23,6 @@ export default function ActionGrid({ push, setTab, leavesPendingCount }) {
       <button className="action-btn" onClick={() => setTab('activity')}>
         <div className="action-btn-icon" style={{ background: '#F3E5F5', color: '#7B1FA2' }}>⏳</div>
         <span className="action-btn-label">Logs</span>
-      </button>
-      <button className="action-btn" onClick={() => push('create_post')}>
-        <div className="action-btn-icon" style={{ background: '#E8F5E9', color: '#2E7D32' }}>📢</div>
-        <span className="action-btn-label">Post</span>
-      </button>
-      <button className="action-btn" onClick={() => push('broadcast')}>
-        <div className="action-btn-icon" style={{ background: '#FFF3E0', color: '#E65100' }}>🔔</div>
-        <span className="action-btn-label">Notify</span>
       </button>
     </div>
   );

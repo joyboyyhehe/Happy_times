@@ -1,5 +1,5 @@
 import BottomSheet from './BottomSheet.jsx';
-import { auth } from '../config/firebase.js';
+import { logout } from '../services/authService.js';
 
 /**
  * ProfileSheet — Avatar in header + bottom sheet with profile info.
@@ -21,8 +21,12 @@ export function ProfileSheet({ open, onClose, name, phone, email, role, initials
     onClose?.();
     // Brief delay so sheet animates closed before navigate
     setTimeout(async () => {
-      await auth.signOut();
-      window.location.href = '/login';
+      try {
+        await logout();
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+      window.location.href = '/';
     }, 250);
   }
 

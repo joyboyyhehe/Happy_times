@@ -2888,5 +2888,187 @@ html.ios-standalone .landing-shell {
   padding-top: env(safe-area-inset-top, 44px) !important;
 }
 
+/* ═══════════════════════════════════════════════════
+   SLCM DASHBOARD CARD GRID & WELCOME BANNER
+   ═══════════════════════════════════════════════════ */
+.welcome-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 20px;
+  color: white;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.welcome-banner::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+.welcome-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+.welcome-wave {
+  font-size: 32px;
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+.welcome-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.welcome-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+.welcome-subtitle {
+  font-size: 13px;
+  opacity: 0.85;
+  margin: 0;
+  line-height: 1.4;
+}
+@keyframes wave {
+  0% { transform: rotate( 0.0deg) }
+  10% { transform: rotate(14.0deg) }
+  20% { transform: rotate(-8.0deg) }
+  30% { transform: rotate(14.0deg) }
+  40% { transform: rotate(-4.0deg) }
+  50% { transform: rotate(10.0deg) }
+  60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
+
+.slcm-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.slcm-card {
+  background: var(--surface);
+  border: 1px solid rgba(26,35,64,0.08);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+.slcm-card:hover, .slcm-card:active {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(232,69,26,0.15);
+  box-shadow: var(--shadow-md);
+}
+.slcm-card:active {
+  transform: translateY(-2px) scale(0.99);
+}
+.slcm-card-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all var(--transition-fast);
+}
+.slcm-card:hover .slcm-card-icon-wrapper {
+  transform: scale(1.1) rotate(-5deg);
+}
+.slcm-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.slcm-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.slcm-card-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  margin: 2px 0;
+}
+.slcm-card-desc {
+  font-size: 11px;
+  color: var(--text-hint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.slcm-icon-attendance { background: var(--success-light); color: var(--success); }
+.slcm-icon-fees { background: var(--accent-light); color: var(--accent); }
+.slcm-icon-announcements { background: #E3F2FD; color: #1E88E5; }
+.slcm-icon-gallery { background: #E8EAF6; color: #3F51B5; }
+.slcm-icon-notifications { background: #FFF3E0; color: #FB8C00; }
+.slcm-icon-leave { background: #F3E5F5; color: #8E24AA; }
+
+.slcm-alert-banner {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  border: 1px solid #FFE0B2;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-xs);
+}
+.slcm-alert-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--warning);
+}
+.slcm-alert-banner-text {
+  font-size: 12px;
+  color: #E65100;
+  line-height: 1.4;
+  flex: 1;
+}
+.slcm-alert-banner-arrow {
+  font-size: 16px;
+  color: #E65100;
+  font-weight: 700;
+}
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px;
+  font-family: inherit;
+  transition: color var(--transition-fast);
+}
+.btn-text:hover {
+  color: var(--primary-dark);
+}
+
 
 

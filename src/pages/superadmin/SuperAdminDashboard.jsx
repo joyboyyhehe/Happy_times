@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useToast } from '../../components/Toast.jsx';
 import { auth } from '../../config/firebase.js';
 import { useNavigate } from 'react-router-dom';
+import { setMaintenanceSettings as saveMaintenanceSettings } from '../../services/profileService.js';
 
 // Shared Hooks
 import { useSuperAdminData } from '../../hooks/useSuperAdminData.js';
@@ -37,11 +38,47 @@ const SuperAdminBroadcastSheet = lazy(() => import('./SuperAdminBroadcastSheet.j
 const SuperAdminCreatePost = lazy(() => import('./SuperAdminCreatePost.jsx'));
 
 export default function SuperAdminDashboard() {
-  const { profile } = useAuth();
+  const { profile, maintenanceSettings, setMaintenanceSettings: setMaintContext } = useAuth();
   const toast = useToast();
   const navigate = useNavigate();
   const [tab, setTab] = useState('home');
   const [moreTab, setMoreTab] = useState('students');
+
+  // Maintenance Form State
+  const [maintForm, setMaintForm] = useState({
+    enabled: false,
+    message: 'System maintenance in progress',
+    estimatedReturn: '',
+    contactNumber: ''
+  });
+  const [updatingMaint, setUpdatingMaint] = useState(false);
+
+  // Sync maintenanceSettings with form
+  useEffect(() => {
+    if (maintenanceSettings) {
+      setMaintForm({
+        enabled: maintenanceSettings.enabled || false,
+        message: maintenanceSettings.message || 'System maintenance in progress',
+        estimatedReturn: maintenanceSettings.estimatedReturn || '',
+        contactNumber: maintenanceSettings.contactNumber || ''
+      });
+    }
+  }, [maintenanceSettings]);
+
+  async function handleUpdateMaintenance(e) {
+    if (e) e.preventDefault();
+    setUpdatingMaint(true);
+    try {
+      await saveMaintenanceSettings(maintForm);
+      setMaintContext(maintForm);
+      toast.success('Maintenance settings updated successfully!');
+    } catch (err) {
+      console.error('[SuperAdminDashboard] Failed to save maintenance settings:', err);
+      toast.error(err.message || 'Failed to update maintenance settings.');
+    } finally {
+      setUpdatingMaint(false);
+    }
+  }
 
   // Whitelist dialog resets
   const [showWhitelistModal, setShowWhitelistModal] = useState(false);
@@ -90,6 +127,7 @@ export default function SuperAdminDashboard() {
 
   // Form states
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [postToEdit, setPostToEdit] = useState(null);
 
   useEffect(() => {
     loadBranches();
@@ -210,7 +248,7 @@ export default function SuperAdminDashboard() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ fontSize: 10, background: 'rgba(255,255,255,0.2)', padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase', fontWeight: 600 }}>
-                  Super Admin
+                  Admin Portal
                 </span>
               </div>
               <h1 style={{ fontSize: 18, fontWeight: 700, marginTop: 2 }}>Happy Times preschool</h1>
@@ -321,6 +359,7 @@ export default function SuperAdminDashboard() {
                   post={p}
                   showDelete={true}
                   onDelete={(id) => handleDeletePost(id, 'superadmin', null)}
+                  onEdit={(post) => { setPostToEdit(post); push('edit_post'); }}
                 />
               ))}
               {hasMorePosts && posts.length > 0 && (
@@ -378,14 +417,83 @@ export default function SuperAdminDashboard() {
               {moreTab === 'logs' && <LogsSection logs={logs} hasMore={hasMoreLogs} onLoadMore={() => loadLogsData(true)} loading={loading} />}
 
               {moreTab === 'settings' && (
-                <div className="card">
-                  <h3>Global Settings</h3>
-                  <div className="input-group mt-12">
-                    <label>Attendance Lock Time (Daily)</label>
-                    <div className="flex gap-8">
-                      <input type="time" className="input" value={lockTimeInput} onChange={e => setLockTimeInput(e.target.value)} />
-                      <button className="btn btn-primary" onClick={() => updateLockSettings(lockTimeInput)}>Update</button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  {/* Attendance Controls */}
+                  <div className="card">
+                    <h3>Attendance Controls</h3>
+                    <div className="input-group mt-12">
+                      <label>Daily Lock Time</label>
+                      <div className="flex gap-8">
+                        <input type="time" className="input" value={lockTimeInput} onChange={e => setLockTimeInput(e.target.value)} />
+                        <button className="btn btn-primary" onClick={() => updateLockSettings(lockTimeInput)}>Update</button>
+                      </div>
                     </div>
+                  </div>
+
+                  {/* Maintenance Mode */}
+                  <div className="card">
+                    <h3>Maintenance Mode</h3>
+                    <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 12 }}>
+                      Enable this to block Parents from accessing their portal. Staff and Administrators can still login normally.
+                    </p>
+                    <form onSubmit={handleUpdateMaintenance} className="flex flex-col gap-12">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0' }}>
+                        <input
+                          id="maint-enabled-chk"
+                          type="checkbox"
+                          checked={maintForm.enabled}
+                          onChange={e => setMaintForm({ ...maintForm, enabled: e.target.checked })}
+                          style={{ width: 18, height: 18, cursor: 'pointer' }}
+                        />
+                        <label htmlFor="maint-enabled-chk" style={{ fontSize: 14, fontWeight: '600', cursor: 'pointer' }}>
+                          Enable Maintenance Mode
+                        </label>
+                      </div>
+
+                      <div className="input-group">
+                        <label>Maintenance Message</label>
+                        <textarea
+                          className="input"
+                          value={maintForm.message}
+                          onChange={e => setMaintForm({ ...maintForm, message: e.target.value })}
+                          placeholder="E.g., Parent Portal is currently undergoing scheduled database upgrades."
+                          style={{ minHeight: 60, fontFamily: 'inherit' }}
+                          required
+                        />
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                        <div className="input-group">
+                          <label>Estimated Return (Optional)</label>
+                          <input
+                            type="text"
+                            className="input"
+                            value={maintForm.estimatedReturn}
+                            onChange={e => setMaintForm({ ...maintForm, estimatedReturn: e.target.value })}
+                            placeholder="E.g., Today at 6:00 PM"
+                          />
+                        </div>
+                        <div className="input-group">
+                          <label>Support Contact (Optional)</label>
+                          <input
+                            type="tel"
+                            className="input"
+                            value={maintForm.contactNumber}
+                            onChange={e => setMaintForm({ ...maintForm, contactNumber: e.target.value })}
+                            placeholder="E.g., +91 98765 43210"
+                          />
+                        </div>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        style={{ marginTop: 8 }}
+                        disabled={updatingMaint}
+                      >
+                        {updatingMaint ? 'Saving Settings...' : 'Save Maintenance Settings'}
+                      </button>
+                    </form>
                   </div>
                 </div>
               )}
@@ -407,6 +515,13 @@ export default function SuperAdminDashboard() {
         )}
         {isOpen('create_post') && (
           <SuperAdminCreatePost pop={pop} onCreated={() => loadPosts()} />
+        )}
+        {isOpen('edit_post') && (
+          <SuperAdminCreatePost
+            pop={() => { setPostToEdit(null); pop(); }}
+            onCreated={() => { setPostToEdit(null); loadPosts(); }}
+            postToEdit={postToEdit}
+          />
         )}
       </Suspense>
 

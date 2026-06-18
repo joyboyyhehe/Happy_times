@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import { ToastProvider } from './components/Toast.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 import App from './App.jsx';
 import './index.css';
 import { initGlobalErrorTracking } from './services/telemetry.js';
@@ -34,9 +35,12 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <AuthProvider>
         <ToastProvider>
-          <App />
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>
 );
+

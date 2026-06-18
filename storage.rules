@@ -7,14 +7,11 @@ service firebase.storage {
       return request.auth != null;
     }
     
-    // Helper function to get the user's role from Firestore
-    function getUserRole() {
-      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role;
-    }
-    
-    // Helper function to check if the user is a staff member (superadmin or branchadmin)
+    // Staff (Super Admin / Branch Admin) always sign in with email+password,
+    // so their JWT always contains an email claim.
+    // Parents use phone OTP (no email claim), so this correctly excludes them.
     function isStaff() {
-      return isAuthenticated() && (getUserRole() == 'superadmin' || getUserRole() == 'branchadmin');
+      return isAuthenticated() && request.auth.token.email != null;
     }
 
     // Match posts images (school announcements)

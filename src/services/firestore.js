@@ -52,6 +52,8 @@ function generateLogDetails(actionType, target) {
       return `Recorded payment of ₹${Number(target.amount || 0).toLocaleString()} via ${target.method || 'Cash'} for student (ID: ${target.studentId})`;
     case 'post_create':
       return `Published announcement "${target.title || 'Untitled'}"`;
+    case 'post_update':
+      return `Edited announcement "${target.title || 'Untitled'}" (ID: ${target.postId})`;
     case 'post_delete':
       return `Deleted announcement/post (ID: ${target.postId})`;
     case 'parent_linked':
@@ -288,6 +290,43 @@ export async function getStudentsForParent(parentUid) {
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
+/**
+ * Ensures a parent pre-registration document exists at users/parent_{phone}.
+ * This doc is what activateParentProfile looks for on the parent's first login.
+ * Safe to call multiple times — uses merge:true and never overwrites uid/activated docs.
+ */
+async function ensureParentPreRegistration(phone, studentId, data = {}) {
+  if (!phone) return;
+  // Normalize: strip +91 or any prefix to get a 10-digit number
+  let clean = String(phone).replace(/\D/g, '');
+  if (clean.length > 10) clean = clean.slice(-10);
+  if (!clean || clean.length < 10) return;
+
+  const docId = `parent_${clean}`;
+  const ref = doc(db, 'users', docId);
+  const snap = await getDoc(ref);
+
+  if (snap.exists() && snap.data().archived) {
+    // Already activated — do not overwrite. Just ensure this student is linked.
+    return;
+  }
+
+  const existing = snap.exists() ? snap.data() : {};
+  const linkedStudentIds = Array.from(new Set([...(existing.linkedStudentIds || []), studentId]));
+
+  await setDoc(ref, {
+    role: 'parent',
+    phone: clean,
+    name: data.name || existing.name || 'Parent',
+    email: existing.email || '',
+    branchId: data.branchId || existing.branchId || '',
+    linkedStudentIds,
+    archived: false,
+    createdAt: existing.createdAt || serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  }, { merge: true });
+}
+
 export async function addStudent(data) {
   const ref = await addDoc(collection(db, 'students'), {
     ...data,
@@ -299,6 +338,15 @@ export async function addStudent(data) {
     feePaid: 0,
     parentUids: data.parentUids || [],
   });
+
+  // Auto-create parent pre-registration docs so parents can log in via OTP
+  if (data.phone1) {
+    await ensureParentPreRegistration(data.phone1, ref.id, { branchId: data.branchId, name: data.guardianName || data.name });
+  }
+  if (data.phone2) {
+    await ensureParentPreRegistration(data.phone2, ref.id, { branchId: data.branchId, name: data.guardianName || data.name });
+  }
+
   await logAction('student_add', { studentId: ref.id, name: data.name });
   return ref.id;
 }
@@ -309,6 +357,15 @@ export async function updateStudent(studentId, data) {
     updateData.className = data.classId; // Cloud Functions compatibility
   }
   await updateDoc(doc(db, 'students', studentId), updateData);
+
+  // Keep parent pre-registration docs in sync when phone numbers change
+  if (data.phone1) {
+    await ensureParentPreRegistration(data.phone1, studentId, { branchId: data.branchId });
+  }
+  if (data.phone2) {
+    await ensureParentPreRegistration(data.phone2, studentId, { branchId: data.branchId });
+  }
+
   await logAction('student_update', { studentId });
 }
 
@@ -320,6 +377,7 @@ export async function deleteStudent(studentId) {
   });
   await logAction('student_delete', { studentId });
 }
+
 
 // ─────────────────────────────────────────────────
 // ATTENDANCE
@@ -709,6 +767,9 @@ export async function createPost(data) {
     authorUid: uid(),
     authorName: auth.currentUser?.displayName || 'Admin',
     timestamp: serverTimestamp(),
+    createdAt: serverTimestamp(),
+    updatedAt: null,
+    edited: false,
     // New metadata fields
     pushNotification: data.pushNotification !== false,  // default true
     status: data.status || 'published',
@@ -716,6 +777,37 @@ export async function createPost(data) {
   });
   await logAction('post_create', { postId: postRef.id, title: data.title });
   return postRef.id;
+}
+
+export async function updatePost(postId, data) {
+  // Upload any new File objects; keep existing URL strings as-is
+  const imageUrls = [];
+  const existingUrls = data.existingImageUrls || [];
+  imageUrls.push(...existingUrls);
+  if (data.images?.length) {
+    for (const file of data.images) {
+      if (file instanceof File) {
+        const storageRef = ref(storage, `posts/${Date.now()}_${file.name}`);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+        imageUrls.push(url);
+      }
+    }
+  }
+  const scope = data.scope === 'all_branches' ? 'all' : (data.scope || 'branch');
+  await updateDoc(doc(db, 'posts', postId), {
+    title: data.title,
+    body: data.body,
+    category: data.category || 'General',
+    scope,
+    branchId: data.branchId || null,
+    classId: data.classId || null,
+    className: data.classId || null,
+    imageUrls,
+    edited: true,
+    updatedAt: serverTimestamp(),
+  });
+  await logAction('post_update', { postId, title: data.title });
 }
 
 export async function deletePost(postId) {

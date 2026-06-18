@@ -1,53 +1,64 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../config/firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
-import { getUserProfile } from '../services/firestore.js';
-import { activateParentProfile } from '../services/activateParentProfile.js';
+import { fetchProfile, fetchMaintenanceSettings } from '../services/profileService.js';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);        // Firebase user
-  const [profile, setProfile] = useState(null);   // Firestore user profile
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);                  // Firebase user
+  const [profile, setProfile] = useState(null);             // Firestore user profile
+  const [authState, setAuthState] = useState('BOOTING');    // BOOTING | UNAUTHENTICATED | AUTHENTICATING | PROFILE_LOADING | AUTHENTICATED | PROFILE_ERROR
+  const [maintenanceSettings, setMaintenanceSettings] = useState({
+    enabled: false,
+    message: 'System maintenance in progress',
+    estimatedReturn: '',
+    contactNumber: ''
+  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
+        setAuthState('PROFILE_LOADING');
         try {
-          let data = await getUserProfile(firebaseUser.uid);
-          if (!data && firebaseUser.phoneNumber) {
-            console.log('[AuthContext] No user profile found for parent login. Attempting auto-activation...');
-            const activatedProfile = await activateParentProfile(firebaseUser);
-            if (activatedProfile) {
-              data = activatedProfile;
-            }
+          // Fetch global maintenance settings
+          const maint = await fetchMaintenanceSettings();
+          setMaintenanceSettings(maint);
+
+          // Fetch profile using profileService
+          const profileData = await fetchProfile(firebaseUser.uid, firebaseUser);
+          setProfile(profileData);
+          
+          if (profileData) {
+            setAuthState('AUTHENTICATED');
+          } else {
+            setAuthState('PROFILE_ERROR');
           }
-          setProfile(data);
         } catch (e) {
-          console.error('Profile fetch/activation failed:', e);
+          console.error('[AuthContext] Auth listener profile load failed:', e);
           setProfile(null);
+          setAuthState('PROFILE_ERROR');
         }
       } else {
         setUser(null);
         setProfile(null);
+        setAuthState('UNAUTHENTICATED');
       }
-      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    if (user && profile) {
+    if (user && profile && authState === 'AUTHENTICATED') {
       import('../services/notifications.js')
         .then(({ initNotifications }) => initNotifications())
         .catch(err => console.error('[AuthContext] Failed to initialize notifications:', err));
     }
-  }, [user, profile]);
+  }, [user, profile, authState]);
 
   useEffect(() => {
-    if (!user || !profile) return;
+    if (!user || !profile || authState !== 'AUTHENTICATED') return;
 
     // session inactivity timeouts
     let timeoutMs = 0;
@@ -65,8 +76,10 @@ export function AuthProvider({ children }) {
       if (inactivityTimer) clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
         console.warn(`[Security] Admin session expired due to inactivity (${profile.role}). Logging out.`);
-        auth.signOut().then(() => {
-          window.location.href = '/login';
+        import('../services/authService.js').then(({ logout }) => {
+          logout().then(() => {
+            window.location.href = '/';
+          });
         });
       }, timeoutMs);
     };
@@ -80,17 +93,49 @@ export function AuthProvider({ children }) {
       if (inactivityTimer) clearTimeout(inactivityTimer);
       events.forEach(event => window.removeEventListener(event, resetTimer));
     };
-  }, [user, profile]);
+  }, [user, profile, authState]);
+
+  const retryProfileLoad = async () => {
+    if (!auth.currentUser) {
+      setAuthState('UNAUTHENTICATED');
+      return null;
+    }
+    setAuthState('PROFILE_LOADING');
+    try {
+      const maint = await fetchMaintenanceSettings();
+      setMaintenanceSettings(maint);
+
+      const profileData = await fetchProfile(auth.currentUser.uid, auth.currentUser);
+      setProfile(profileData);
+      if (profileData) {
+        setAuthState('AUTHENTICATED');
+      } else {
+        setAuthState('PROFILE_ERROR');
+      }
+      return profileData;
+    } catch (e) {
+      console.error('[AuthContext] retryProfileLoad failed:', e);
+      setProfile(null);
+      setAuthState('PROFILE_ERROR');
+      return null;
+    }
+  };
 
   const refreshProfile = async () => {
-    if (!auth.currentUser) return null;
-    const data = await getUserProfile(auth.currentUser.uid);
-    setProfile(data);
-    return data;
+    return await retryProfileLoad();
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, setProfile, refreshProfile }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      profile, 
+      authState, 
+      setAuthState, 
+      maintenanceSettings, 
+      setMaintenanceSettings,
+      refreshProfile, 
+      retryProfileLoad 
+    }}>
       {children}
     </AuthContext.Provider>
   );
@@ -101,3 +146,4 @@ export function useAuth() {
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');
   return ctx;
 }
+

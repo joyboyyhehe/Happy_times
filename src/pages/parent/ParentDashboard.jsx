@@ -5,6 +5,7 @@ import BottomNav from '../../components/BottomNav.jsx';
 import Modal from '../../components/Modal.jsx';
 import InstallBanner from '../../components/InstallBanner.jsx';
 import { auth } from '../../config/firebase.js';
+import { logout } from '../../services/authService.js';
 import {
   getStudentsForParent,
   getStudentAttendanceMonth,
@@ -24,6 +25,7 @@ import ExpandableCard from '../../components/ExpandableCard.jsx';
 import EmptyState from '../../components/EmptyState.jsx';
 import { ProfileAvatar, ProfileSheet } from '../../components/ProfileSheet.jsx';
 import BottomSheet from '../../components/BottomSheet.jsx';
+import LinkifyText from '../../components/LinkifyText.jsx';
 
 const CATEGORIES = ['All', 'Announcement', 'Event', 'Holiday', 'Circular', 'General'];
 
@@ -358,8 +360,8 @@ export default function ParentDashboard() {
                 onClick={() => selectedChild && setActiveStudentProfile(selectedChild)}
                 title={selectedChild ? "Click to view student details" : ""}
               >
-                {selectedChild ? `${selectedChild.name}'s Dashboard` : 'Dashboard'}
-                {selectedChild && <span style={{ fontSize: 13, opacity: 0.7 }}>ℹ️</span>}
+                Parent Portal
+                {selectedChild && <span style={{ fontSize: 13, opacity: 0.7 }}>({selectedChild.name}) ℹ️</span>}
               </h1>
               {lastSynced && <div style={{ fontSize: 10, opacity: 0.6, marginTop: 2, display: 'flex', alignItems: 'center', gap: 4 }}><span>🔄</span> Synced at {lastSynced}</div>}
             </div>
@@ -396,132 +398,151 @@ export default function ParentDashboard() {
           const attendanceRate = totalDays > 0 ? Math.round(((stats.present + stats.late) / totalDays) * 100) : 100;
           return (
             <div className="fade-in">
-              {/* Attendance summary */}
-              <div className="card mb-16">
-                <div className="section-title mb-8">📅 Attendance This Month</div>
-                <div className="stat-grid cols-3" style={{ marginBottom: 12 }}>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: 24, fontWeight: 700, color: 'var(--success)' }}>{stats.present}</div>
-                    <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Present</div>
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: 24, fontWeight: 700, color: 'var(--error)' }}>{stats.absent}</div>
-                    <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Absent</div>
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: 24, fontWeight: 700, color: 'var(--warning)' }}>{stats.late}</div>
-                    <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Late</div>
-                  </div>
-                </div>
-
-                {/* Progress bar and details */}
-                <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: 12, marginTop: 12 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-mid)' }}>Monthly Attendance Rate</span>
-                    <span className="badge" style={{
-                      background: attendanceRate >= 90 ? 'var(--success-light)' : 'var(--warning-light)',
-                      color: attendanceRate >= 90 ? 'var(--success)' : 'var(--warning)',
-                      fontWeight: '700',
-                      fontSize: '11px'
-                    }}>
-                      {attendanceRate}% Rate
-                    </span>
-                  </div>
-                  <div style={{ background: '#ECEFF1', borderRadius: 99, height: 8, width: '100%', overflow: 'hidden' }}>
-                    <div style={{
-                      background: 'linear-gradient(90deg, var(--success) 0%, var(--accent) 100%)',
-                      height: '100%',
-                      width: `${attendanceRate}%`,
-                      borderRadius: 99,
-                      transition: 'width 0.8s ease-out'
-                    }} />
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-hint)', marginTop: 6 }}>
-                    <span>Target: 90%</span>
-                    <strong>{attendanceRate >= 90 ? 'Excellent Regularity! 🌟' : 'Needs attention'}</strong>
+              {/* Premium Welcome Banner */}
+              <div className="welcome-banner">
+                <div className="welcome-banner-content">
+                  <span className="welcome-wave">👋</span>
+                  <div className="welcome-text-group">
+                    <h2 className="welcome-title">Hello, {profile?.name || 'Parent'}!</h2>
+                    <p className="welcome-subtitle">
+                      {selectedChild 
+                        ? `${selectedChild.name} is enrolled in ${selectedChild.classId} (${selectedChild.branchId} branch).`
+                        : 'Manage your child\'s school profiles and updates.'}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Quick Shortcuts */}
-              <div className="section-header">
-                <span className="section-title">⚡ Quick Shortcuts</span>
-              </div>
-              <div className="quick-actions mb-16">
-                <button className="quick-action" onClick={() => setTab('attendance')}>
-                  <div className="quick-action-icon" style={{ background: 'var(--success-light)', color: 'var(--success)' }}>📅</div>
-                  Calendar
-                </button>
-                <button className="quick-action" onClick={() => { setTab('leaves'); setLeaveTab('apply'); }}>
-                  <div className="quick-action-icon" style={{ background: 'var(--warning-light)', color: 'var(--warning)' }}>📝</div>
-                  Apply Leave
-                </button>
-                <button className="quick-action" onClick={() => setTab('fees')}>
-                  <div className="quick-action-icon" style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}>💰</div>
-                  Pay Fees
-                </button>
-                <button className="quick-action" onClick={() => setTab('feed')}>
-                  <div className="quick-action-icon" style={{ background: '#F3E5F5', color: '#7B1FA2' }}>📢</div>
-                  Latest Feed
-                </button>
-                <button className="quick-action" onClick={() => {
-                  if (selectedChild) {
-                    setActiveStudentProfile(selectedChild);
-                  } else {
-                    setTab('profile');
-                  }
-                }}>
-                  <div className="quick-action-icon" style={{ background: 'var(--info-light)', color: 'var(--info)' }}>👤</div>
-                  Child Details
-                </button>
-              </div>
-
-              {/* Pending fees */}
-              {feeRecord && feeRecord.pending > 0 && (
-                <div className="card mb-16" style={{ borderLeft: '4px solid var(--primary)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div>
-                      <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>Pending Fee</div>
-                      <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--primary)' }}>₹{feeRecord.pending.toLocaleString()}</div>
+              {selectedChild ? (
+                <>
+                  {/* SLCM Card Grid (3x2) */}
+                  <div className="slcm-card-grid">
+                    {/* Card 1: Attendance */}
+                    <div className="slcm-card" onClick={() => setTab('attendance')}>
+                      <div className="slcm-card-icon-wrapper slcm-icon-attendance">
+                        <span>📅</span>
+                      </div>
+                      <div className="slcm-card-content">
+                        <div className="slcm-card-label">Attendance</div>
+                        <div className="slcm-card-val">{attendanceRate}%</div>
+                        <div className="slcm-card-desc">{stats.present} Present · {stats.absent} Absent</div>
+                      </div>
                     </div>
-                    <button className="btn btn-outline btn-sm" onClick={() => setTab('fees')}>View →</button>
-                  </div>
-                </div>
-              )}
 
-              {/* Recent Announcements Feed */}
-              <div className="section-header">
-                <span className="section-title">📢 Recent Announcements & Updates</span>
-                <button onClick={() => setTab('feed')} style={{ background: 'none', border: 'none', color: 'var(--primary)', fontWeight: 600, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>See all →</button>
-              </div>
-              <div className="flex flex-col gap-10 mb-16">
-                {posts.slice(0, 3).map(p => (
-                  <div 
-                    key={p.id} 
-                    className="card" 
-                    style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 6 }}
-                    onClick={() => setActivePostDetail(p)}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span className={`post-cat-badge ${p.category?.toLowerCase()}`}>{p.category}</span>
-                      <span style={{ fontSize: 11, color: 'var(--text-hint)' }}>
-                        {p.timestamp?.toDate?.()?.toLocaleDateString?.('en-IN', { day: 'numeric', month: 'short' }) || '—'}
-                      </span>
+                    {/* Card 2: Fees */}
+                    <div className="slcm-card" onClick={() => setTab('fees')}>
+                      <div className="slcm-card-icon-wrapper slcm-icon-fees">
+                        <span>💰</span>
+                      </div>
+                      <div className="slcm-card-content">
+                        <div className="slcm-card-label">Fees</div>
+                        <div className="slcm-card-val">
+                          {feeRecord ? `₹${feeRecord.pending.toLocaleString()}` : '₹0'}
+                        </div>
+                        <div className="slcm-card-desc">
+                          {feeRecord && feeRecord.pending > 0 ? 'Pending Dues' : 'Fully Paid ✓'}
+                        </div>
+                      </div>
                     </div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--navy)' }}>{p.title}</div>
-                    <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>
-                      {p.body?.length > 120 ? `${p.body.slice(0, 120)}...` : p.body}
-                    </div>
-                  </div>
-                ))}
-                {posts.length === 0 && (
-                  <div className="card" style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>
-                    No announcements or updates posted yet.
-                  </div>
-                )}
-              </div>
 
-              {!selectedChild && (
+                    {/* Card 3: Announcements */}
+                    <div className="slcm-card" onClick={() => { setTab('feed'); setCategoryFilter('Announcement'); }}>
+                      <div className="slcm-card-icon-wrapper slcm-icon-announcements">
+                        <span>📢</span>
+                      </div>
+                      <div className="slcm-card-content">
+                        <div className="slcm-card-label">Announcements</div>
+                        <div className="slcm-card-val">
+                          {posts.filter(p => p.category === 'Announcement' || p.category === 'Circular').length}
+                        </div>
+                        <div className="slcm-card-desc">Circulars &amp; Notices</div>
+                      </div>
+                    </div>
+
+                    {/* Card 4: Gallery */}
+                    <div className="slcm-card" onClick={() => { setTab('feed'); setCategoryFilter('Event'); }}>
+                      <div className="slcm-card-icon-wrapper slcm-icon-gallery">
+                        <span>🖼️</span>
+                      </div>
+                      <div className="slcm-card-content">
+                        <div className="slcm-card-label">Gallery</div>
+                        <div className="slcm-card-val">
+                          {posts.reduce((acc, p) => acc + (p.imageUrls?.length || 0), 0)}
+                        </div>
+                        <div className="slcm-card-desc">Activity Photos</div>
+                      </div>
+                    </div>
+
+                    {/* Card 5: Notifications */}
+                    <div className="slcm-card" onClick={() => setTab('feed')}>
+                      <div className="slcm-card-icon-wrapper slcm-icon-notifications">
+                        <span>🔔</span>
+                      </div>
+                      <div className="slcm-card-content">
+                        <div className="slcm-card-label">Notifications</div>
+                        <div className="slcm-card-val">{posts.length}</div>
+                        <div className="slcm-card-desc">Recent Updates</div>
+                      </div>
+                    </div>
+
+                    {/* Card 6: Apply Leave */}
+                    <div className="slcm-card" onClick={() => { setTab('leaves'); setLeaveTab('apply'); }}>
+                      <div className="slcm-card-icon-wrapper slcm-icon-leave">
+                        <span>📝</span>
+                      </div>
+                      <div className="slcm-card-content">
+                        <div className="slcm-card-label">Apply Leave</div>
+                        <div className="slcm-card-val">{leaves.length}</div>
+                        <div className="slcm-card-desc">
+                          {leaves.filter(l => l.status === 'pending').length} Pending Approval
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pending Fees Alert Banner */}
+                  {feeRecord && feeRecord.pending > 0 && (
+                    <div className="slcm-alert-banner" onClick={() => setTab('fees')}>
+                      <div className="slcm-alert-banner-text">
+                        <strong>💳 Pending Fee Payment:</strong> You have an outstanding balance of <strong>₹{feeRecord.pending.toLocaleString()}</strong>. Tap to view payment options.
+                      </div>
+                      <span className="slcm-alert-banner-arrow">→</span>
+                    </div>
+                  )}
+
+                  {/* Recent Activity Section */}
+                  <div className="section-header">
+                    <span className="section-title">📢 Latest Announcements</span>
+                    <button onClick={() => setTab('feed')} style={{ background: 'none', border: 'none', color: 'var(--primary)', fontWeight: 600, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>See all</button>
+                  </div>
+                  <div className="flex flex-col gap-10" style={{ marginBottom: 16 }}>
+                    {posts.slice(0, 2).map(p => (
+                      <div 
+                        key={p.id} 
+                        className="post-card" 
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => setActivePostDetail(p)}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                          <span className={`post-cat-badge ${p.category?.toLowerCase()}`}>{p.category}</span>
+                          <span style={{ fontSize: 11, color: 'var(--text-hint)' }}>
+                            {p.timestamp?.toDate?.()?.toLocaleDateString?.('en-IN', { day: 'numeric', month: 'short' }) || '—'}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--navy)', marginBottom: 4 }}>{p.title}</div>
+                        <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                          {p.body?.length > 120 ? `${p.body.slice(0, 120)}...` : p.body}
+                        </div>
+                      </div>
+                    ))}
+                    {posts.length === 0 && (
+                      <div className="card" style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>
+                        No announcements posted yet.
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
                 <div className="empty-state">
                   <div className="empty-state-icon">👋</div>
                   <div className="empty-state-title">Welcome!</div>
@@ -830,7 +851,7 @@ export default function ParentDashboard() {
                     <span className={`post-cat-badge ${p.category?.toLowerCase()}`}>{p.category}</span>
                     <div style={{ fontSize: 15, fontWeight: 600, marginTop: 8, marginBottom: 4 }}>{p.title}</div>
                     <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                      {p.body?.length > 150 ? `${p.body.slice(0, 150)}...` : p.body}
+                      <LinkifyText text={p.body} maxChars={150} />
                     </div>
                     {p.imageUrls?.length > 0 && (
                       <div style={{ display: 'flex', gap: 8, marginTop: 10, overflowX: 'auto', paddingBottom: 4 }}>
@@ -1261,7 +1282,15 @@ export default function ParentDashboard() {
             <button
               className="btn btn-primary"
               style={{ flex: 1, background: 'var(--error)', boxShadow: 'none' }}
-              onClick={() => { setShowLogoutConfirm(false); auth.signOut(); }}
+              onClick={async () => {
+                setShowLogoutConfirm(false);
+                try {
+                  await logout();
+                  window.location.href = '/';
+                } catch (e) {
+                  console.error('Logout error:', e);
+                }
+              }}
             >
               Logout
             </button>
@@ -1297,7 +1326,7 @@ export default function ParentDashboard() {
               <span>👤</span> Published by <strong>{activePostDetail.authorName}</strong>
             </div>
             <p style={{ fontSize: 14, color: 'var(--text-dark)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
-              {activePostDetail.body}
+              <LinkifyText text={activePostDetail.body} />
             </p>
 
             {activePostDetail.imageUrls?.length > 0 && (

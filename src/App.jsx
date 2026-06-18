@@ -2,10 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense, useState, useEffect } from 'react';
 import { useAuth } from './contexts/AuthContext.jsx';
 import LoginScreen from './pages/auth/LoginScreen.jsx';
-import LandingPage from './pages/LandingPage.jsx';
 import { logTelemetryEvent } from './services/telemetry.js';
-import { isStandalone, isInstalledApp } from './utils/appMode.js';
-import { auth } from './config/firebase.js';
 import AppLogo from './components/AppLogo.jsx';
 
 // Lazy load dashboard chunks for optimal mobile page-load speed
@@ -14,20 +11,11 @@ const BranchAdminDashboard = lazy(() => import('./pages/branchadmin/BranchAdminD
 const SuperAdminDashboard = lazy(() => import('./pages/superadmin/SuperAdminDashboard.jsx'));
 const FeeRecorder = lazy(() => import('./pages/superadmin/FeeRecorder.jsx'));
 
-// Check if installation gate is bypassed
-function isBypassed() {
-  const disableInstallGate = import.meta.env.VITE_DISABLE_INSTALL_GATE === 'true';
-  const emergencyBypass = sessionStorage.getItem('emergency_bypass') === 'true';
-  const browserLoginAllowed = sessionStorage.getItem('browser_login_allowed') === 'true';
-  return isInstalledApp() || disableInstallGate || emergencyBypass || browserLoginAllowed;
-}
-
 function ProtectedRoute({ children, allowedRoles }) {
-  const { user, profile, loading, refreshProfile } = useAuth();
+  const { authState, profile, maintenanceSettings, retryProfileLoad } = useAuth();
   const [retrying, setRetrying] = useState(false);
-  const bypassed = isBypassed();
 
-  if (loading) {
+  if (authState === 'BOOTING' || authState === 'PROFILE_LOADING' || authState === 'AUTHENTICATING') {
     return (
       <div className="page-shell">
         <div className="loading-container">
@@ -37,17 +25,14 @@ function ProtectedRoute({ children, allowedRoles }) {
     );
   }
 
-  // Enforce PWA installation gate
-  if (!bypassed) {
+  if (authState === 'UNAUTHENTICATED') {
     return <Navigate to="/" replace />;
   }
 
-  if (!user) return <Navigate to="/login" replace />;
-
-  // Profile loaded but null = Firestore couldn't fetch it
-  if (!profile && !loading) {
+  // Profile loaded but null / error
+  if (authState === 'PROFILE_ERROR' || !profile) {
     return (
-      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', padding: 24 }}>
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', padding: 24, display: 'flex', height: '100vh', boxSizing: 'border-box' }}>
         <div style={{ textAlign: 'center', maxWidth: 300 }}>
           <div style={{ fontSize: 40, marginBottom: 16 }}>⚠️</div>
           <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8, color: 'var(--text-dark)' }}>
@@ -58,11 +43,11 @@ function ProtectedRoute({ children, allowedRoles }) {
           </div>
           <button
             className="btn btn-primary"
-            style={{ marginBottom: 12 }}
+            style={{ marginBottom: 12, cursor: 'pointer' }}
             disabled={retrying}
             onClick={async () => {
               setRetrying(true);
-              await refreshProfile();
+              await retryProfileLoad();
               setRetrying(false);
             }}
           >
@@ -71,7 +56,13 @@ function ProtectedRoute({ children, allowedRoles }) {
           <br />
           <button
             style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}
-            onClick={() => { auth.signOut(); window.location.href = '/login'; }}
+            onClick={() => {
+              import('./services/authService.js').then(({ logout }) => {
+                logout().then(() => {
+                  window.location.href = '/';
+                });
+              });
+            }}
           >
             Sign out and try again
           </button>
@@ -80,86 +71,122 @@ function ProtectedRoute({ children, allowedRoles }) {
     );
   }
 
+  // Maintenance mode active for parents
+  if (maintenanceSettings?.enabled && profile?.role === 'parent') {
+    return <Navigate to="/" replace />;
+  }
+
   if (allowedRoles && profile) {
     if (!allowedRoles.includes(profile.role)) {
-      return <Navigate to="/login" replace />;
+      return <Navigate to="/" replace />;
     }
   }
   return children;
 }
 
 function SplashRouter() {
-  const { user, profile, loading } = useAuth();
-  const bypassed = isBypassed();
+  const { authState, profile, maintenanceSettings, retryProfileLoad } = useAuth();
+  const [retrying, setRetrying] = useState(false);
 
-  if (loading) {
+  if (authState === 'BOOTING' || authState === 'PROFILE_LOADING' || authState === 'AUTHENTICATING') {
     return (
-      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column', height: '100vh' }}>
         <AppLogo variant="splash" />
-        <div className="spinner" />
+        <div className="spinner" style={{ marginTop: 16 }} />
+        {authState === 'PROFILE_LOADING' && (
+          <div style={{ marginTop: 16, fontSize: 14, color: 'var(--text-muted)' }}>
+            Loading your profile...
+          </div>
+        )}
       </div>
     );
   }
 
-  // Enforce PWA installation gate
-  if (!bypassed) {
+  if (authState === 'UNAUTHENTICATED') {
     return <Navigate to="/" replace />;
   }
 
-  if (!user) return <LoginScreen />;
+  if (authState === 'PROFILE_ERROR' || !profile) {
+    return (
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', padding: 24, display: 'flex', height: '100vh', boxSizing: 'border-box' }}>
+        <div style={{ textAlign: 'center', maxWidth: 300 }}>
+          <div style={{ fontSize: 40, marginBottom: 16 }}>⚠️</div>
+          <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8, color: 'var(--text-dark)' }}>
+            Profile not found
+          </div>
+          <div style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 24, lineHeight: 1.5 }}>
+            We couldn't load your account profile. If you are a parent, please ensure your mobile number is registered with the school.
+          </div>
+          <button
+            className="btn btn-primary"
+            style={{ marginBottom: 12, cursor: 'pointer' }}
+            disabled={retrying}
+            onClick={async () => {
+              setRetrying(true);
+              await retryProfileLoad();
+              setRetrying(false);
+            }}
+          >
+            {retrying ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} /> : 'Retry'}
+          </button>
+          <br />
+          <button
+            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}
+            onClick={() => {
+              import('./services/authService.js').then(({ logout }) => {
+                logout().then(() => {
+                  window.location.href = '/';
+                });
+              });
+            }}
+          >
+            Sign out and try again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Maintenance mode active for parents
+  if (maintenanceSettings?.enabled && profile?.role === 'parent') {
+    return <Navigate to="/" replace />;
+  }
 
   switch (profile?.role) {
     case 'superadmin': return <Navigate to="/super-admin" replace />;
     case 'branchadmin': return <Navigate to="/branch-admin" replace />;
     case 'parent': return <Navigate to="/parent" replace />;
-    default: return <LoginScreen />;
+    default: 
+      import('./services/authService.js').then(({ logout }) => {
+        logout().then(() => {
+          window.location.href = '/';
+        });
+      });
+      return (
+        <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100vh' }}>
+          <div className="spinner" />
+        </div>
+      );
   }
 }
 
 function MainRouter() {
-  const { user, loading } = useAuth();
-  const bypassed = isBypassed();
+  const { authState, profile, maintenanceSettings } = useAuth();
 
-  if (loading) {
+  if (authState === 'BOOTING' || authState === 'PROFILE_LOADING') {
     return (
-      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100vh' }}>
         <div className="spinner" />
       </div>
     );
   }
 
-  // If already authenticated and bypassed, go straight to portal
-  if (user && bypassed) {
+  // If already authenticated and profile loaded
+  if (authState === 'AUTHENTICATED') {
+    if (maintenanceSettings?.enabled && profile?.role === 'parent') {
+      return <LoginScreen />;
+    }
     return <Navigate to="/portal" replace />;
-  }
-
-  if (bypassed) {
-    return <Navigate to="/portal" replace />;
-  }
-
-  return <LandingPage />;
-}
-
-function LoginRoute() {
-  const { user, loading } = useAuth();
-  const bypassed = isBypassed();
-
-  if (loading) {
-    return (
-      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <div className="spinner" />
-      </div>
-    );
-  }
-
-  // If already authenticated and bypassed, go straight to portal
-  if (user && bypassed) {
-    return <Navigate to="/portal" replace />;
-  }
-
-  // Enforce PWA installation gate
-  if (!bypassed) {
-    return <Navigate to="/" replace />;
   }
 
   return <LoginScreen />;
@@ -171,41 +198,9 @@ function EmergencyLoginRoute() {
     sessionStorage.setItem('emergency_bypass', 'true');
     sessionStorage.setItem('browser_login_allowed', 'true');
     logTelemetryEvent('emergency_bypass_triggered');
-    
-    // Generate browser fingerprint safely
-    const parts = [
-      navigator.userAgent || '',
-      navigator.language || '',
-      (window.screen?.width || 0) + 'x' + (window.screen?.height || 0),
-      new Date().getTimezoneOffset()
-    ];
-    const str = parts.join('|');
-    let hash = 5381;
-    for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) + hash) + str.charCodeAt(i);
-    }
-    const fingerprint = 'fp_' + (hash >>> 0).toString(16);
-    
-    const browser = navigator.userAgent.includes('Chrome') ? 'Chrome' :
-                    navigator.userAgent.includes('Safari') ? 'Safari' :
-                    navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Other';
-
-    // Log directly to firestore install_telemetry collection
-    import('./config/firebase.js').then(({ db }) => {
-      import('firebase/firestore').then(({ collection, addDoc, serverTimestamp }) => {
-        addDoc(collection(db, 'install_telemetry'), {
-          event: 'emergency_login_used',
-          browser: browser.substring(0, 50),
-          userAgent: navigator.userAgent.substring(0, 300),
-          standalone: false,
-          fingerprint,
-          timestamp: serverTimestamp()
-        }).catch(err => console.warn('Failed to write emergency bypass log:', err));
-      });
-    });
   }, []);
 
-  return <Navigate to="/login" replace />;
+  return <Navigate to="/" replace />;
 }
 
 function OfflineBanner() {
@@ -281,7 +276,7 @@ export default function App() {
     <>
       <div className="ios-status-bar-bg" />
       <Suspense fallback={
-        <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100vh' }}>
           <div className="loading-container">
             <div className="spinner" />
           </div>
@@ -289,11 +284,8 @@ export default function App() {
       }>
         <OfflineBanner />
       <Routes>
-        {/* Main Entry point: renders LandingPage in browser or redirects to portal in standalone */}
+        {/* Main Entry point: renders LoginScreen directly if unauthenticated */}
         <Route path="/" element={<MainRouter />} />
-
-        {/* Auth — redirects to landing page in browser mode if unauthenticated */}
-        <Route path="/login" element={<LoginRoute />} />
 
         {/* Emergency Login Bypass */}
         <Route path="/emergency-login" element={<EmergencyLoginRoute />} />
@@ -337,7 +329,7 @@ export default function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </Suspense>
+      </Suspense>
     </>
   );
 }

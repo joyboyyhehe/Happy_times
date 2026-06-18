@@ -114,6 +114,9 @@ export default function LandingPage() {
   function proceedToLogin() {
     sessionStorage.setItem('browser_login_allowed', 'true');
     sessionStorage.setItem('emergency_bypass', 'true');
+    // Also persist to localStorage so in-app browsers (WhatsApp, Instagram) don't
+    // lose the bypass flag when they navigate away and back.
+    localStorage.setItem('browser_login_allowed', 'true');
     navigate('/login', { replace: true });
   }
 
@@ -151,12 +154,17 @@ export default function LandingPage() {
           logInstallGateEvent('fallback_unlocked', `Lockout threshold met: ${newCount} declines. Fallback login option visible.`);
         }
 
+        // Clear spent prompt so user can fallback
+        setDeferredPrompt(null);
+
         setTimeout(() => {
           setInstallStatus('idle');
         }, 3000);
       }
     } catch (err) {
       setInstallStatus('idle');
+      // Clear spent/failed prompt to avoid exceptions on retry
+      setDeferredPrompt(null);
       console.error('Install prompt failed:', err);
     }
   }
