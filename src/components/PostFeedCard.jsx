@@ -1,3 +1,5 @@
+import LinkifyText from './LinkifyText.jsx';
+
 /**
  * PostFeedCard — Feed-style post card shared between Branch Admin and Super Admin.
  *
@@ -5,7 +7,9 @@
  *   post       {object}   — Firestore post document
  *   onDelete   {function} — called with (postId) when delete is confirmed
  *   showDelete {boolean}  — whether to render the delete button (role-gated by parent)
+ *   onEdit     {function} — called with (post) when edit is requested (Super Admin only)
  */
+
 
 const CATEGORY_COLORS = {
   announcement: { bg: '#EEF2FF', color: '#4338CA', border: '#C7D2FE' },
@@ -38,14 +42,27 @@ function scopeLabel(post) {
   return post.scope || '—';
 }
 
-export default function PostFeedCard({ post, onDelete, showDelete }) {
+/** Returns true if post was created within the last 30 minutes */
+function isWithinEditWindow(post) {
+  const ts = post.createdAt || post.timestamp;
+  if (!ts) return false;
+  const date = ts.toDate ? ts.toDate() : new Date(ts);
+  return Date.now() - date.getTime() < 30 * 60 * 1000;
+}
+
+export default function PostFeedCard({ post, onDelete, showDelete, onEdit }) {
   const cat = post.category?.toLowerCase() || 'general';
   const colors = CATEGORY_COLORS[cat] || CATEGORY_COLORS.general;
+  const canEdit = !!onEdit && isWithinEditWindow(post);
 
   function handleDelete() {
     if (window.confirm(`Delete "${post.title}"? This cannot be undone.`)) {
       onDelete?.(post.id);
     }
+  }
+
+  function handleEdit() {
+    onEdit?.(post);
   }
 
   return (
@@ -116,6 +133,22 @@ export default function PostFeedCard({ post, onDelete, showDelete }) {
                 🕐 Scheduled
               </span>
             )}
+
+            {/* Edited badge */}
+            {post.edited && (
+              <span style={{
+                display: 'inline-block',
+                padding: '3px 10px',
+                borderRadius: 99,
+                fontSize: 11,
+                fontWeight: 600,
+                background: '#F0F9FF',
+                color: '#0369A1',
+                border: '1px solid #BAE6FD',
+              }}>
+                ✏️ Edited
+              </span>
+            )}
           </div>
 
           <span style={{ fontSize: 11, color: 'var(--text-hint)', flexShrink: 0, marginLeft: 8 }}>
@@ -141,10 +174,10 @@ export default function PostFeedCard({ post, onDelete, showDelete }) {
           lineHeight: 1.5,
           marginBottom: 10,
         }}>
-          {post.body?.length > 160 ? `${post.body.slice(0, 160)}...` : post.body}
+          <LinkifyText text={post.body} maxChars={160} />
         </div>
 
-        {/* Footer: author + delete */}
+        {/* Footer: author + edit + delete */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -156,28 +189,53 @@ export default function PostFeedCard({ post, onDelete, showDelete }) {
             by {post.authorName || 'Admin'}
           </span>
 
-          {showDelete && (
-            <button
-              onClick={handleDelete}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
-                background: 'var(--error-bg)',
-                color: 'var(--error)',
-                border: '1px solid var(--error-border)',
-                borderRadius: 8,
-                fontSize: 12,
-                fontWeight: 600,
-                padding: '5px 10px',
-                cursor: 'pointer',
-                fontFamily: 'inherit',
-                transition: 'opacity 0.15s ease',
-              }}
-            >
-              🗑 Delete
-            </button>
-          )}
+          <div style={{ display: 'flex', gap: 6 }}>
+            {canEdit && (
+              <button
+                onClick={handleEdit}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  background: '#EEF2FF',
+                  color: '#4338CA',
+                  border: '1px solid #C7D2FE',
+                  borderRadius: 8,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  padding: '5px 10px',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                  transition: 'opacity 0.15s ease',
+                }}
+              >
+                ✏️ Edit
+              </button>
+            )}
+
+            {showDelete && (
+              <button
+                onClick={handleDelete}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  background: 'var(--error-bg)',
+                  color: 'var(--error)',
+                  border: '1px solid var(--error-border)',
+                  borderRadius: 8,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  padding: '5px 10px',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                  transition: 'opacity 0.15s ease',
+                }}
+              >
+                🗑 Delete
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

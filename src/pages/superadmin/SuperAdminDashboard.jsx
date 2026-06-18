@@ -90,6 +90,7 @@ export default function SuperAdminDashboard() {
 
   // Form states
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [postToEdit, setPostToEdit] = useState(null);
 
   useEffect(() => {
     loadBranches();
@@ -321,6 +322,7 @@ export default function SuperAdminDashboard() {
                   post={p}
                   showDelete={true}
                   onDelete={(id) => handleDeletePost(id, 'superadmin', null)}
+                  onEdit={(post) => { setPostToEdit(post); push('edit_post'); }}
                 />
               ))}
               {hasMorePosts && posts.length > 0 && (
@@ -407,6 +409,13 @@ export default function SuperAdminDashboard() {
         )}
         {isOpen('create_post') && (
           <SuperAdminCreatePost pop={pop} onCreated={() => loadPosts()} />
+        )}
+        {isOpen('edit_post') && (
+          <SuperAdminCreatePost
+            pop={() => { setPostToEdit(null); pop(); }}
+            onCreated={() => { setPostToEdit(null); loadPosts(); }}
+            postToEdit={postToEdit}
+          />
         )}
       </Suspense>
 

@@ -24,6 +24,7 @@ import ExpandableCard from '../../components/ExpandableCard.jsx';
 import EmptyState from '../../components/EmptyState.jsx';
 import { ProfileAvatar, ProfileSheet } from '../../components/ProfileSheet.jsx';
 import BottomSheet from '../../components/BottomSheet.jsx';
+import LinkifyText from '../../components/LinkifyText.jsx';
 
 const CATEGORIES = ['All', 'Announcement', 'Event', 'Holiday', 'Circular', 'General'];
 
@@ -830,7 +831,7 @@ export default function ParentDashboard() {
                     <span className={`post-cat-badge ${p.category?.toLowerCase()}`}>{p.category}</span>
                     <div style={{ fontSize: 15, fontWeight: 600, marginTop: 8, marginBottom: 4 }}>{p.title}</div>
                     <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                      {p.body?.length > 150 ? `${p.body.slice(0, 150)}...` : p.body}
+                      <LinkifyText text={p.body} maxChars={150} />
                     </div>
                     {p.imageUrls?.length > 0 && (
                       <div style={{ display: 'flex', gap: 8, marginTop: 10, overflowX: 'auto', paddingBottom: 4 }}>
@@ -1297,7 +1298,7 @@ export default function ParentDashboard() {
               <span>👤</span> Published by <strong>{activePostDetail.authorName}</strong>
             </div>
             <p style={{ fontSize: 14, color: 'var(--text-dark)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
-              {activePostDetail.body}
+              <LinkifyText text={activePostDetail.body} />
             </p>
 
             {activePostDetail.imageUrls?.length > 0 && (

@@ -268,37 +268,65 @@ export default function LoginScreen() {
     setLoading(true);
     setError(null);
     
-    // Set a 15-second safety timeout for verification
+    // Set a 30-second safety timeout for full verification + profile load
     const safetyTimeout = setTimeout(() => {
       setLoading(false);
       setError('OTP verification timed out. Please check your connection and try again.');
-    }, 15000);
+    }, 30000);
 
     try {
       await confirmResult.confirm(otp);
       clearTimeout(safetyTimeout);
-      const profile = await refreshProfile();
+
+      // Retry loop: onAuthStateChanged and activateParentProfile run concurrently.
+      // We must wait for the profile to be fully ready before navigating.
+      // Up to 4 attempts with 800ms delay between each (total wait up to ~3.2s).
+      let profile = null;
+      const MAX_RETRIES = 4;
+      const RETRY_DELAY_MS = 800;
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        profile = await refreshProfile();
+        if (profile) break;
+        console.log(`[Auth] Profile not ready yet, retrying (${attempt}/${MAX_RETRIES})...`);
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+      }
+
       if (profile) {
         logTelemetryEvent('login_success', { role: profile.role });
         navigateByRole(profile.role);
       } else {
         logTelemetryEvent('login_failed', { reason: 'parent_profile_missing' });
-        logTelemetryError(new Error('Parent profile whitelisting missing for verified phone'), { category: 'auth', isCritical: true });
-        setError('Account not found. Contact your school admin.');
+        logTelemetryError(new Error('Parent profile missing for verified phone'), { category: 'auth', isCritical: true });
+        setError('Your account was not found in our system. Please contact your school admin and ask them to register your phone number in the portal.');
         await auth.signOut().catch(() => {});
         setLoading(false);
       }
+
     } catch (e) {
       clearTimeout(safetyTimeout);
-      logTelemetryEvent('otp_failed', { code: e.code });
-      logTelemetryEvent('login_failed', { reason: 'otp_verification_failed' });
-      logTelemetryError(e, { category: 'auth', isCritical: !e.message?.includes('OTP') && !e.code?.includes('code') });
-      await auth.signOut().catch(() => {});
-      if (e.message?.includes('OTP') || e.code?.includes('code')) {
+      
+      // Distinguish between OTP errors and "account not found" errors
+      const isOtpError = e.message?.includes('OTP') || e.code?.includes('code') || e.code?.includes('invalid');
+      const isAccountMissing = e.code === 'permission-denied' || e.code === 'not-found' || 
+                               e.message?.includes('permission') || e.message?.includes('Missing or insufficient');
+      
+      if (isAccountMissing) {
+        // Parent profile doesn't exist in the system
+        logTelemetryEvent('login_failed', { reason: 'parent_profile_missing' });
+        logTelemetryError(e, { category: 'auth', isCritical: true });
+        setError('Your account was not found in our system. Please contact your school admin and ask them to register your phone number in the portal.');
+      } else if (isOtpError) {
+        logTelemetryEvent('otp_failed', { code: e.code });
+        logTelemetryEvent('login_failed', { reason: 'otp_verification_failed' });
         setError('Invalid OTP. Please try again.');
       } else {
+        logTelemetryEvent('otp_failed', { code: e.code });
+        logTelemetryEvent('login_failed', { reason: 'otp_verification_failed' });
+        logTelemetryError(e, { category: 'auth', isCritical: !isOtpError });
         setError(e.message || 'Verification failed. Please try again.');
       }
+      
+      await auth.signOut().catch(() => {});
       setLoading(false);
     }
   }
@@ -597,9 +625,9 @@ export default function LoginScreen() {
                 <span>⚠</span>
                 <span>{error}</span>
               </div>
-              {/FBAN|FBAV|Instagram|Twitter|Line|WhatsApp/i.test(navigator.userAgent) && (
+              {/FBAN|FBAV|Instagram|Twitter|Line|WhatsApp|wv\)|GSA\//i.test(navigator.userAgent) && (
                 <div style={{ fontSize: '11px', opacity: 0.8, borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '6px', marginTop: '4px', textAlign: 'left', lineHeight: '1.4' }}>
-                  💡 <strong>Tip:</strong> In-app browsers (like Instagram or WhatsApp) often block Google sign-in. Tap the menu in the top corner and select <strong>"Open in Browser"</strong> to complete login.
+                  💡 <strong>Tip:</strong> You appear to be using an in-app browser (WhatsApp/Instagram). For the best experience, tap the ⋮ menu and select <strong>"Open in Chrome"</strong> or <strong>"Open in Safari"</strong>.
                 </div>
               )}
             </div>

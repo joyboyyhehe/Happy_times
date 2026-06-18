@@ -62,24 +62,39 @@ service cloud.firestore {
       allow read: if isAuthenticated() && (
         request.auth.uid == userId || 
         isStaff() ||
-        (request.auth.token.email != null && resource.data.email.lower() == request.auth.token.email.lower()) ||
+        (request.auth.token.email != null && resource.data.email != null && resource.data.email.lower() == request.auth.token.email.lower()) ||
         (request.auth.token.phone_number != null && (
-          resource.data.phone == request.auth.token.phone_number ||
-          request.auth.token.phone_number == '+91' + resource.data.phone
+          (resource.data.phone != null && (
+            resource.data.phone == request.auth.token.phone_number ||
+            request.auth.token.phone_number == '+91' + resource.data.phone
+          )) ||
+          // Allow reading pre-created parent_phone doc by matching the doc ID directly
+          userId == 'parent_' + request.auth.token.phone_number[3:]
         ))
       );
       
       // Let new users link their authenticated account to a pre-created profile
       allow update: if isAuthenticated() && 
         (
-          (request.auth.token.email != null && resource.data.email.lower() == request.auth.token.email.lower()) ||
+          (request.auth.token.email != null && resource.data.email != null && resource.data.email.lower() == request.auth.token.email.lower()) ||
           (request.auth.token.phone_number != null && (
-            resource.data.phone == request.auth.token.phone_number ||
-            request.auth.token.phone_number == '+91' + resource.data.phone
+            (resource.data.phone != null && (
+              resource.data.phone == request.auth.token.phone_number ||
+              request.auth.token.phone_number == '+91' + resource.data.phone
+            )) ||
+            // Match pre-created parent_phone doc by doc ID pattern
+            userId == 'parent_' + request.auth.token.phone_number[3:]
           ))
         ) &&
         request.resource.data.uid == request.auth.uid &&
-        request.resource.data.role == resource.data.role;
+        request.resource.data.role == 'parent';
+
+      // Allow phone-authenticated parent to archive their pre-created parent_phone doc during activation
+      allow update: if isAuthenticated() &&
+        request.auth.token.phone_number != null &&
+        userId == 'parent_' + request.auth.token.phone_number[3:] &&
+        request.resource.data.archived == true &&
+        request.resource.data.migratedTo == request.auth.uid;
         
       // Allow users to update their own profile safely (e.g. for fcmTokens)
       allow update: if isAuthenticated() && request.auth.uid == userId &&
@@ -95,6 +110,13 @@ service cloud.firestore {
           request.resource.data.role == get(/databases/$(database)/documents/staff_whitelist/$(request.auth.token.email.lower())).data.role
         )
       );
+
+      // Allow branch admins to create/update parent pre-registration docs (users/parent_{phone})
+      // This is called automatically by addStudent/updateStudent to allow parents to log in via OTP.
+      allow create, update: if isStaff() &&
+        userId.matches('parent_[0-9]{10}') &&
+        request.resource.data.role == 'parent' &&
+        request.resource.data.archived == false;
     }
 
     // --- /registrations (Public parent registration submissions) ---
@@ -163,9 +185,6 @@ service cloud.firestore {
     // --- /posts ---
     match /posts/{postId} {
       allow read, write: if isSuperAdmin();
-      allow read, write: if isBranchAdmin() && 
-        (resource == null || resource.data.branchId == getUserData().branchId) &&
-        (request.resource == null || request.resource.data.branchId == getUserData().branchId);
       // Parents and authenticated users can read posts (they are school announcements)
       allow read: if isAuthenticated();
     }

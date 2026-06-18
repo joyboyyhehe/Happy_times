@@ -18,8 +18,12 @@ const FeeRecorder = lazy(() => import('./pages/superadmin/FeeRecorder.jsx'));
 function isBypassed() {
   const disableInstallGate = import.meta.env.VITE_DISABLE_INSTALL_GATE === 'true';
   const emergencyBypass = sessionStorage.getItem('emergency_bypass') === 'true';
-  const browserLoginAllowed = sessionStorage.getItem('browser_login_allowed') === 'true';
-  return isInstalledApp() || disableInstallGate || emergencyBypass || browserLoginAllowed;
+  const browserLoginAllowed =
+    sessionStorage.getItem('browser_login_allowed') === 'true' ||
+    localStorage.getItem('browser_login_allowed') === 'true'; // persists across in-app browser navigations
+  // Auto-bypass for in-app browsers (WhatsApp, Instagram, etc.) — they can't install PWAs anyway
+  const isInAppBrowser = /FBAN|FBAV|Instagram|wv\)|GSA\//.test(navigator.userAgent);
+  return isInstalledApp() || disableInstallGate || emergencyBypass || browserLoginAllowed || isInAppBrowser;
 }
 
 function ProtectedRoute({ children, allowedRoles }) {
@@ -89,8 +93,38 @@ function ProtectedRoute({ children, allowedRoles }) {
 }
 
 function SplashRouter() {
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading, refreshProfile } = useAuth();
   const bypassed = isBypassed();
+  const [retrying, setRetrying] = useState(false);
+  const [retryError, setRetryError] = useState(false);
+
+  useEffect(() => {
+    if (user && !profile && !loading) {
+      let attempts = 0;
+      const maxAttempts = 3;
+      const intervalId = setInterval(async () => {
+        attempts++;
+        console.log(`[SplashRouter] Retrying profile load (${attempts}/${maxAttempts})...`);
+        try {
+          const p = await refreshProfile();
+          if (p) {
+            clearInterval(intervalId);
+          } else if (attempts >= maxAttempts) {
+            clearInterval(intervalId);
+            setRetryError(true);
+          }
+        } catch (err) {
+          console.error('[SplashRouter] Retry profile load failed:', err);
+          if (attempts >= maxAttempts) {
+            clearInterval(intervalId);
+            setRetryError(true);
+          }
+        }
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [user, profile, loading, refreshProfile]);
 
   if (loading) {
     return (
@@ -107,6 +141,57 @@ function SplashRouter() {
   }
 
   if (!user) return <LoginScreen />;
+
+  // If authenticated but profile is still loading (activation race), wait on /portal splash
+  if (user && !profile) {
+    if (retryError) {
+      return (
+        <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center', padding: 24 }}>
+          <div style={{ textAlign: 'center', maxWidth: 300 }}>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>⚠️</div>
+            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8, color: 'var(--text-dark)' }}>
+              Profile not found
+            </div>
+            <div style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 24, lineHeight: 1.5 }}>
+              We couldn't load your account profile. If you are a parent, please ensure your mobile number is registered with the school.
+            </div>
+            <button
+              className="btn btn-primary"
+              style={{ marginBottom: 12 }}
+              disabled={retrying}
+              onClick={async () => {
+                setRetrying(true);
+                const p = await refreshProfile();
+                if (p) {
+                  setRetryError(false);
+                }
+                setRetrying(false);
+              }}
+            >
+              {retrying ? <div className="spinner spinner-sm" style={{ borderTopColor: 'white' }} /> : 'Retry'}
+            </button>
+            <br />
+            <button
+              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}
+              onClick={() => { auth.signOut(); window.location.href = '/login'; }}
+            >
+              Sign out and try again
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="page-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <AppLogo variant="splash" />
+        <div className="spinner" />
+        <div style={{ marginTop: 16, fontSize: 14, color: 'var(--text-muted)' }}>
+          Loading your profile...
+        </div>
+      </div>
+    );
+  }
 
   switch (profile?.role) {
     case 'superadmin': return <Navigate to="/super-admin" replace />;

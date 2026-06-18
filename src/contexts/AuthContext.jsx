@@ -22,6 +22,9 @@ export function AuthProvider({ children }) {
             const activatedProfile = await activateParentProfile(firebaseUser);
             if (activatedProfile) {
               data = activatedProfile;
+            } else {
+              // Concurrency fallback: check if another request activated it
+              data = await getUserProfile(firebaseUser.uid);
             }
           }
           setProfile(data);
@@ -84,7 +87,17 @@ export function AuthProvider({ children }) {
 
   const refreshProfile = async () => {
     if (!auth.currentUser) return null;
-    const data = await getUserProfile(auth.currentUser.uid);
+    let data = await getUserProfile(auth.currentUser.uid);
+    if (!data && auth.currentUser.phoneNumber) {
+      console.log('[AuthContext] refreshProfile: No user profile found for parent login. Attempting auto-activation...');
+      const activatedProfile = await activateParentProfile(auth.currentUser);
+      if (activatedProfile) {
+        data = activatedProfile;
+      } else {
+        // Concurrency fallback: check if another request activated it
+        data = await getUserProfile(auth.currentUser.uid);
+      }
+    }
     setProfile(data);
     return data;
   };
